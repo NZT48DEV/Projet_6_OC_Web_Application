@@ -9,7 +9,13 @@ Le README complet (fonctionnalités, installation, utilisation, etc.) sera mis �
 
 ## 📅 État du projet
 
+[x] = Terminé
+[-] = En cours
+[ ] = Pas commencé
+
 - [x] Initialisation du dépôt Git
-- [ ] Documentation des fonctionnalités
-- [ ] Mise en place de l’architecture
-- [ ] Version stable à venir
+- [x] Récupération de l'API OCMovies.
+- [x] Mise en place de l’architecture HTML/CSS/JAVASCRIPT
+- [-] HTML 
+- [-] CSS
+- [ ] Javascript
