@@ -1,0 +1,140 @@
+/* 🌍 Style global */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+    margin: 0;
+    padding: 20px;
+    color: #000;
+  }
+  
+  h1 {
+    color: #007BFF;
+    font-size: 2rem;
+    margin-bottom: 10px;
+  }
+  
+  h2 {
+    font-size: 1.5rem;
+    margin: 20px 0 10px;
+  }
+  
+  h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0;
+  }
+  
+  /* 🎬 En-tête / Bannière */
+  .banner {
+    background-color: #55808a;
+    color: white;
+    padding: 14px 40px;
+    font-weight: bold;
+    max-width: 837px;
+    margin: 0 auto 30px;
+    text-align: center;
+    font-size: 1.2rem;
+    border-radius: 4px;
+  }
+  
+  /* 🏆 Bloc "Meilleur film" */
+  #best-movie {
+    max-width: 900px;
+    margin: 0 auto 40px;
+  }
+  
+  .movie-featured {
+    display: flex;
+    background-color: white;
+    border: 2px solid black;
+    padding: 20px;
+    gap: 20px;
+    align-items: center;
+    border-radius: 5px;
+  }
+  
+  .movie-featured img {
+    width: 180px;
+    height: auto;
+    border-radius: 3px;
+    object-fit: cover;
+  }
+  
+  .movie-info {
+    flex: 1;
+  }
+  
+  .movie-info p {
+    margin: 10px 0;
+    line-height: 1.4;
+    font-size: 1rem;
+    color: #333;
+  }
+  
+  /* 🎯 Bouton */
+  #best-movie-btn {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  #best-movie-btn:hover {
+    background-color: #c40000;
+  }
+  
+  /* 📱 Responsive Design */
+  
+  /* Tablette */
+  @media screen and (max-width: 768px) {
+    .movie-featured {
+      flex-direction: column;
+      text-align: center;
+    }
+  
+    .movie-featured img {
+      width: 70%;
+      max-width: 300px;
+    }
+  
+    #best-movie-btn {
+      margin-top: 10px;
+    }
+  }
+  
+  /* Téléphone */
+  @media screen and (max-width: 480px) {
+    body {
+      padding: 10px;
+    }
+  
+    h1 {
+      font-size: 1.5rem;
+    }
+  
+    .banner {
+      font-size: 1rem;
+      padding: 8px;
+    }
+  
+    .movie-featured img {
+      width: 100%;
+      max-width: 100%;
+    }
+  
+    .movie-info p {
+      font-size: 0.95rem;
+    }
+  
+    #best-movie-btn {
+      display: block;
+      margin: 10px auto 0;
+      padding: 6px 14px;
+      font-size: 0.9rem;
+    }
+  }
+  
