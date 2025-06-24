@@ -2,29 +2,40 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>JustStreamIt</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <header>
-        <h1>JustStreamIt</h1>
-        <div class="banner">Vidéos à la demande</div>
+  <div class="container">
+    <header class="header-logo">
+      <div class="logo-container">
+        <img src="assets/logo_1.svg" alt="Logo JustStreamIt" class="logo-img">
+      </div>
+      <h1 class="header-title">Vidéos à la demande</h1>
     </header>
 
     <main>
-        <section id="best-movie">
-            <h2>Meilleur film</h2>
-            <div class="movie-featured">
-                <img src="https://picsum.photos/300/200" alt="Affiche du film" id="best-movie-img">
-                <div class="movie-info">
-                    <h3 id="best-movie-title">Titre du film</h3>
-                    <p id="best-movie-desc">Description du film</p>
-                    <button id="best-movie-btn">Détails</button>
-                </div>
-            </div>
-        </section>
+      <section class="best-movie">
+        <h2 class="best-movie-title">Meilleur film</h2>
+        <div class="movie-card">
+          <img
+            src="assets/the-big-lebowski.svg"
+            alt="Affiche du film The Big Lebowski"
+            class="movie-poster"
+          />
+          <div class="movie-info">
+            <h3 class="movie-title">The Big Lebowski</h3>
+            <p class="movie-description">
+              Jeff "The Dude" Lebowski, mistaken for a millionaire of the same name, seeks restitution for his ruined rug and enlists his bowling buddies to help get it.
+            </p>
+            <button class="movie-button">Détails</button>
+          </div>
+        </div>
+      </section>
     </main>
+  </div>
 
 </body>
 </html>
