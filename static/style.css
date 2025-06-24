@@ -1,23 +1,23 @@
 :root {
   --header-height-mobile: 6rem;
-  --header-height-tablet: 7rem;
-  --header-height-desktop: 8rem;
+  --header-height-tablet-desktop: 8rem;
   --logo-size: 100%;
   --max-content-width: 1920px;
 }
 
-/* ========== GLOBAL RESET ========== */
+/* GLOBAL RESET */
 * {
   box-sizing: border-box;
 }
 
-/* ========== MOBILE (par défaut) ========== */
+/* CONTAINER */
 .container {
-  max-width: 1920px;
+  max-width: var(--max-content-width);
   margin: 0 auto;
   padding: 0 clamp(1rem, 3vw, 2rem);
 }
 
+/* HEADER */
 .header-logo {
   height: var(--header-height-mobile);
   background-color: #5a6d73;
@@ -34,7 +34,6 @@
 
 .logo-container {
   height: 100%;
-  width: auto;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -51,9 +50,9 @@
   white-space: nowrap;
 }
 
+/* MEILLEUR FILM */
 .best-movie-title {
   width: 100%;
-  padding-left: 0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -67,13 +66,9 @@
   text-align: center;
 }
 
-/* ========== MOVIE CARD ========== */
 .movie-card {
-  position: relative;
-  width: 100%;
-  margin: 0 auto;
-  background-color: #ffffff;
-  border: 6px solid #000000;
+  background-color: #fff;
+  border: 6px solid #000;
   border-radius: 10px;
   overflow: hidden;
   display: flex;
@@ -82,16 +77,33 @@
   gap: clamp(0.5rem, 2vw, 1rem);
 }
 
-/* ========== IMAGE ========== */
+/* IMAGE */
 .movie-poster {
   width: 100%;
   aspect-ratio: 4 / 3;
   object-fit: cover;
   border-radius: 8px;
   display: block;
+  transition: transform 0.3s ease;
 }
 
-/* ========== INFO TEXTE ========== */
+.movie-card-wrapper {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+
+
+
+@media screen and (max-width: 767px) {
+  
+  .movie-poster:hover {
+    transform: scale(1.05);
+  }
+}
+
+/* INFO FILM */
 .movie-info {
   padding: clamp(0.5rem, 2vw, 1rem);
   display: flex;
@@ -103,16 +115,20 @@
 .movie-title {
   font-size: clamp(1rem, 7vw, 5rem);
   font-weight: bold;
-  margin: 0 0 0.5rem 0;
+  margin-bottom: 0.5rem;
 }
 
 .movie-description {
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
   font-size: clamp(0.85rem, 3vw, 1.5rem);
   line-height: 1.5;
-  margin: 0 0 1rem 0;
 }
 
-/* ========== BOUTON ========== */
+/* BOUTON */
 .movie-button {
   align-self: center;
   background-color: red;
@@ -130,11 +146,117 @@
   background-color: darkred;
 }
 
+/* FILMS LES MIEUX NOTÉS */
+.top-rated-section {
+  padding: clamp(1rem, 3vw, 2rem);
+  text-align: center;
+  max-width: var(--max-content-width);
+  margin: 0 auto;
+}
 
-/* ========== TABLETTE (≥768px) ========== */
+.top-rated-title {
+  font-size: clamp(1.5rem, 3vw, 2.5rem);
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.top-rated-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  justify-items: center;
+}
+
+/* ITEM FILM */
+.movie-item {
+  position: relative;
+  width: 100%;
+  max-width: clamp(220px, 45vw, 400px);
+  border-radius: 8px;
+  overflow: hidden;
+  display: block;
+}
+
+.movie-item img {
+  width: 100%;
+  aspect-ratio: 2 / 3;
+  object-fit: cover;
+  display: block;
+  border-radius: 8px;
+  transition: transform 0.3s ease;
+}
+
+.movie-item img:hover {
+  transform: scale(1.03);
+}
+
+.overlay {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+  padding: 0.5rem;
+  font-size: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* BOUTON VOIR PLUS */
+.view-more-button {
+  margin-top: 1rem;
+  padding: 0.75rem 2rem;
+  background-color: red;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.hidden {
+  display: none;
+}
+
+
+
+
+
+
+/* RESPONSIVE */
+
+/* Tablette (≥768px et ≤1023px) */
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+  .top-rated-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .movie-item:nth-child(-n+4) {
+    display: block;
+  }
+}
+
+/* Desktop (≥1024px) */
+@media screen and (min-width: 1024px) {
+  .top-rated-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .movie-item {
+    display: block !important;
+  }
+
+  .view-more-button {
+    display: none;
+  }
+}
+
+/* HEADER + FILM en mode tablette et plus */
 @media screen and (min-width: 768px) {
   .header-logo {
-    height: var(--header-height-tablet);
+    height: var(--header-height-tablet-desktop);
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
@@ -146,23 +268,18 @@
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    font-size: clamp(1.5rem, 4vw, 8rem);
+    font-size: clamp(2rem, 4vw, 3rem);
     font-family: 'Oswald', sans-serif;
   }
 
   .best-movie-title {
-    display: block;
-    font-size: clamp(1.5rem, 4vw, 3rem);
-    font-weight: bold;
     text-align: left;
-    margin: 0 auto 1rem auto;
-    width: min(95%, 1920px);
+    justify-content: flex-start;
     padding-left: clamp(0.5rem, 2vw, 1rem);
   }
 
   .movie-card {
     flex-direction: row;
-    align-items: stretch;
   }
 
   .movie-poster {
@@ -173,15 +290,13 @@
     flex-shrink: 0;
   }
 
-
   .movie-title {
-    font-size: clamp(2rem, 4vw, 4rem);
-    margin-top: 0;
+    font-size: clamp(2rem, 2.5vw, 3rem);
   }
 
   .movie-description {
-    font-size: clamp(1.2rem, 2.5vw, 3rem);
-    margin-bottom: 1rem;
+    font-size: clamp(1.3rem, 1.8vw, 2rem);
+    overflow-wrap: anywhere;
   }
 
   .movie-button {
@@ -191,40 +306,22 @@
   }
 }
 
-/* ========== DESKTOP (≥1024px) ========== */
-@media screen and (min-width: 1024px) {
-  .header-logo {
-    height: var(--header-height-desktop);
-  }
-
-  .header-title {
-    font-size: clamp(2.5rem, 4vw, 5rem)
-  }
-
-  .best-movie-title {
-    font-size: clamp(2.5rem, 4vw, 4rem);
-  }
-
-  .movie-card {
-    align-items: stretch; /* ✅ pour que movie-info prenne toute la hauteur */
-  }
-
-  .movie-info {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between; /* ✅ titre en haut, bouton en bas */
-    height: auto;
-    flex-grow: 1;
-    padding: 1rem;
-  }
-
-  .movie-title {
-    margin: 0 0 1rem 0;
-  }
-
-  .movie-description {
-    flex-grow: 1; /* ✅ la description occupe l'espace entre le titre et le bouton */
-    margin: 0 0 1.5rem 0;
-  }
+/* Petits écrans (≤299px) */
+.screen-too-small {
+  display: none;
+  text-align: center;
+  padding: 2rem;
+  font-size: 1.2rem;
+  color: #900;
+  background-color: #ffe5e5;
 }
 
+@media screen and (max-width: 299px) {
+  .site-wrapper {
+    display: none !important;
+  }
+
+  .screen-too-small {
+    display: block;
+  }
+}
