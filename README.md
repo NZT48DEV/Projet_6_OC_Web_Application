@@ -10,7 +10,9 @@ Le README complet (fonctionnalités, installation, utilisation, etc.) sera mis �
 ## 📅 État du projet
 
 [x] = Terminé
+
 [-] = En cours
+
 [ ] = Pas commencé
 
 - [x] Initialisation du dépôt Git
