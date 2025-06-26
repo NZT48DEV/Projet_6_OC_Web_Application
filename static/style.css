@@ -10,7 +10,7 @@ h2 {
 }
 
 h3 {
-    font-size: clamp(2rem, 8vw, 4rem); 
+    font-size: clamp(1.1rem, 8.5vw, 4rem); 
 }
 
 
@@ -80,7 +80,7 @@ img {
 
 .movie-description {
     text-align: left;
-    font-size: clamp(1.1rem, 4vw, 2rem);
+    font-size: clamp(1.1rem, 4.3vw, 2rem);
   }
   
 .movie-button {
@@ -88,19 +88,19 @@ img {
     background-color: #FA0B0B;   /* rouge vif (ajuste selon ton design) */
     color: white;                /* texte blanc */
     border: none;                /* pas de bordure par défaut */
-    padding: 1.5rem 3rem;     /* espace intérieur vertical/horizontal */
+    padding: clamp(0.75rem, 5vw, 2rem) clamp(1.5rem, 8vw, 4rem);     /* espace intérieur vertical/horizontal */
     border-radius: 60px;         /* coins bien arrondis */
     font-weight: bold;           /* texte en gras */
-    font-size: clamp(0.75rem, 4vw, 1.5rem);
+    font-size: clamp(1rem, 4vw, 2rem);
     text-decoration: none;       /* supprime tout soulignement */
     cursor: pointer;             /* pointeur main au survol */
     transition: background-color 0.3s ease;
     margin-top: 1rem;
   }
 
-  .movie-button:hover {
+.movie-button:hover {
     background-color: #bf0810;   /* variante plus foncée au survol */
-  }
+}
 
 .movie-poster {
     width: 100%;            /* l’image prend toute la largeur de sa carte */
@@ -110,85 +110,234 @@ img {
     display: block;         /* supprime les espaces blancs liés à img inline */
   }
 
-/* 1) Centre et limite la largeur de la grille */
+
+
 .top-rated-wrapper {
     width: 100%;
     max-width: 768px;     /* même max-width que .movie-card */
     margin: 0 auto 1rem;  /* centre + espace sous la grille */
   }
   
-  /* 2) Grille 1 colonne pleine largeur */
-  .top-rated-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 1rem;            /* écart entre les items */
-    justify-items: stretch; /* force chaque cellule à remplir la colonne */
-  }
+/* 2) Grille 1 colonne pleine largeur */
+.top-rated-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;            /* écart entre les items */
+  justify-items: stretch; /* force chaque cellule à remplir la colonne */
+}
+
+/* 3) Chaque “movie-item” devient 100% de la grille */
+.top-rated-grid .movie-item {
+  width: 100%;
+}
+
+/* 4) L’affiche remplit 100% de son container */
+.top-rated-grid .movie-item img {
+  width: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.movie-item {
+  position: relative;   /* le parent pour l’overlay absolu */
+  overflow: hidden;
+}
+
+.movie-item .overlay {
+  position: absolute;
+  top: 10%;                 /* on colle la bande tout en haut */
+  left: 0;
+  right: 0;
+  height: 40%;            /* couvre la moitié haute de l’image */
+  background: rgba(0, 0, 0, 0.5);
   
-  /* 3) Chaque “movie-item” devient 100% de la grille */
-  .top-rated-grid .movie-item {
-    width: 100%;
-  }
+  display: flex;
+  flex-direction: column; /* empile titre + bouton */
+  justify-content: space-between; /* titre en haut, bouton en bas */
   
-  /* 4) L’affiche remplit 100% de son container */
-  .top-rated-grid .movie-item img {
-    width: 100%;
-    object-fit: cover;
-    display: block;
-  }
+  /* padding adaptatif : 
+      - vertical : de 1rem à 2rem selon la largeur viewport 
+      - horizontal : de 1.5rem à 3rem */
+  padding: clamp(1rem, 4vw, 2rem) clamp(1.5rem, 6vw, 3rem);
   
-  .movie-item {
-    position: relative;   /* le parent pour l’overlay absolu */
-    overflow: hidden;
-  }
-  
-  .movie-item .overlay {
-    position: absolute;
-    top: 0;                 /* on colle la bande tout en haut */
-    left: 0;
-    right: 0;
-    height: 50%;            /* couvre la moitié haute de l’image */
-    background: rgba(0, 0, 0, 0.5);
-    
-    display: flex;
-    flex-direction: column; /* empile titre + bouton */
-    justify-content: space-between; /* titre en haut, bouton en bas */
-    
-    /* padding adaptatif : 
-       - vertical : de 1rem à 2rem selon la largeur viewport 
-       - horizontal : de 1.5rem à 3rem */
-    padding: clamp(1rem, 4vw, 2rem) clamp(1.5rem, 6vw, 3rem);
-    
-    box-sizing: border-box;
-    z-index: 1;
-  }
-  
-  
-  /* On remet le texte en blanc et taille adaptée */
-  .movie-item .overlay span {
-    font-size: clamp(1rem, 8vw, 4rem);
-    font-weight: 700;
-    color: #fff;
-    align-self: flex-start;         /* colle à gauche */
-  }
-  
-    /* BOUTON en bas-droite */
-    .movie-item .overlay button {
-        background-color: #2a2222;
-        color: white;
-        border: none;
-        padding: clamp(0.5rem, 4vw, 2rem) clamp(1rem, 6vw, 3rem);
-        border-radius: 60px;
-        font-size: clamp(0.75rem, 8vw, 1.5rem);
-        font-weight: bold;
-        cursor: pointer;
-        transition: background-color 0.3s;
-        align-self: flex-end;           /* colle à droite */
-    }
-    .movie-item .overlay button:hover {
-        background-color: #000000;
-    }
-    
+  box-sizing: border-box;
+  z-index: 1;
+}
+
+.movie-item .overlay span {
+  font-size: clamp(0.8rem, 6.2vw, 3rem);
+  font-weight: 700;
+  color: #fff;
+  align-self: flex-start;         /* colle à gauche */
+}
+
+.movie-item .overlay button {
+    background-color: #2a2222;
+    color: white;
+    border: none;
+    padding: clamp(0.3rem, 4vw, 1.5rem) clamp(1.5rem, 11vw, 5rem);
+    border-radius: 60px;
+    font-size: clamp(0.3rem, 4.2vw, 2rem);
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    align-self: flex-end;           /* colle à droite */
+}
+.movie-item .overlay button:hover {
+    background-color: #000000;
+}
+
+.view-more-button {
+  display: inline-block;       /* pour que padding fonctionne proprement */
+  background-color: #FA0B0B;   /* rouge vif (ajuste selon ton design) */
+  color: white;                /* texte blanc */
+  border: none;                /* pas de bordure par défaut */
+  padding: clamp(0.3rem, 3vw, 1.5rem) clamp(4.2rem, 20vw, 10rem);     /* espace intérieur vertical/horizontal */
+  border-radius: 60px;         /* coins bien arrondis */
+  font-weight: bold;           /* texte en gras */
+  font-size: clamp(0.5rem, 4vw, 2rem);
+  text-decoration: none;       /* supprime tout soulignement */
+  cursor: pointer;             /* pointeur main au survol */
+  transition: background-color 0.3s ease;
+  margin-top: 1rem;
+}
+
+
+
+/* FIRST CATEGORY */
+
+.first-category-wrapper {
+  width: 100%;
+  max-width: 768px;     /* même max-width que .movie-card */
+  margin: 0 auto 1rem;  /* centre + espace sous la grille */
+}
+
+.first-category-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;            /* écart entre les items */
+  justify-items: stretch; /* force chaque cellule à remplir la colonne */
+}
+
+.first-category-grid .movie-item {
+  width: 100%;
+}
+
+.first-category-grid .movie-item img {
+  width: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+
+/* SECOND CATEGORY */
+
+.second-category-wrapper {
+  width: 100%;
+  max-width: 768px;     /* même max-width que .movie-card */
+  margin: 0 auto 1rem;  /* centre + espace sous la grille */
+}
+
+.second-category-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;            /* écart entre les items */
+  justify-items: stretch; /* force chaque cellule à remplir la colonne */
+}
+
+.second-category-grid .movie-item {
+  width: 100%;
+}
+
+.second-category-grid .movie-item img {
+  width: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+
+/* OTHER CATEGORY */
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+  font-family: sans-serif;
+}
+
+.dropdown-toggle {
+  background: #fff;
+  border: 2px solid #333;
+  padding: 0.5rem 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 220px;
+}
+
+.dropdown-toggle:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(0,0,0,0.2);
+}
+
+.arrow {
+  margin-left: 0.5rem;
+  font-size: 1.2rem;
+  line-height: 1;
+  pointer-events: none;
+  transition: transform 0.2s;
+}
+
+/* La liste masquée par défaut */
+.dropdown-menu {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  background: #fff;
+  border: 2px solid #333;
+  border-radius: 4px;
+  margin: 0;
+  padding: 0.25rem 0;
+  list-style: none;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+  z-index: 100;
+}
+
+/* État ouvert */
+.dropdown.open .dropdown-menu {
+  max-height: 300px; /* asseyez pour contenir tous les items */
+  overflow-y: auto;
+}
+
+.dropdown.open .arrow {
+  transform: rotate(180deg);
+}
+
+/* Items */
+.dropdown-menu li {
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.dropdown-menu li:hover,
+.dropdown-menu li[aria-selected="true"] {
+  background: #333;
+  color: #fff;
+}
+
+/* Message sous le dropdown */
+.info {
+  margin-top: 1rem;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
 
 
 
@@ -196,22 +345,21 @@ img {
 
 /* Message écran trop petit */
 .screen-too-small {
-    display: none;
-    text-align: center;
-    padding: 2rem;
-    font-size: 1.2rem;
-    color: #900;
-    background-color: #ffe5e5;
+  display: none;
+  text-align: center;
+  padding: 2rem;
+  font-size: 1.2rem;
+  color: #900;
+  background-color: #ffe5e5;
+}
+
+/* Masquer tout le site si écran trop petit */
+@media screen and (max-width: 319px) {
+  .site-wrapper {
+    display: none !important;
   }
-  
-  /* Masquer tout le site si écran trop petit */
-  @media screen and (max-width: 319px) {
-    .site-wrapper {
-      display: none !important;
-    }
-  
-    .screen-too-small {
-      display: block;
-    }
+
+  .screen-too-small {
+    display: block;
   }
-  
+}

@@ -155,6 +155,7 @@
 
           </div>
         </div>
+        <button class="view-more-button">Voir moins</button>
       </section>
 
       <section class="second-category">
@@ -211,18 +212,35 @@
             </div>
 
       <section class="other-category">
-        <nav class="navbar">
-          <ul class="menu">
-            <li class="dropdown">
-              <a href="#" class="dropbtn">Catégories</a>
-              <ul class="dropdown-content">
-                <li><a href="#">Action</a></li>
-                <li><a href="#">Comédie</a></li>
-                <li><a href="#">Drame</a></li>
+        <h2 class="other-category-title">Autres :</h2>
+            <div class="dropdown" id="genre-dropdown">
+              <button
+                class="dropdown-toggle"
+                aria-haspopup="listbox"
+                aria-expanded="false"
+                id="dropdownToggle"
+              >
+                Sélectionnez un genre <span class="arrow">▾</span>
+              </button>
+              <ul
+                class="dropdown-menu"
+                role="listbox"
+                aria-labelledby="dropdownToggle"
+                tabindex="-1"
+              >
+                <li role="option" data-value="action">Films d’action</li>
+                <li role="option" data-value="comedie">Comédies</li>
+                <li role="option" data-value="famille">Famille</li>
+                <li role="option" data-value="fantasy">Films de fantasy</li>
+                <li role="option" data-value="horreur">Films d’horreur</li>
+                <li role="option" data-value="sf">Science-fiction</li>
+                <li role="option" data-value="westerns">Westerns</li>
               </ul>
-            </li>
-          </ul>
-        </nav>
+
+              <div id="info-selection" class="info">
+                Aucune catégorie sélectionnée
+              </div>
+            </div>     
 
       </section>
     </main>
