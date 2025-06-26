@@ -213,38 +213,40 @@
 
       <section class="other-category">
         <h2 class="other-category-title">Autres :</h2>
-            <div class="dropdown" id="genre-dropdown">
-              <button
-                class="dropdown-toggle"
-                aria-haspopup="listbox"
-                aria-expanded="false"
-                id="dropdownToggle"
-              >
-                Sélectionnez un genre <span class="arrow">▾</span>
-              </button>
-              <ul
-                class="dropdown-menu"
-                role="listbox"
-                aria-labelledby="dropdownToggle"
-                tabindex="-1"
-              >
-                <li role="option" data-value="action">Films d’action</li>
-                <li role="option" data-value="comedie">Comédies</li>
-                <li role="option" data-value="famille">Famille</li>
-                <li role="option" data-value="fantasy">Films de fantasy</li>
-                <li role="option" data-value="horreur">Films d’horreur</li>
-                <li role="option" data-value="sf">Science-fiction</li>
-                <li role="option" data-value="westerns">Westerns</li>
-              </ul>
-
-              <div id="info-selection" class="info">
-                Aucune catégorie sélectionnée
-              </div>
-            </div>     
+          <div class="dropdown-menu" id="genre-dropdown">
+            <button
+              class="dropdown-toggle"
+              aria-haspopup="listbox"
+              aria-expanded="false"
+              id="dropdownToggle"
+            >
+              Sélectionnez un genre
+              <span class="arrow">▾</span>
+            </button>
+            <ul
+              class="dropdown-items"
+              role="listbox"
+              aria-labelledby="dropdownToggle"
+              tabindex="-1"
+            >
+              <li role="option" data-value="action">Films d’action</li>
+              <li role="option" data-value="comedie">Comédies</li>
+              <li role="option" data-value="famille">Famille</li>
+              <li role="option" data-value="fantasy">Films de fantasy</li>
+              <li role="option" data-value="horreur">Films d’horreur</li>
+              <li role="option" data-value="sf">Science-fiction</li>
+              <li role="option" data-value="westerns">Westerns</li>
+            </ul>
+          </div>
+          
+          <div id="info-selection" class="info">
+            Aucune catégorie sélectionnée
+          </div>
+          
 
       </section>
     </main>
   </div>
-
+  <script src="app.js"></script>
 </body>
 </html>

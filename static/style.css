@@ -258,80 +258,72 @@ img {
 
 /* OTHER CATEGORY */
 
-.dropdown {
+/*  — LE CONTAINER UNIQUE (bordure + coins) — */
+.dropdown-menu {
   position: relative;
   display: inline-block;
+  width: 220px;            /* ou ce que vous voulez */
+  border: 2px solid #333;  /* bordure unique */
+  border-radius: 4px;      /* arrondis appliqués tout autour */
+  overflow: hidden;        /* masque la liste quand fermée */
   font-family: sans-serif;
 }
 
+/*  — LE BOUTON “toggle” — */
 .dropdown-toggle {
-  background: #fff;
-  border: 2px solid #333;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
   padding: 0.5rem 1rem;
+  background: #fff;
+  border: none;            /* plus de border ici */
   font-weight: bold;
   cursor: pointer;
-  border-radius: 4px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 220px;
 }
-
 .dropdown-toggle:focus {
   outline: none;
   box-shadow: 0 0 0 3px rgba(0,0,0,0.2);
 }
 
+/*  — LA FLÈCHE — */
 .arrow {
-  margin-left: 0.5rem;
-  font-size: 1.2rem;
-  line-height: 1;
-  pointer-events: none;
   transition: transform 0.2s;
 }
 
-/* La liste masquée par défaut */
-.dropdown-menu {
-  position: absolute;
-  top: calc(100% + 4px);
-  left: 0;
-  right: 0;
-  background: #fff;
-  border: 2px solid #333;
-  border-radius: 4px;
-  margin: 0;
-  padding: 0.25rem 0;
+/*  — LA LISTE MASQUÉE PAR DÉFAUT — */
+.dropdown-items {
   list-style: none;
-  max-height: 0;
+  margin: 0;
+  padding: 0;
+  background: #fff;
+  max-height: 0;           /* cachée */
   overflow: hidden;
   transition: max-height 0.3s ease;
-  z-index: 100;
 }
 
-/* État ouvert */
-.dropdown.open .dropdown-menu {
-  max-height: 300px; /* asseyez pour contenir tous les items */
+/*  — ÉTAT “OUVERT” — */
+.dropdown-menu.open .dropdown-items {
+  max-height: 300px;       /* assez pour contenir tous les li */
   overflow-y: auto;
 }
-
-.dropdown.open .arrow {
+.dropdown-menu.open .arrow {
   transform: rotate(180deg);
 }
 
-/* Items */
-.dropdown-menu li {
+/*  — LES ITEMS — */
+.dropdown-items li {
   padding: 0.5rem 1rem;
   cursor: pointer;
   font-weight: bold;
 }
-
-.dropdown-menu li:hover,
-.dropdown-menu li[aria-selected="true"] {
+.dropdown-items li:hover,
+.dropdown-items li[aria-selected="true"] {
   background: #333;
   color: #fff;
 }
 
-/* Message sous le dropdown */
+/*  — LE TEXTE SOUS LE DROPDOWN — */
 .info {
   margin-top: 1rem;
   font-size: 1rem;
