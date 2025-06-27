@@ -16,7 +16,6 @@ Le README complet (fonctionnalités, installation, utilisation, etc.) sera mis �
 [ ] = Pas commencé
 
 - [x] Initialisation du dépôt Git
-- [x] Récupération de l'API OCMovies.
 - [x] Mise en place de l’architecture HTML/CSS/JAVASCRIPT
 - [-] HTML 
 - [-] CSS

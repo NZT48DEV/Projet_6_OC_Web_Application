@@ -210,41 +210,54 @@
                   <button>Détails</button>
                 </div>
             </div>
-
-      <section class="other-category">
-        <h2 class="other-category-title">Autres :</h2>
-          <div class="dropdown-menu" id="genre-dropdown">
-            <button
-              class="dropdown-toggle"
-              aria-haspopup="listbox"
-              aria-expanded="false"
-              id="dropdownToggle"
-            >
-              Sélectionnez un genre
-              <span class="arrow">▾</span>
-            </button>
-            <ul
-              class="dropdown-items"
-              role="listbox"
-              aria-labelledby="dropdownToggle"
-              tabindex="-1"
-            >
-              <li role="option" data-value="action">Films d’action</li>
-              <li role="option" data-value="comedie">Comédies</li>
-              <li role="option" data-value="famille">Famille</li>
-              <li role="option" data-value="fantasy">Films de fantasy</li>
-              <li role="option" data-value="horreur">Films d’horreur</li>
-              <li role="option" data-value="sf">Science-fiction</li>
-              <li role="option" data-value="westerns">Westerns</li>
-            </ul>
-          </div>
+          </section>
           
-          <div id="info-selection" class="info">
-            Aucune catégorie sélectionnée
-          </div>
           
 
-      </section>
+          <section class="other-category">
+            <h2 class="other-category-title">Autres :</h2>
+          
+            <div class="dropdown-menu" id="genre-dropdown">
+              <button class="dropdown-toggle" aria-haspopup="listbox" aria-expanded="false" id="dropdownToggle">
+                <span class="selected-value">Sélectionnez un genre</span>
+                <span class="arrow">▾</span>
+              </button>
+              <ul class="dropdown-items" role="listbox" aria-labelledby="dropdownToggle" tabindex="-1">
+                <li role="option" data-value="action" data-image="assets/alien.svg" data-title="Alien">
+                  <span>Films d’action</span>
+                  <span class="checkmark">✔</span>
+                </li>
+                <li role="option" data-value="comedie" data-image="assets/titanic.svg" data-title="Titanic">
+                  <span>Comédies</span>
+                  <span class="checkmark">✔</span>
+                </li>
+                <li role="option" data-value="famille" data-image="assets/retour-futur.svg" data-title="Retour vers le futur">
+                  <span>Famille</span>
+                  <span class="checkmark">✔</span>
+                </li>
+                <li role="option" data-value="fantasy" data-image="assets/pulp-fiction.svg" data-title="Pulp Fiction">
+                  <span>Films de fantasy</span>
+                  <span class="checkmark">✔</span>
+                </li>
+                <li role="option" data-value="horreur" data-image="assets/scarface.svg" data-title="Scarface">
+                  <span>Films d’horreur</span>
+                  <span class="checkmark">✔</span>
+                </li>
+                <li role="option" data-value="sf" data-image="assets/the-big-lebowski.svg" data-title="The Big Lebowski">
+                  <span>Science-fiction</span>
+                  <span class="checkmark">✔</span>
+                </li>
+                <li role="option" data-value="westerns" data-image="assets/le-parrain.svg" data-title="Le Parrain">
+                  <span>Westerns</span>
+                  <span class="checkmark">✔</span>
+                </li>
+              </ul>
+            </div>
+          </section>
+          
+            <div class="selected-category-wrapper">
+              <div id="selected-category-container"></div>
+            </div>                             
     </main>
   </div>
   <script src="app.js"></script>
