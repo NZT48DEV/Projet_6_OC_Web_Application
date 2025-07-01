@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const dd      = document.getElementById('genre-dropdown');
   const toggle  = dd.querySelector('.dropdown-toggle');
   const items   = dd.querySelectorAll('.dropdown-items li');
-  const display = document.getElementById('selected-category-container');
+  const display = dd.querySelector('#selected-category-container');
 
   toggle.addEventListener('click', () => {
     const isOpen = dd.classList.toggle('open');
@@ -30,25 +30,40 @@ document.addEventListener('DOMContentLoaded', () => {
     items.forEach(i => i.removeAttribute('aria-selected'));
     item.setAttribute('aria-selected', 'true');
   
-    const selectedText = item.querySelector('span').textContent;       // Pour l'affichage du menu
-    const movieTitle = item.getAttribute('data-title');              // Pour le nom affiché sur l'overlay
-    const imagePath = item.getAttribute('data-image');
-
+    const selectedText = item.querySelector('span').textContent;
     toggle.querySelector('.selected-value').textContent = selectedText;
     dd.classList.remove('open');
     toggle.setAttribute('aria-expanded', false);
-
-    display.innerHTML = `
-    <div class="movie-item">
-      <div class="uniform-card">
-        <img src="${imagePath}" alt="${selectedText}" class="movie-poster" />
+  
+    // Lire l'attribut data-movies en toute sécurité
+    const moviesAttr = item.getAttribute('data-movies');
+    let movies = [];
+  
+    try {
+      if (moviesAttr) {
+        movies = JSON.parse(moviesAttr);
+        if (!Array.isArray(movies)) {
+          movies = [];
+        }
+      }
+    } catch (e) {
+      console.warn('data-movies invalide pour cet élément :', e);
+      movies = [];
+    }
+  
+    // Générer le HTML seulement si on a des films
+    const movieCards = movies.map(({ title, image }) => `
+      <div class="movie-item">
+        <img src="${image}" alt="${title}">
         <div class="overlay">
-          <span>${selectedText}</span>
-          <button>Détails</button>
+          <span>${title}</span>
+          <button class="movie-button">Détails</button>
         </div>
       </div>
-    </div>
-  `;
+    `).join('');
   
+    display.innerHTML = movies.length
+    ? `<div class="top-rated-grid">${movieCards}</div>`
+    : `<p class="no-movie-message">Aucun film disponible pour cette catégorie.</p>`;  
   }  
 });

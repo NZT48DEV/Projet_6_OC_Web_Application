@@ -1,61 +1,60 @@
 * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-  }
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
-  
 h2 {
-    font-size: clamp(2rem, 8vw, 4rem);
+  font-size: clamp(1.5rem, 8vw, 4rem);
 }
 
 h3 {
-    font-size: clamp(1.1rem, 8.5vw, 4rem); 
+  font-size: clamp(1.1rem, 8.5vw, 4rem);
 }
 
+.container,
+.header-logo,
+.section-wrapper {
+  max-width: 768px;
+  margin: 0 auto;
+  width: 100%;
+}
 
 .container {
-    max-width: 768px; 
-    margin: 0 auto; 
-    width: 100%;
-    padding: 1rem;
-    text-align: center;
-    font-family: 'Oswald';
-  }
+  padding: 1rem;
+  text-align: center;
+  font-family: 'Oswald';
+}
 
 .header-logo {
-    display: flex;
-    justify-content: center;  /* centre horizontal */
-    align-items: center;      /* centre vertical */
-    height: 8rem;             /* fixe la hauteur */
-    padding: 0 1rem;          /* uniquement du padding horizontal */
-    margin: 0 auto;
-    max-width: 768px;
-    width: 100%;
-    background: #5a6d73;
-    border: 1px solid black;
-    border-radius: 4px;
-  }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 8rem;
+  padding: 0 1rem;
+  background: #5a6d73;
+  border: 1px solid black;
+  border-radius: 4px;
+}
 
 .logo-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    width: 100%;
-  }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
 
-  .logo-img {
-    /* on fait maintenant varier la hauteur du logo dans le header */
-    height: 80%;      /* 80% de la hauteur du .header-logo */
-    width: auto;      /* on garde les proportions */
-    max-height: 100%; /* pour être sûr de ne jamais dépasser */
-    margin: 0 auto;
-  }
+.logo-img {
+  height: 80%;
+  width: auto;
+  max-height: 100%;
+  margin: 0 auto;
+}
 
 .header-title {
-    display: none;
-  }
+  display: none;
+}
 
 h2,
 h3,
@@ -64,255 +63,174 @@ p,
 .movie-item,
 button,
 img {
-    margin-bottom: 1rem;
+  margin-bottom: 1rem;
 }
-
 
 .movie-card {
-    border: 10px solid black; 
-    padding: 1rem;     
-    margin-bottom: 1rem;
+  border: 10px solid black;
+  padding: 1rem;
+  margin-bottom: 1rem;
 }
 
-.movie-title {
-    text-align: left;
+.movie-title,
+.movie-description {
+  text-align: left;
 }
 
 .movie-description {
-    text-align: left;
-    font-size: clamp(1.1rem, 4.3vw, 2rem);
-  }
-  
-.movie-button {
-    display: inline-block;       /* pour que padding fonctionne proprement */
-    background-color: #FA0B0B;   /* rouge vif (ajuste selon ton design) */
-    color: white;                /* texte blanc */
-    border: none;                /* pas de bordure par défaut */
-    padding: clamp(0.75rem, 5vw, 2rem) clamp(1.5rem, 8vw, 4rem);     /* espace intérieur vertical/horizontal */
-    border-radius: 60px;         /* coins bien arrondis */
-    font-weight: bold;           /* texte en gras */
-    font-size: clamp(1rem, 4vw, 2rem);
-    text-decoration: none;       /* supprime tout soulignement */
-    cursor: pointer;             /* pointeur main au survol */
-    transition: background-color 0.3s ease;
-    margin-top: 1rem;
-  }
-
-.movie-button:hover {
-    background-color: #bf0810;   /* variante plus foncée au survol */
+  font-size: clamp(1.1rem, 4.3vw, 2rem);
 }
 
-.movie-poster {
-    width: 100%;            /* l’image prend toute la largeur de sa carte */
-    aspect-ratio: 4 / 3;    /* ratio fixe 4:3 */
-    object-fit: cover;      /* recadre l’image pour remplir le cadre */
-    object-position: center;/* centre le recadrage */
-    display: block;         /* supprime les espaces blancs liés à img inline */
-  }
-
-
-
-.top-rated-wrapper {
-    width: 100%;
-    max-width: 768px;     /* même max-width que .movie-card */
-    margin: 0 auto 1rem;  /* centre + espace sous la grille */
-  }
-  
-/* 2) Grille 1 colonne pleine largeur */
-.top-rated-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1rem;            /* écart entre les items */
-  justify-items: stretch; /* force chaque cellule à remplir la colonne */
+.button-style {
+  display: inline-block;
+  background-color: #FA0B0B;
+  color: white;
+  border: none;
+  border-radius: 60px;
+  font-weight: bold;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
-/* 3) Chaque “movie-item” devient 100% de la grille */
-.top-rated-grid .movie-item {
+.btn {
+  display: inline-block;
+  background-color: #FA0B0B;
+  color: white;
+  border: none;
+  padding: clamp(0.75rem, 5vw, 2rem) clamp(1.5rem, 8vw, 4rem);
+  border-radius: 60px;
+  font-weight: bold;
+  font-size: clamp(1rem, 4vw, 2rem);
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 1rem;
+}
+
+.btn.wide {
+  padding: clamp(0.3rem, 3vw, 1.5rem) clamp(4.2rem, 20vw, 10rem);
+  font-size: clamp(0.5rem, 4vw, 2rem);
+}
+
+.btn:hover {
+  background-color: #bf0810;
+}
+
+.movie-poster,
+.movie-item img {
   width: 100%;
-}
-
-/* 4) L’affiche remplit 100% de son container */
-.top-rated-grid .movie-item img {
-  width: 100%;
+  aspect-ratio: 4 / 3;
   object-fit: cover;
+  object-position: center;
   display: block;
 }
 
+.single-column-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  justify-items: stretch;
+}
+
 .movie-item {
-  position: relative;   /* le parent pour l’overlay absolu */
+  position: relative;
   overflow: hidden;
 }
 
 .movie-item .overlay {
   position: absolute;
-  top: 10%;                 /* on colle la bande tout en haut */
+  top: 10%;
   left: 0;
   right: 0;
-  height: 40%;            /* couvre la moitié haute de l’image */
+  height: 40%;
   background: rgba(0, 0, 0, 0.5);
-  
   display: flex;
-  flex-direction: column; /* empile titre + bouton */
-  justify-content: space-between; /* titre en haut, bouton en bas */
-  
-  /* padding adaptatif : 
-      - vertical : de 1rem à 2rem selon la largeur viewport 
-      - horizontal : de 1.5rem à 3rem */
-  padding: clamp(1rem, 4vw, 2rem) clamp(1.5rem, 6vw, 3rem);
-  
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1rem 1rem;
   box-sizing: border-box;
   z-index: 1;
 }
 
 .movie-item .overlay span {
-  font-size: clamp(0.8rem, 6.2vw, 3rem);
+  font-size: clamp(1rem, 6vw, 3rem);
   font-weight: 700;
   color: #fff;
-  align-self: flex-start;         /* colle à gauche */
+  align-self: flex-start;
 }
 
 .movie-item .overlay button {
-    background-color: #2a2222;
-    color: white;
-    border: none;
-    padding: clamp(0.3rem, 4vw, 1.5rem) clamp(1.5rem, 11vw, 5rem);
-    border-radius: 60px;
-    font-size: clamp(0.3rem, 4.2vw, 2rem);
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    align-self: flex-end;           /* colle à droite */
-}
-.movie-item .overlay button:hover {
-    background-color: #000000;
-}
-
-.view-more-button {
-  display: inline-block;       /* pour que padding fonctionne proprement */
-  background-color: #FA0B0B;   /* rouge vif (ajuste selon ton design) */
-  color: white;                /* texte blanc */
-  border: none;                /* pas de bordure par défaut */
-  padding: clamp(0.3rem, 3vw, 1.5rem) clamp(4.2rem, 20vw, 10rem);     /* espace intérieur vertical/horizontal */
-  border-radius: 60px;         /* coins bien arrondis */
-  font-weight: bold;           /* texte en gras */
+  background-color: #2a2222;
+  color: white;
+  border: none;
+  padding: clamp(0.3rem, 4vw, 1.5rem) clamp(1.2rem, 10vw, 5rem);
+  border-radius: 60px;
   font-size: clamp(0.5rem, 4vw, 2rem);
-  text-decoration: none;       /* supprime tout soulignement */
-  cursor: pointer;             /* pointeur main au survol */
-  transition: background-color 0.3s ease;
-  margin-top: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  align-self: flex-end;
 }
 
-
-
-/* FIRST CATEGORY */
-
-.first-category-wrapper {
-  width: 100%;
-  max-width: 768px;     /* même max-width que .movie-card */
-  margin: 0 auto 1rem;  /* centre + espace sous la grille */
+.movie-item .overlay button:hover {
+  background-color: #000000;
 }
 
-.first-category-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1rem;            /* écart entre les items */
-  justify-items: stretch; /* force chaque cellule à remplir la colonne */
-}
-
-.first-category-grid .movie-item {
-  width: 100%;
-}
-
-.first-category-grid .movie-item img {
-  width: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-
-/* SECOND CATEGORY */
-
-.second-category-wrapper {
-  width: 100%;
-  max-width: 768px;     /* même max-width que .movie-card */
-  margin: 0 auto 1rem;  /* centre + espace sous la grille */
-}
-
-.second-category-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1rem;            /* écart entre les items */
-  justify-items: stretch; /* force chaque cellule à remplir la colonne */
-}
-
-.second-category-grid .movie-item {
-  width: 100%;
-}
-
-.second-category-grid .movie-item img {
-  width: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-
-
-/* OTHER CATEGORY */
-
-.other-category {
-  background-color: #ddd;
-  padding: 2rem 1rem;
-  text-align: center;
-  border-radius: 12px;
-}
-
-.other-category-title {
-  font-size: clamp(1.5rem, 4vw, 2.5rem);
-  margin-bottom: 1.5rem;
-  font-weight: 700;
-}
-
-/* Menu dropdown */
+/* DROPDOWN */
 .dropdown-menu {
   display: block;
   max-width: 100%;
   margin: 0 auto;
+  padding: 0;
   border-radius: 12px;
   background-color: white;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  /* box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); */
   font-family: 'Oswald', sans-serif;
   overflow: hidden;
 }
 
-/* Bouton */
 .dropdown-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
   width: 100%;
-  padding: 1rem;
+  padding: clamp(0.3rem, 3vw, 1.5rem) clamp(4.2rem, 20vw, 10rem);
   background-color: #f0f0f0;
   border: none;
   font-weight: bold;
   font-size: 1.2rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   border-radius: 12px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  font-family: 'Oswald', sans-serif;
+  margin-bottom: 0; /* empêche le vide sous le bouton */
 }
 
 .dropdown-toggle:hover {
   background-color: #e2e2e2;
 }
 
+.selected-value {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  pointer-events: none;
+  font-size: clamp(0.5rem, 4vw, 2rem);
+}
+
 .arrow {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
   transition: transform 0.3s ease;
 }
 
 .dropdown-menu.open .arrow {
   transform: rotate(180deg);
 }
-
-/* Liste */
 
 .dropdown-items {
   list-style: none;
@@ -322,22 +240,22 @@ img {
   max-height: 0;
   overflow: hidden;
   transition: max-height 0.3s ease-in-out;
+  margin-top: 0; /* supprime l'espace avec le bouton */
 }
 
 .dropdown-menu.open .dropdown-items {
-  max-height: 300px;        /* Limite visible du menu */
-  overflow-y: auto;         /* Active la barre de défilement si trop de contenu */
+  max-height: 300px;
+  overflow-y: auto;
   border-top: 1px solid #ccc;
 }
 
-/* Items */
 .dropdown-items li {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   padding: 1rem;
   font-weight: bold;
-  font-size: 1.1rem;
+  font-size: clamp(0.5rem, 4vw, 2rem);
   border-bottom: 2px solid black;
   cursor: pointer;
   text-align: left;
@@ -345,21 +263,38 @@ img {
   background-color: white;
 }
 
+.dropdown-results {
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.no-movie-message {
+  text-align: center;
+  padding: 1rem 2rem;
+  font-size: clamp(0.5rem, 4vw, 2rem);
+  font-family: 'Oswald', sans-serif;
+  color: #900;
+  background-color: #ffe5e5;
+  border: 1px solid #faa;
+  border-radius: 8px;
+  width: 100%;
+  box-sizing: border-box;
+  margin-top: 1rem;
+}
+
 .dropdown-items li:last-child {
   border-bottom: none;
 }
 
-/* Sélection */
 .dropdown-items li[aria-selected="true"] {
   background-color: #fa0b0b;
   color: white;
 }
 
-/* Coche verte */
 .checkmark {
   display: none;
   margin-left: 1rem;
-  font-size: 1.2rem;
+  font-size: clamp(0.5rem, 4vw, 2rem);
   color: limegreen;
 }
 
@@ -367,9 +302,9 @@ img {
   display: inline;
 }
 
-.dropdown-items li:hover {
-  background-color: #eee;  /* Gris clair au survol */
-  color: black;            /* Garde le texte lisible */
+.dropdown-items li:not([aria-selected="true"]):hover {
+  background-color: #eee;
+  color: black;
 }
 
 .dropdown-items::-webkit-scrollbar {
@@ -390,79 +325,8 @@ img {
 }
 
 
-.category-icon {
-  width: 24px;
-  height: 24px;
-  margin-right: 0.5rem;
-}
 
-.uniform-card {
-  width: 100%;
-  max-width: 768px;
-  margin: 0 auto 1rem;
-  border: none;
-  padding: 0;
-  box-shadow: 0 0 10px rgba(0,0,0,0.15);
-  border-radius: 8px;
-  overflow: hidden;
-  position: relative;
-}
-
-
-.uniform-card .movie-poster {
-  width: 100%;
-  object-fit: cover;
-  display: block;
-  aspect-ratio: auto; /* optionnel */
-}
-
-
-
-
-.uniform-card .overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0,0,0,0.4);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: clamp(1rem, 4vw, 2rem) clamp(1.5rem, 6vw, 3rem);
-  box-sizing: border-box;
-}
-
-.uniform-card .overlay span {
-  color: white;
-  font-size: clamp(1rem, 4vw, 2.5rem);
-  font-weight: bold;
-}
-
-.uniform-card .overlay button {
-  background-color: #2a2222;
-  color: white;
-  border: none;
-  padding: clamp(0.3rem, 4vw, 1.5rem) clamp(1.5rem, 11vw, 5rem);
-  border-radius: 60px;
-  font-size: clamp(0.8rem, 3.5vw, 2rem);
-  font-weight: bold;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  align-self: flex-end;
-}
-
-.uniform-card .overlay button:hover {
-  background-color: #000000;
-}
-
-
-
-
-
-
-
-/* Message écran trop petit */
+/* Responsive alert */
 .screen-too-small {
   display: none;
   text-align: center;
@@ -472,7 +336,6 @@ img {
   background-color: #ffe5e5;
 }
 
-/* Masquer tout le site si écran trop petit */
 @media screen and (max-width: 319px) {
   .site-wrapper {
     display: none !important;

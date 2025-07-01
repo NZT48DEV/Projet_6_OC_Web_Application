@@ -38,7 +38,7 @@
                 <p class="movie-description">
                 Jeff "The Dude" Lebowski, mistaken for a millionaire of the same name, seeks restitution for his ruined rug and enlists his bowling buddies to help get it.
                 </p>
-                <button class="movie-button">Détails</button>
+                <button class="btn">Détails</button>
             </div>
             </div>
         </section>
@@ -97,7 +97,7 @@
               
                 </div>
 
-        <button class="view-more-button">Voir plus</button>
+        <button class="btn wide">Voir plus</button>
       </section>
 
       <section class="first-category">
@@ -155,7 +155,7 @@
 
           </div>
         </div>
-        <button class="view-more-button">Voir moins</button>
+        <button class="btn wide">Voir moins</button>
       </section>
 
       <section class="second-category">
@@ -216,18 +216,31 @@
 
           <section class="other-category">
             <h2 class="other-category-title">Autres :</h2>
-          
             <div class="dropdown-menu" id="genre-dropdown">
               <button class="dropdown-toggle" aria-haspopup="listbox" aria-expanded="false" id="dropdownToggle">
                 <span class="selected-value">Sélectionnez un genre</span>
                 <span class="arrow">▾</span>
               </button>
               <ul class="dropdown-items" role="listbox" aria-labelledby="dropdownToggle" tabindex="-1">
-                <li role="option" data-value="action" data-image="assets/alien.svg" data-title="Alien">
+                <li 
+                  role="option" 
+                  data-value="action"
+                  data-movies='[
+                    {"title":"Alien", "image":"assets/alien.svg"},
+                    {"title":"Le Parrain", "image":"assets/le-parrain.svg"},
+                    {"title":"Pulp Fiction", "image":"assets/pulp-fiction.svg"},
+                    {"title":"The Big Lebowski", "image":"assets/the-big-lebowski.svg"}
+                  ]'>
                   <span>Films d’action</span>
                   <span class="checkmark">✔</span>
                 </li>
-                <li role="option" data-value="comedie" data-image="assets/titanic.svg" data-title="Titanic">
+
+                <li 
+                  role="option" 
+                  data-value="comedie"
+                  data-movies='[
+                    {"title":"Alien", "image":"assets/alien.svg"}
+                  ]'>
                   <span>Comédies</span>
                   <span class="checkmark">✔</span>
                 </li>
@@ -252,12 +265,13 @@
                   <span class="checkmark">✔</span>
                 </li>
               </ul>
+              <div class="selected-category-wrapper">
+                <div id="selected-category-container" class="top-rated-wrapper"></div>
+              </div>      
             </div>
           </section>
           
-            <div class="selected-category-wrapper">
-              <div id="selected-category-container"></div>
-            </div>                             
+                       
     </main>
   </div>
   <script src="app.js"></script>
