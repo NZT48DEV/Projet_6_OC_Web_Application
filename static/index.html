@@ -1,288 +1,309 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>JustStreamIt</title>
-  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;600&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="style.css">
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JustStreamIt</title>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;600&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-  <div class="screen-too-small">
-    <p>Votre écran est trop petit pour afficher correctement ce site.</p>
-  </div>
-  
-  <div class="container site-wrapper">
+    <div class="screen-too-small">
+        <p>Votre écran est trop petit pour afficher correctement ce site.</p>
+    </div>
 
-    <header class="header-logo">
-      <div class="logo-container">
-        <img src="assets/logo_1.svg" alt="Logo JustStreamIt" class="logo-img">
-      </div>
-      <div class="title-container">
-        <h1 class="header-title">Vidéos à la demande</h1>
-      </div>
-    </header>
-    
-    
-    <main>
+    <div class="site-wrapper">
 
-      <section class="best-movie">
-        <h2 class="best-movie-title">Meilleur film</h2>
-        <div class="movie-card-wrapper">
-          <div class="movie-card">
-            <img
-              src="assets/the-big-lebowski.svg"
-              alt="Affiche du film The Big Lebowski"
-              class="movie-poster"
-            />
-            <div class="movie-info">
-              <h3 class="movie-title">The Big Lebowski</h3>
-              <p class="movie-description">
-                Jeff "The Dude" Lebowski, mistaken for a millionaire of the same name,
-                seeks restitution for his ruined rug and enlists his bowling buddies to help get it.
-              </p>
-              <button class="btn">Détails</button>
-            </div>
-          </div>
-        </div>
-      </section>
-      
-      
-      
-      
+        <header class="header-logo">
+            <img src="assets/logo_1.svg" alt="Logo JustStreamIt" class="logo-img">
+            <h1 class="header-title">Vidéos à la demande</h1>
+        </header>
 
-        <section class="top-rated-section">
-            <h2 class="top-rated-title">Films les mieux notés</h2>
-            <div class="top-rated-wrapper">
-                <div class="top-rated-grid">
-                  <div class="movie-item">
+        <main>
+
+            <!------------------- BEST MOVIE ------------------->
+
+            <section class="best-movie">
+                <h2 class="best-movie-title">Meilleur Film</h2>
+                <div class="movie-card">
+                    <img
+                    src="assets/the-big-lebowski.svg"
+                    alt="Affiche du film The Big Lebowski"
+                    class="movie-poster"
+                  />
+                  <div class="movie-info">
+                    <h3 class="movie-title">The Big Lebowski</h3>
+                    <p class="movie-description">
+                        Jeff "The Dude" Lebowski, mistaken for a millionaire of the same name,
+                        seeks restitution for his ruined rug and enlists his bowling buddies to help get it.
+                    </p>
+                    <button class="btn">Détails</button>
+                  </div>
+                </div>
+            </section>
+
+            <!------------------- TOP RATED CATEGORY ------------------->
+
+            <section id="top-rated" class="category-section">
+                <h2 class="category-title">Films les mieux notés</h2>
+                <div class="movie-item">
                     <img src="assets/titanic.svg" alt="Titanic">
                     <div class="overlay">
-                      <span>Titanic</span>
-                      <button>Détails</button>
+                        <span>Titanic</span>
+                        <button>Détails</button>
                     </div>
-                  </div>
-              
-                  <div class="movie-item">
+                </div>
+                
+                <div class="movie-item">
                     <img src="assets/retour-futur.svg" alt="Retour vers le futur">
                     <div class="overlay">
-                      <span>Retour vers le futur</span>
-                      <button>Détails</button>
+                        <span>Retour vers le futur</span>
+                        <button>Détails</button>
                     </div>
-                  </div>
-              
-                  <div class="movie-item hidden">
+                </div> 
+
+                <div class="movie-item hidden">
                     <img src="assets/scarface.svg" alt="Scarface">
                     <div class="overlay">
-                      <span>Scarface</span>
-                      <button>Détails</button>
+                        <span>Scarface</span>
+                        <button>Détails</button>
                     </div>
-                  </div>
-              
-                  <div class="movie-item hidden">
+                </div> 
+
+                <div class="movie-item hidden">
                     <img src="assets/pulp-fiction.svg" alt="Pulp Fiction">
                     <div class="overlay">
-                      <span>Pulp Fiction</span>
-                      <button>Détails</button>
+                        <span>Pulp Fiction</span>
+                        <button>Détails</button>
                     </div>
-                  </div>
-              
-                  <div class="movie-item hidden">
+                </div> 
+
+                <div class="movie-item hidden">
                     <img src="assets/le-parrain.svg" alt="Le Parrain">
                     <div class="overlay">
-                      <span>Le Parrain</span>
-                      <button>Détails</button>
+                        <span>Le Parrain</span>
+                        <button>Détails</button>
                     </div>
-                  </div>
-              
-                  <div class="movie-item hidden">
+                </div> 
+
+                <div class="movie-item hidden">
                     <img src="assets/alien.svg" alt="Alien">
                     <div class="overlay">
-                      <span>Alien</span>
-                      <button>Détails</button>
+                        <span>Alien</span>
+                        <button>Détails</button>
                     </div>
-                  </div>
-              
+                </div> 
+
+                <button id="show-more-btn" class="btn">Voir plus</button>
+            </section>
+            
+            <!------------------- CATEGORY 1 ------------------->
+
+            <section id="category-1" class="category-section">
+                <h2 class="category-title">Mystery</h2>
+                <div class="movie-item">
+                    <img src="assets/le-parrain.svg" alt="Le Parrain">
+                    <div class="overlay">
+                        <span>Le Parrain</span>
+                        <button>Détails</button>
+                    </div>
                 </div>
+                
+                <div class="movie-item">
+                    <img src="assets/scarface.svg" alt="Scarface">
+                    <div class="overlay">
+                        <span>Retour vers le futur</span>
+                        <button>Détails</button>
+                    </div>
+                </div> 
 
-        <button class="btn wide">Voir plus</button>
-      </section>
+                <div class="movie-item hidden">
+                    <img src="assets/pulp-fiction.svg" alt="Pulp Fiction">
+                    <div class="overlay">
+                        <span>Pulp Fiction</span>
+                        <button>Détails</button>
+                    </div>
+                </div> 
 
-      <section class="first-category">
-        <h2 class="first-category-title">Category 1</h2>
-        <div class="first-category-wrapper">
-          <div class="first-category-grid">
+                <div class="movie-item hidden">
+                    <img src="assets/titanic.svg" alt="Titanic">
+                    <div class="overlay">
+                        <span>Titanic</span>
+                        <button>Détails</button>
+                    </div>
+                </div> 
 
-            <div class="movie-item">
-              <img src="assets/le-parrain.svg" alt="Le Parrain">
-                <div class="overlay">
-                  <span>Le Parrain</span>
-                  <button>Détails</button>
+                <div class="movie-item hidden">
+                    <img src="assets/retour-futur.svg" alt="Retour vers le futur">
+                    <div class="overlay">
+                        <span>Retour vers le futur</span>
+                        <button>Détails</button>
+                    </div>
+                </div> 
+
+                <div class="movie-item hidden">
+                    <img src="assets/the-big-lebowski.svg" alt="The Big Lebowski">
+                    <div class="overlay">
+                        <span>The Big Lebowski</span>
+                        <button>Détails</button>
+                    </div>
+                </div> 
+
+                <button id="show-more-btn" class="btn">Voir plus</button>
+            </section>
+
+            <!------------------- CATEGORY 2 ------------------->
+
+            <section id="category-2" class="category-section">
+                <h2 class="category-title">Action</h2>
+                <div class="movie-item">
+                    <img src="assets/alien.svg" alt="Alien">
+                    <div class="overlay">
+                        <span>Alien</span>
+                        <button>Détails</button>
+                    </div>
                 </div>
-            </div>
+                
+                <div class="movie-item">
+                    <img src="assets/le-parrain.svg" alt="Le Parrain">
+                    <div class="overlay">
+                        <span>Le Parrain</span>
+                        <button>Détails</button>
+                    </div>
+                </div> 
 
-            <div class="movie-item">
-              <img src="assets/scarface.svg" alt="Scarface">
-                <div class="overlay">
-                  <span>Scarface</span>
-                  <button>Détails</button>
+                <div class="movie-item hidden">
+                    <img src="assets/scarface.svg" alt="Scarface">
+                    <div class="overlay">
+                        <span>Scarface</span>
+                        <button>Détails</button>
+                    </div>
+                </div> 
+
+                <div class="movie-item hidden">
+                    <img src="assets/pulp-fiction.svg" alt="Pulp Fiction">
+                    <div class="overlay">
+                        <span>Pulp Fiction</span>
+                        <button>Détails</button>
+                    </div>
+                </div> 
+
+                <div class="movie-item hidden">
+                    <img src="assets/retour-futur.svg" alt="Retour vers le futur">
+                    <div class="overlay">
+                        <span>Retour vers le futur</span>
+                        <button>Détails</button>
+                    </div>
+                </div> 
+
+                <div class="movie-item hidden">
+                    <img src="assets/titanic.svg" alt="Titanic">
+                    <div class="overlay">
+                        <span>Titanic</span>
+                        <button>Détails</button>
+                    </div>
+                </div> 
+
+                <button id="show-more-btn" class="btn">Voir plus</button>
+            </section>
+
+            <!------------------- CATEGORY : AUTRES ------------------->
+
+            <section id="category-other" class="category-section">
+                <h2 class="category-title">Autres:</h2>
+                <div class="dropdown-menu" id="genre-dropdown">
+                    <button class="dropdown-toggle" aria-haspopup="listbox" aria-expanded="false" id="dropdownToggle">
+                        <span class="selected-value">Sélectionnez un genre</span>
+                        <span class="arrow">▾</span>
+                    </button>
+                    <ul class="dropdown-items" role="listbox" aria-labelledby="dropdownToggle" tabindex="-1">
+                        <li 
+                        role="option" 
+                        data-value="action"
+                        data-movies='[
+                            {"title":"Alien", "image":"assets/alien.svg"},
+                            {"title":"Le Parrain", "image":"assets/le-parrain.svg"},
+                            {"title":"Pulp Fiction", "image":"assets/pulp-fiction.svg"},
+                            {"title":"The Big Lebowski", "image":"assets/the-big-lebowski.svg"}
+                        ]'>
+                        <span>Films d’action</span>
+                        <span class="checkmark">✔</span>
+                        </li>
+
+                        <li 
+                        role="option" 
+                        data-value="action"
+                        data-movies='[]'>
+                        <span>Mystery</span>
+                        <span class="checkmark">✔</span>
+                        </li>
+
+                        <li 
+                        role="option" 
+                        data-value="comedie"
+                        data-movies='[
+                            {"title":"Retour vers le futur", "image":"assets/retour-futur.svg"}
+                        ]'>
+                        <span>Comédies</span>
+                        <span class="checkmark">✔</span>
+                        </li>
+
+                        <li 
+                        role="option" 
+                        data-value="fantasy"
+                        data-movies='[
+                            {"title":"Pulp Fiction", "image":"assets/pulp-fiction.svg"}
+                        ]'>
+                        <span>Fantasy</span>
+                        <span class="checkmark">✔</span>
+                        </li>
+
+                        <li 
+                        role="option" 
+                        data-value="test1"
+                        data-movies='[]'>
+                        <span>Test 1</span>
+                        <span class="checkmark">✔</span>
+                        </li>
+
+                        <li 
+                        role="option" 
+                        data-value="test2"
+                        data-movies='[]'>
+                        <span>Test 2</span>
+                        <span class="checkmark">✔</span>
+                        </li>
+
+                        <li 
+                        role="option" 
+                        data-value="test3"
+                        data-movies='[]'>
+                        <span>Test 3</span>
+                        <span class="checkmark">✔</span>
+                        </li>
+
+                        <li 
+                        role="option" 
+                        data-value="test4"
+                        data-movies='[]'>
+                        <span>Test 4</span>
+                        <span class="checkmark">✔</span>
+                        </li>
+
+                    </ul>
+                    <div class="selected-category-wrapper">
+                        <div id="selected-category-container" class="top-rated-wrapper"></div>
+                        <button id="others-show-more-btn" class="btn" style="display:none;">
+                        Voir plus
+                        </button>
+                      </div> 
                 </div>
-            </div>
+            </section>
 
-            <div class="movie-item">
-              <img src="assets/pulp-fiction.svg" alt="Pulp Fiction">
-                <div class="overlay">
-                  <span>Pulp Fiction</span>
-                  <button>Détails</button>
-                </div>
-            </div>
 
-            <div class="movie-item">
-              <img src="assets/titanic.svg" alt="Titanic">
-                <div class="overlay">
-                  <span>Titanic</span>
-                  <button>Détails</button>
-                </div>
-            </div>
-
-            <div class="movie-item">
-              <img src="assets/retour-futur.svg" alt="Retour vers le futur">
-                <div class="overlay">
-                  <span>Retour vers le futur</span>
-                  <button>Détails</button>
-                </div>
-            </div>
-
-            <div class="movie-item">
-              <img src="assets/the-big-lebowski.svg" alt="The Big Lebowski">
-                <div class="overlay">
-                  <span>The Big Lebowski</span>
-                  <button>Détails</button>
-                </div>
-            </div>
-
-          </div>
-        </div>
-        <button class="btn wide">Voir moins</button>
-      </section>
-
-      <section class="second-category">
-        <h2 class="second-category-title">Category 2</h2>
-        <div class="second-category-wrapper">
-          <div class="second-category-grid">
-
-            <div class="movie-item">
-              <img src="assets/le-parrain.svg" alt="Le Parrain">
-                <div class="overlay">
-                  <span>Le Parrain</span>
-                  <button>Détails</button>
-                </div>
-            </div>
-
-            <div class="movie-item">
-              <img src="assets/scarface.svg" alt="Scarface">
-                <div class="overlay">
-                  <span>Scarface</span>
-                  <button>Détails</button>
-                </div>
-            </div>
-
-            <div class="movie-item">
-              <img src="assets/pulp-fiction.svg" alt="Pulp Fiction">
-                <div class="overlay">
-                  <span>Pulp Fiction</span>
-                  <button>Détails</button>
-                </div>
-            </div>
-
-            <div class="movie-item">
-              <img src="assets/titanic.svg" alt="Titanic">
-                <div class="overlay">
-                  <span>Titanic</span>
-                  <button>Détails</button>
-                </div>
-            </div>
-
-            <div class="movie-item">
-              <img src="assets/retour-futur.svg" alt="Retour vers le futur">
-                <div class="overlay">
-                  <span>Retour vers le futur</span>
-                  <button>Détails</button>
-                </div>
-            </div>
-
-            <div class="movie-item">
-              <img src="assets/the-big-lebowski.svg" alt="The Big Lebowski">
-                <div class="overlay">
-                  <span>The Big Lebowski</span>
-                  <button>Détails</button>
-                </div>
-            </div>
-          </section>
-          
-          
-
-          <section class="other-category">
-            <h2 class="other-category-title">Autres :</h2>
-            <div class="dropdown-menu" id="genre-dropdown">
-              <button class="dropdown-toggle" aria-haspopup="listbox" aria-expanded="false" id="dropdownToggle">
-                <span class="selected-value">Sélectionnez un genre</span>
-                <span class="arrow">▾</span>
-              </button>
-              <ul class="dropdown-items" role="listbox" aria-labelledby="dropdownToggle" tabindex="-1">
-                <li 
-                  role="option" 
-                  data-value="action"
-                  data-movies='[
-                    {"title":"Alien", "image":"assets/alien.svg"},
-                    {"title":"Le Parrain", "image":"assets/le-parrain.svg"},
-                    {"title":"Pulp Fiction", "image":"assets/pulp-fiction.svg"},
-                    {"title":"The Big Lebowski", "image":"assets/the-big-lebowski.svg"}
-                  ]'>
-                  <span>Films d’action</span>
-                  <span class="checkmark">✔</span>
-                </li>
-
-                <li 
-                  role="option" 
-                  data-value="comedie"
-                  data-movies='[
-                    {"title":"Alien", "image":"assets/alien.svg"}
-                  ]'>
-                  <span>Comédies</span>
-                  <span class="checkmark">✔</span>
-                </li>
-                <li role="option" data-value="famille" data-image="assets/retour-futur.svg" data-title="Retour vers le futur">
-                  <span>Famille</span>
-                  <span class="checkmark">✔</span>
-                </li>
-                <li role="option" data-value="fantasy" data-image="assets/pulp-fiction.svg" data-title="Pulp Fiction">
-                  <span>Films de fantasy</span>
-                  <span class="checkmark">✔</span>
-                </li>
-                <li role="option" data-value="horreur" data-image="assets/scarface.svg" data-title="Scarface">
-                  <span>Films d’horreur</span>
-                  <span class="checkmark">✔</span>
-                </li>
-                <li role="option" data-value="sf" data-image="assets/the-big-lebowski.svg" data-title="The Big Lebowski">
-                  <span>Science-fiction</span>
-                  <span class="checkmark">✔</span>
-                </li>
-                <li role="option" data-value="westerns" data-image="assets/le-parrain.svg" data-title="Le Parrain">
-                  <span>Westerns</span>
-                  <span class="checkmark">✔</span>
-                </li>
-              </ul>
-              <div class="selected-category-wrapper">
-                <div id="selected-category-container" class="top-rated-wrapper"></div>
-              </div>      
-            </div>
-          </section>
-          
-                       
-    </main>
-  </div>
-  <script src="app.js"></script>
+        </main>
+    </div>
+    <script src="app.js"></script>
 </body>
 </html>

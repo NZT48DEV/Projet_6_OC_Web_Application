@@ -1,69 +1,106 @@
-document.addEventListener('DOMContentLoaded', () => {
-  const dd      = document.getElementById('genre-dropdown');
-  const toggle  = dd.querySelector('.dropdown-toggle');
-  const items   = dd.querySelectorAll('.dropdown-items li');
-  const display = dd.querySelector('#selected-category-container');
-
-  toggle.addEventListener('click', () => {
-    const isOpen = dd.classList.toggle('open');
-    toggle.setAttribute('aria-expanded', isOpen);
-  });
-
-  items.forEach(item => {
-    item.addEventListener('click', () => select(item));
-    item.addEventListener('keydown', e => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        select(item);
-      }
+// Gestion des boutons "Voir plus" dans les catégories fixes (avec éléments .movie-item.hidden)
+document.querySelectorAll('section.category-section').forEach(section => {
+    const btn = section.querySelector('#show-more-btn');
+    if (!btn) return;
+  
+    btn.addEventListener('click', () => {
+      const hiddenMovies = section.querySelectorAll('.movie-item.hidden');
+      hiddenMovies.forEach(item => item.classList.toggle('visible'));
+      
+      btn.textContent = btn.textContent === 'Voir plus' ? 'Voir moins' : 'Voir plus';
     });
   });
-
-  document.addEventListener('click', e => {
-    if (!dd.contains(e.target)) {
+  
+  // Gestion spécifique du bouton "Voir plus" dans la section "Autres"
+  document.addEventListener('DOMContentLoaded', () => {
+    const dd = document.getElementById('genre-dropdown');
+    const toggle = dd.querySelector('.dropdown-toggle');
+    const items = dd.querySelectorAll('.dropdown-items li');
+    const display = dd.querySelector('#selected-category-container');
+    const showMoreBtn = dd.querySelector('#others-show-more-btn');
+  
+    let currentMovies = [];
+    let displayedCount = 0;
+    const INITIAL_COUNT = 2;
+    const INCREMENT = 4;
+  
+    toggle.addEventListener('click', () => {
+      const isOpen = dd.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', isOpen);
+    });
+  
+    items.forEach(item => {
+      item.addEventListener('click', () => selectCategory(item));
+      item.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          selectCategory(item);
+        }
+      });
+    });
+  
+    document.addEventListener('click', e => {
+      if (!dd.contains(e.target)) {
+        dd.classList.remove('open');
+        toggle.setAttribute('aria-expanded', false);
+      }
+    });
+  
+    function renderMovies(movies, count) {
+      const moviesToShow = movies.slice(0, count);
+      const movieCards = moviesToShow.map(({ title, image }) => `
+        <div class="movie-item">
+          <img src="${image}" alt="${title}">
+          <div class="overlay">
+            <span>${title}</span>
+            <button class="movie-button">Détails</button>
+          </div>
+        </div>
+      `).join('');
+      display.innerHTML = movieCards.length > 0
+        ? `<div class="top-rated-grid">${movieCards}</div>`
+        : `<p class="no-movie-message">Aucun film disponible pour cette catégorie.</p>`;
+    }
+  
+    function updateShowMoreButton() {
+      if (displayedCount >= currentMovies.length) {
+        showMoreBtn.textContent = 'Voir moins';
+      } else {
+        showMoreBtn.textContent = 'Voir plus';
+      }
+      showMoreBtn.style.display = currentMovies.length > INITIAL_COUNT ? 'block' : 'none';
+    }
+  
+    function selectCategory(item) {
+      items.forEach(i => i.removeAttribute('aria-selected'));
+      item.setAttribute('aria-selected', 'true');
+  
+      const selectedText = item.querySelector('span').textContent;
+      toggle.querySelector('.selected-value').textContent = selectedText;
       dd.classList.remove('open');
       toggle.setAttribute('aria-expanded', false);
-    }
-  });
-
-  function select(item) {
-    items.forEach(i => i.removeAttribute('aria-selected'));
-    item.setAttribute('aria-selected', 'true');
   
-    const selectedText = item.querySelector('span').textContent;
-    toggle.querySelector('.selected-value').textContent = selectedText;
-    dd.classList.remove('open');
-    toggle.setAttribute('aria-expanded', false);
-  
-    // Lire l'attribut data-movies en toute sécurité
-    const moviesAttr = item.getAttribute('data-movies');
-    let movies = [];
-  
-    try {
-      if (moviesAttr) {
-        movies = JSON.parse(moviesAttr);
-        if (!Array.isArray(movies)) {
-          movies = [];
-        }
+      try {
+        const moviesAttr = item.getAttribute('data-movies');
+        currentMovies = moviesAttr ? JSON.parse(moviesAttr) : [];
+        if (!Array.isArray(currentMovies)) currentMovies = [];
+      } catch {
+        currentMovies = [];
       }
-    } catch (e) {
-      console.warn('data-movies invalide pour cet élément :', e);
-      movies = [];
+  
+      displayedCount = Math.min(INITIAL_COUNT, currentMovies.length);
+      renderMovies(currentMovies, displayedCount);
+      updateShowMoreButton();
     }
   
-    // Générer le HTML seulement si on a des films
-    const movieCards = movies.map(({ title, image }) => `
-      <div class="movie-item">
-        <img src="${image}" alt="${title}">
-        <div class="overlay">
-          <span>${title}</span>
-          <button class="movie-button">Détails</button>
-        </div>
-      </div>
-    `).join('');
+    showMoreBtn.addEventListener('click', () => {
+      if (displayedCount >= currentMovies.length) {
+        displayedCount = Math.min(INITIAL_COUNT, currentMovies.length);
+      } else {
+        displayedCount = Math.min(displayedCount + INCREMENT, currentMovies.length);
+      }
+      renderMovies(currentMovies, displayedCount);
+      updateShowMoreButton();
+    });
+  });
   
-    display.innerHTML = movies.length
-    ? `<div class="top-rated-grid">${movieCards}</div>`
-    : `<p class="no-movie-message">Aucun film disponible pour cette catégorie.</p>`;  
-  }  
-});
