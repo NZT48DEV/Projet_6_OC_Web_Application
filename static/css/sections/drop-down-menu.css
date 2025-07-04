@@ -1,0 +1,160 @@
+/* ------------------- DROPDOWN MENU (UNIFIÉ POUR "AUTRES") ------------------- */
+#category-other .dropdown-menu {
+    display: block;
+    width: 100%;
+    max-width: 500px;
+    margin: 0;
+    padding: 0;
+    border-radius: 12px;
+    font-family: 'Oswald', sans-serif;
+    overflow: visible;
+    position: relative;
+    z-index: 2;
+}
+
+#category-other .dropdown-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 100%;
+    padding: 8px 16px;
+    background-color: #f0f0f0;
+    border: none;
+    font-weight: bold;
+    font-size: clamp(24px, 6vw, 36px);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-bottom: 0;
+}
+
+#category-other .dropdown-toggle:hover {
+    background-color: #e2e2e2;
+}
+
+#category-other .dropdown-menu.open .arrow {
+    transform: rotate(180deg);
+}
+
+/* Par défaut, menu caché */
+#category-other .dropdown-items {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    background: #fff;
+    display: none;
+    min-height: 200px;
+    max-height: 200px;  /* hauteur environ 4 éléments */
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    margin-top: 0;
+    box-sizing: border-box;
+    position: absolute;
+    left: 0;
+    top: 100%;
+    width: 100%;
+    min-width: 220px;
+    border: 1px solid #ddd;
+    border-radius: 0 0 8px 8px;
+    box-shadow: 0 4px 18px #0001;
+    z-index: 100;
+}
+
+/* Affichage quand menu ouvert */
+#category-other .dropdown-menu.open .dropdown-items {
+    display: block;
+}
+
+#category-other .dropdown-items li {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 16px;
+    font-weight: bold;
+    font-size: clamp(20px, 5.2vw, 32px);
+    border-bottom: 2px solid black;
+    cursor: pointer;
+    text-align: center;
+    color: black;
+    background-color: white;
+    position: relative;
+}
+
+#category-other .dropdown-items li > span:first-child {
+    flex: 1;
+    text-align: center;
+}
+
+#category-other .checkmark {
+    position: absolute;
+    right: 16px;
+    font-size: 32px;
+    color: limegreen;
+    display: none;
+}
+
+#category-other .dropdown-items li[aria-selected="true"] .checkmark {
+    display: inline;
+}
+
+#category-other .dropdown-items li:not([aria-selected="true"]):hover {
+    background-color: #eee;
+    color: black;
+}
+
+#category-other .dropdown-items::-webkit-scrollbar {
+    width: 10px;
+}
+
+#category-other .dropdown-items::-webkit-scrollbar-track {
+    background: #f0f0f0;
+}
+
+#category-other .dropdown-items::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+}
+
+#category-other .dropdown-items::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+#category-other .dropdown-results {
+    width: 100%;
+    margin-top: 16px;
+}
+
+#category-other .no-movie-message {
+    text-align: center;
+    padding: 2px 4px;
+    font-size: 20px;
+    font-family: 'Oswald', sans-serif;
+    color: #900;
+    background-color: #ffe5e5;
+    border: 1px solid #faa;
+    border-radius: 8px;
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: 16px;
+}
+
+#category-other .dropdown-items li:last-child {
+    border-bottom: none;
+}
+
+#category-other .selected-category-wrapper {
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+/* Adaptations tablette */
+@media (min-width: 456px) {
+    #category-other .dropdown-toggle {
+        font-size: clamp(20px, 5.2vw, 32px);
+        margin-top: 24px;
+    }
+    #category-other .dropdown-items {
+        max-height: 244px;
+    }
+}

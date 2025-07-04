@@ -1,0 +1,166 @@
+.header {
+    height: 137px;
+    min-width: 200px;
+    max-width: 500px;
+    border: 1px solid black;
+    background-color: rgb(var(--grey-color));
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;  
+}
+
+.header__container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+}
+
+.container__logo-img {
+    width: 182px;
+    height: 130px;
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+}
+
+.container__logo-title {
+    display: none;
+}
+
+/* --- Autres section (mobile first) --- */
+.other-header-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+}
+
+#category-other .title {
+    margin: 0;
+    font-size: 32px;
+    font-weight: var(--title-font-weight, 700);
+    white-space: nowrap;
+}
+
+#category-other .dropdown-menu {
+    flex: 1 1 0;
+    min-width: 180px;
+    max-width: 100%;
+}
+
+#category-other .selected-category-wrapper {
+    width: 100%;
+    margin-top: 0;
+}
+
+/* Grille générique : UNE SEULE CLASS PARTOUT ! */
+.category-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+/* Harmonise movie-item PARTOUT */
+.movie-item {
+    width: 100%;
+    aspect-ratio: 1/1;
+    position: relative;
+    margin: 0;
+    max-width: 100%;
+}
+.movie-item img {
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    display: block;
+    margin: 0;
+    border-radius: 0;
+}
+
+/* Desktop/tablette */
+@media (min-width: 456px) {
+
+.header {
+    height: 137px;
+    max-width: 619px;
+    border: 1px solid black;
+    background-color: rgb(var(--grey-color));
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;  
+}
+
+.container__logo-title {
+    display: block;
+    color: white;
+    font-size: clamp(32px, 5.7vw, 40px);
+    font-weight: 200;
+    width: 619px;
+    text-align: center;
+}
+
+.header__container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 8px;
+    width: 100%;
+}
+
+.container__logo-img {
+    height: 113px;
+    width: auto;
+    padding: 8px;
+}
+
+/* --- "Autres" header aligné horizontalement sur desktop --- */
+.other-header-row {
+    flex-direction: row;
+    align-items: center;
+    gap: 24px;
+    margin-bottom: 24px;
+    flex-wrap: nowrap;
+}
+
+#category-other .title {
+    font-size: 40px;
+    margin: 0;
+}
+
+#category-other .dropdown-menu {
+    max-width: 480px;
+    min-width: 220px;
+}
+
+/* Grille sur 2 colonnes partout */
+.category-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    padding-bottom: 16px;
+}
+
+#category-other .selected-category-wrapper {
+    width: 100%;
+    margin-top: 0;
+}
+}
+
+/* Optionnel : assure les dropdown-items prennent toute la largeur */
+#category-other .dropdown-items {
+    width: 100%;
+    min-width: 220px;
+    box-sizing: border-box;
+}
+
+/* Garde les boutons "voir plus" alignés */
+#others-show-more-btn {
+    display: block;
+    margin: 32px auto 16px auto;
+    width: 214px;
+}

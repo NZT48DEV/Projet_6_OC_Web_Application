@@ -21,10 +21,14 @@
   max-width: 329px;
   width: 100%;
   max-height: 137px;
-  height: 100%;
   margin: 0 auto;
   margin-top: 16px;
   margin-bottom: 20px;
+}
+
+.logo-img {
+  width: 182px;
+  height: 130px;
 }
 
 /* ---------- Best movie ------------ */
@@ -33,6 +37,10 @@ h2 {
   text-align: center;
   font-size: 32px;
   font-weight: 600;
+  width: 100%;
+  max-width: 359px;  
+  margin-left: auto;
+  margin-right: auto;
   font-family: 'Oswald';
   margin-top: 0;
 }
@@ -45,19 +53,23 @@ h2 {
 /* ------------ Movie Card -------------- */
 
 .movie-card {
+  max-width: 100%;
   width: 329px;
+  max-height: 100%;
   height: 463px;
   border: 6px solid black;
   padding: 8px 8px 8px 8px;
   margin: 0 auto;
-  margin-bottom: 16px
+  margin-bottom: 16px;
+  box-sizing: border-box;
 }
 
 .movie-poster {
   display: block;
-  margin: 0 auto; 
-  width: 100%;
-  height: 58%;
+  margin: 0 auto;
+  width: 100%;      /* Laisse l'image prendre toute la largeur dispo */
+  height: auto;     /* Ajuste la hauteur automatiquement */
+  max-height: 241px; 
   object-fit: cover;
   margin-bottom: 8px;
 }
@@ -341,6 +353,23 @@ h2 {
 
 .dropdown-items li:last-child {
   border-bottom: none;
+}
+
+@media screen and (min-width: 768px) {
+  .header-logo {
+    display: flex;
+    justify-content: center;
+    align-items: left;   
+    border: 1px solid black;
+    background: #61787F;
+    max-width: 619.13px;
+    width: 100%;
+    max-height: 137px;
+    height: 100%;
+    margin: 0 auto;
+    margin-top: 16px;
+    margin-bottom: 20px;
+  }
 }
 
 

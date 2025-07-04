@@ -1,0 +1,103 @@
+
+.best-movie__movie-card {
+    border: 6px solid rgb(var(--primary-color));
+    min-height: 300px;
+    padding: 8px;
+    margin-bottom: 16px;
+    max-width: 500px;
+}
+
+.best-movie__title {
+    font-size: 32px;
+    font-weight: var(--title-font-weight);
+}
+
+.movie-card__movie-poster {
+    width: 100%;     
+    height: auto;     
+    max-height: 241px; 
+    object-fit: cover;
+    box-sizing: border-box;
+}
+
+.movie-info__movie-title,
+.movie-info__movie-description {
+    text-align: left;
+    padding: 8px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 0 8px;
+}
+
+.movie-info__movie-title {
+    font-size: 32px;
+    font-weight: var(--title-font-weight);
+    -webkit-line-clamp: 1;
+}
+
+.movie-info__movie-description {
+    font-size: 16px;
+    line-height: 1.4;
+    font-weight: var(--description-font-weight);
+    -webkit-line-clamp: 3;
+}
+
+@media (min-width: 456px) {
+    .best-movie__movie-card {
+        display: flex;
+        flex-direction: row;        
+        align-items: stretch;        
+        max-height: 271px;
+        min-height: 200px;
+        max-width: 618px;
+        overflow: hidden;
+    }
+  
+    .movie-card__movie-poster {
+        width: auto;       
+        max-width: 618px;    
+        height: 100%;      
+        height: 100%;
+    }
+    .movie-card__movie-info {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between; 
+        flex: 1 1 0;
+        min-width: 0;
+        overflow: hidden;
+    }
+
+    .movie-info__movie-title {
+        font-size: clamp(24px, 5.4vw, 40px);
+        padding-left: 16px;
+    }
+
+    .movie-info__movie-description {
+        font-size: clamp(18px, 3.3vw, 24px);
+        padding-left: 16px;
+        
+        /* Ajoute ceci pour régler ton souci */
+        display: block !important;       /* Désactive -webkit-box */
+        -webkit-line-clamp: unset;
+        -webkit-box-orient: unset;
+        overflow: auto;
+        flex: 1 1 auto;
+        min-height: 0;
+    }
+
+    .best-movie__title {
+        font-size: 40px;
+        text-align: left;
+        margin-bottom: 8px;
+    }
+
+    .movie-info__btn {
+        align-self: flex-end;  /* Aligne le bouton à droite */
+        margin-top: auto;      /* Le pousse en bas si besoin */
+        margin-right: 16px;    /* Ajoute un espace à droite */
+      }
+
+}

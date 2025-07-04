@@ -1,0 +1,79 @@
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    font-family: var(--oswald);
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+.body-container {
+    text-align: center;
+    max-width: 724px;
+    min-width: 400px;
+    width: 100%;
+    margin: auto; 
+    padding: 32px;
+    /* background: #d8d3d3;    /* Optionnel : pour un effet carte sur fond gris */
+    /* border-radius: 10px; Optionnel : coins arrondis */
+    /* box-shadow: 0 0 16px #eaeaea; Optionnel : ombre douce */
+}
+
+.header,
+.best-movie__movie-card,
+img {
+    max-width: 500px;
+    width: 100%;
+    margin: auto;
+}
+
+.btn {
+    font-size: 14px;
+    font-weight: var(--btn-font-weight);
+    margin-top: 16px;
+    border-radius: 25px;
+    background-color: #FA0B0B;
+    color: white;
+    border: none;
+    cursor: pointer;
+    width: 91px;
+    height: 40px;
+    padding: 2px 4px 2px 4px;
+    transition: background 0.3s;
+  }
+
+.btn:hover {
+    background-color: #d50000;
+}
+
+.movie-item.hidden {
+    display: none;
+  }
+  
+  .movie-item.visible {
+    display: block;
+  }
+
+@media (min-width: 456px) {
+.body-container {
+    max-width: 619px;
+    width: 100%;
+    text-align: left;
+}
+
+.header,
+.best-movie__movie-card,
+img {
+    max-width: 619px;
+}
+
+.show-more-btn {
+    display: block;
+    margin: 32px auto 16px auto;  /* haut, auto (centre), bas, auto */
+    width: 214px;
+  }
+
+}

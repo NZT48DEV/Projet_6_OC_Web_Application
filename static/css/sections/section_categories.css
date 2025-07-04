@@ -1,0 +1,204 @@
+/* ----------------------- CATEGORIES & FILMS ----------------------- */
+#category-2 .title,
+#category-1 .title,
+#category-top-rated .title {
+    font-size: 32px;
+    font-weight: var(--title-font-weight);
+}
+
+/* Images de film (toutes sections) */
+.movie-item img {
+    margin-bottom: 16px;
+    aspect-ratio: 1 / 1;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    display: block;
+}
+
+/* Card film */
+.movie-item {
+    position: relative;
+    max-width: 500px; /* Limite max pour contenir l'image et la card */
+    width: 100%;
+    margin: auto;
+}
+
+/* Overlay info sur affiche */
+.overlay {
+    position: absolute;
+    top: 14%;
+    left: 0;
+    right: 0;
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+    height: 40%;
+    background-color: rgba(0, 0, 0, 0.5);
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.overlay span {
+    position: absolute;
+    top: 12%;
+    left: 6%;
+    color: #fff;
+    font-size: 24px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-shadow: 0 2px 8px #000a;
+    text-align: left;
+}
+
+.overlay button {
+    position: absolute;
+    bottom: 10%;
+    right: 6%;
+    background: #333;
+    color: #fff;
+    font-size: 14px;
+    font-weight: bold;
+    border: none;
+    border-radius: 25px;
+    padding: 8px 32px;
+    cursor: pointer;
+    box-shadow: 0 2px 8px #0005;
+    transition: background 0.3s;
+    outline: none;
+    display: block;
+}
+
+.overlay button:hover {
+    background: #FA0B0B;
+}
+
+/* Boutons Voir plus */
+.show-more-btn,
+#others-show-more-btn {
+    margin-top: 0;
+    margin-bottom: 16px;
+    width: 214px;
+    height: 36px;
+    font-size: 20px;
+    padding: 2px 4px;
+    gap: 10px;
+    transition: background 0.3s;
+}
+
+/* Titres spéciaux pour "Action" et "Autres" */
+#category-2 .title {
+    font-size: 36px;
+    font-weight: var(--title-font-weight);
+}
+
+#category-other .title {
+    font-size: 40px;
+    font-weight: var(--title-font-weight);
+    white-space: nowrap;
+    margin: 0;
+}
+
+/* SECTION AUTRES : HEADER FLEX */
+.other-header-row {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+}
+
+#category-other .dropdown-menu {
+    flex: 1 1 0;
+    min-width: 180px;
+    max-width: 100%;
+    position: relative; /* pour dropdown absolu */
+}
+
+/* Grille harmonisée partout */
+#category-other .category-grid,
+.category-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+    width: 100%;
+    max-width: 619px; /* limite globale à 500px pour cohérence */
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
+#category-other .movie-item,
+.category-grid .movie-item {
+    max-width: 100%; /* s'adapte à la grille max-width */
+    width: 100%;
+    margin: auto;
+    position: relative;
+}
+
+#category-other .movie-item img,
+.category-grid .movie-item img {
+    aspect-ratio: 1 / 1;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    margin-bottom: 16px;
+    display: block;
+}
+
+/* ---------- RESPONSIVE TABLETTE/DESKTOP ---------- */
+@media (min-width: 456px) {
+    #category-2 .title,
+    #category-1 .title,
+    #category-top-rated .title,
+    #best-movie .best-movie__title,
+    #category-other .title {
+        font-size: clamp(24px, 5.7vw, 40px);
+    }
+    /* Header Autres et menu sur une ligne */
+    .other-header-row {
+        flex-direction: row;
+        align-items: center;
+        gap: 24px;
+        margin-bottom: 24px;
+        flex-wrap: nowrap;
+    }
+    #category-other .dropdown-menu {
+        max-width: 480px;
+        min-width: 220px;
+    }
+    #category-other .category-grid,
+    .category-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+        padding-bottom: 16px;
+        max-width: 619px; /* On limite aussi en desktop */
+        margin: 0 auto;
+    }
+    /* Suppression de la gestion single-column */
+    #category-other .movie-item,
+    .category-grid .movie-item {
+        margin: 0;
+        max-width: 100%;
+    }
+    #category-other .movie-item img,
+    .category-grid .movie-item img {
+        margin-bottom: 0;
+    }
+    .category-section .title {
+        margin-bottom: 24px;
+    }
+    .overlay span {
+        font-size: clamp(16px, 4vw, 24px);
+    }
+    .overlay button {
+        font-size: clamp(6px, 2vw, 14px);
+    }
+}
+
+/* Voir plus "Autres" bien centré */
+#others-show-more-btn {
+    display: block;
+    margin: auto;
+    width: 214px;
+}

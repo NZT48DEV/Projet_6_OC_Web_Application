@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JustStreamIt</title>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;600&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="shortcut icon" href="../assets/logo_1.svg" type="image/svg+xml">
+</head>
+
+<body>
+    <div class="body-container">
+        <header class="header">
+            <div class="header__container">
+                <img src="../assets/logo_1.svg" alt="Logo JustStreamIt" class="container__logo-img">
+                <h1 class="container__logo-title">Vidéos à la demande</h1>
+            </div>
+        </header>
+
+        <main>
+
+            <!------------------- BEST MOVIE ------------------->
+
+            <section id="best-movie" class="section__best-movie">
+                <h2 class="best-movie__title">Meilleur Film</h2>
+                <div class="best-movie__movie-card">
+                    <img
+                    src="../assets/the-big-lebowski.svg"
+                    alt="Affiche du film The Big Lebowski"
+                    class="movie-card__movie-poster"
+                    />
+                    <div class="movie-card__movie-info">
+                        <h3 class="movie-info__movie-title">The Big Lebowski</h3>
+                        <p class="movie-info__movie-description">
+                        Jeff "The Dude" Lebowski, mistaken for a millionaire of the same name,
+                        seeks restitution for his ruined rug and enlists his bowling buddies to help get it.
+                        </p>
+                        <button class="movie-info__btn btn">Détails</button>
+                    </div>
+                </div>
+            </section>
+
+            <!------------------- TOP RATED CATEGORY ------------------->
+            <div class="categories">
+                <section id="category-top-rated" class="category-section">
+                    <h2 class="title">Films les mieux notés</h2>
+                    <div class="category-grid">
+                      <div class="movie-item">
+                          <img src="../assets/titanic.svg" alt="Titanic">
+                          <div class="overlay">
+                              <span>Titanic</span>
+                              <button>Détails</button>
+                          </div>
+                      </div>
+                      <div class="movie-item">
+                          <img src="../assets/retour-futur.svg" alt="Retour vers le futur">
+                          <div class="overlay">
+                              <span>Retour vers le futur</span>
+                              <button>Détails</button>
+                          </div>
+                      </div>
+                      <div class="movie-item hidden">
+                          <img src="../assets/scarface.svg" alt="Scarface">
+                          <div class="overlay">
+                              <span>Scarface</span>
+                              <button>Détails</button>
+                          </div>
+                      </div>
+                      <div class="movie-item hidden">
+                          <img src="../assets/pulp-fiction.svg" alt="Pulp Fiction">
+                          <div class="overlay">
+                              <span>Pulp Fiction</span>
+                              <button>Détails</button>
+                          </div>
+                      </div>
+                      <div class="movie-item hidden">
+                          <img src="../assets/le-parrain.svg" alt="Le Parrain">
+                          <div class="overlay">
+                              <span>Le Parrain</span>
+                              <button>Détails</button>
+                          </div>
+                      </div>
+                      <div class="movie-item hidden">
+                          <img src="../assets/alien.svg" alt="Alien">
+                          <div class="overlay">
+                              <span>Alien</span>
+                              <button>Détails</button>
+                          </div>
+                      </div>
+                    </div>
+                    <button class="show-more-btn btn">Voir plus</button>
+                  </section>
+
+                <!------------------- CATEGORY 1 ------------------->
+
+                <section id="category-1" class="category-section">
+                    <h2 class="title">Mystery</h2>
+                    <div class="category-grid">
+                        <div class="movie-item">
+                            <img src="../assets/le-parrain.svg" alt="Le Parrain">
+                            <div class="overlay">
+                                <span>Le Parrain</span>
+                                <button>Détails</button>
+                            </div>
+                        </div>
+                        
+                        <div class="movie-item">
+                            <img src="../assets/scarface.svg" alt="Scarface">
+                            <div class="overlay">
+                                <span>Scarface</span>
+                                <button>Détails</button>
+                            </div>
+                        </div> 
+
+                        <div class="movie-item hidden">
+                            <img src="../assets/pulp-fiction.svg" alt="Pulp Fiction">
+                            <div class="overlay">
+                                <span>Pulp Fiction</span>
+                                <button>Détails</button>
+                            </div>
+                        </div> 
+
+                        <div class="movie-item hidden">
+                            <img src="../assets/titanic.svg" alt="Titanic">
+                            <div class="overlay">
+                                <span>Titanic</span>
+                                <button>Détails</button>
+                            </div>
+                        </div> 
+
+                        <div class="movie-item hidden">
+                            <img src="../assets/retour-futur.svg" alt="Retour vers le futur">
+                            <div class="overlay">
+                                <span>Retour vers le futur</span>
+                                <button>Détails</button>
+                            </div>
+                        </div> 
+
+                        <div class="movie-item hidden">
+                            <img src="../assets/the-big-lebowski.svg" alt="The Big Lebowski">
+                            <div class="overlay">
+                                <span>The Big Lebowski</span>
+                                <button>Détails</button>
+                            </div>
+                        </div> 
+                    </div>
+                    <button class="show-more-btn btn">Voir plus</button>
+                </section>
+
+
+
+                <!------------------- CATEGORY 2 ------------------->
+
+                <section id="category-2" class="category-section">
+                    <h2 class="title">Action</h2>
+                    <div class="category-grid">
+                        <div class="movie-item">
+                            <img src="../assets/alien.svg" alt="Alien">
+                            <div class="overlay">
+                                <span>Alien</span>
+                                <button>Détails</button>
+                            </div>
+                        </div>
+                        
+                        <div class="movie-item">
+                            <img src="../assets/le-parrain.svg" alt="Le Parrain">
+                            <div class="overlay">
+                                <span>Le Parrain</span>
+                                <button>Détails</button>
+                            </div>
+                        </div> 
+
+                        <div class="movie-item hidden">
+                            <img src="../assets/scarface.svg" alt="Scarface">
+                            <div class="overlay">
+                                <span>Scarface</span>
+                                <button>Détails</button>
+                            </div>
+                        </div> 
+
+                        <div class="movie-item hidden">
+                            <img src="../assets/pulp-fiction.svg" alt="Pulp Fiction">
+                            <div class="overlay">
+                                <span>Pulp Fiction</span>
+                                <button>Détails</button>
+                            </div>
+                        </div> 
+
+                        <div class="movie-item hidden">
+                            <img src="../assets/retour-futur.svg" alt="Retour vers le futur">
+                            <div class="overlay">
+                                <span>Retour vers le futur</span>
+                                <button>Détails</button>
+                            </div>
+                        </div> 
+
+                        <div class="movie-item hidden">
+                            <img src="../assets/titanic.svg" alt="Titanic">
+                            <div class="overlay">
+                                <span>Titanic</span>
+                                <button>Détails</button>
+                            </div>
+                        </div> 
+                    </div>
+                    <button class="show-more-btn btn">Voir plus</button>
+                </section>
+
+                <!------------------- CATEGORY : AUTRES ------------------->
+
+                <section id="category-other" class="category-section">
+                    <div class="other-header-row">
+                      <h2 class="title">Autres:</h2>
+                      <div class="dropdown-menu" id="genre-dropdown">
+                        <button class="dropdown-toggle" aria-haspopup="listbox" aria-expanded="false" id="dropdownToggle">
+                          <span class="selected-value">Sélectionnez un genre</span>
+                          <span class="arrow">▾</span>
+                        </button>
+                        <ul class="dropdown-items" role="listbox" aria-labelledby="dropdownToggle" tabindex="-1">
+                          <li 
+                            role="option" 
+                            data-value="action"
+                            data-movies='[
+                                {"title":"Alien", "image":"../assets/alien.svg"},
+                                {"title":"Le Parrain", "image":"../assets/le-parrain.svg"},
+                                {"title":"Pulp Fiction", "image":"../assets/pulp-fiction.svg"},
+                                {"title":"The Big Lebowski", "image":"../assets/the-big-lebowski.svg"}
+                            ]'>
+                            <span>Films d’action</span>
+                            <span class="checkmark">✔</span>
+                          </li>
+                          <li role="option" data-value="action" data-movies='[]'>
+                            <span>Mystery</span>
+                            <span class="checkmark">✔</span>
+                          </li>
+                          <li 
+                            role="option" 
+                            data-value="comedie"
+                            data-movies='[
+                                {"title":"Retour vers le futur", "image":"../assets/retour-futur.svg"}
+                            ]'>
+                            <span>Comédies</span>
+                            <span class="checkmark">✔</span>
+                          </li>
+                          <li 
+                            role="option" 
+                            data-value="fantasy"
+                            data-movies='[
+                                {"title":"Pulp Fiction", "image":"../assets/pulp-fiction.svg"}
+                            ]'>
+                            <span>Fantasy</span>
+                            <span class="checkmark">✔</span>
+                          </li>
+                          <li role="option" data-value="test1" data-movies='[]'>
+                            <span>Test 1</span>
+                            <span class="checkmark">✔</span>
+                          </li>
+                          <li role="option" data-value="test2" data-movies='[]'>
+                            <span>Test 2</span>
+                            <span class="checkmark">✔</span>
+                          </li>
+                          <li role="option" data-value="test3" data-movies='[]'>
+                            <span>Test 3</span>
+                            <span class="checkmark">✔</span>
+                          </li>
+                          <li role="option" data-value="test4" data-movies='[]'>
+                            <span>Test 4</span>
+                            <span class="checkmark">✔</span>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                    <div class="selected-category-wrapper">
+                      <div id="selected-category-container" class="category-grid"></div>
+                      <button id="others-show-more-btn" class="btn" style="display:none;">Voir plus</button>
+                    </div>
+                </section>                  
+            </div>
+        </main>
+    </div>
+    <script src="../js/app.js"></script>
+</body>
+</html>

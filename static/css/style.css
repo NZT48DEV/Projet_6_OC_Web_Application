@@ -1,0 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Oswald:wght@200..700&display=swap');
+@import url('global.css');
+@import url('sections/header.css');
+@import url('sections/section_best_movie.css');
+@import url('sections/section_categories.css');
+@import url('sections/drop-down-menu.css');
+
+
+:root {
+    --primary-color: 0, 0, 0;
+    --secondary-color: 255, 255, 255;
+
+    --grey-color: 97, 120, 127;
+    --red-color: 250, 11, 11;
+
+    --oswald: "Oswald", sans-serif;
+
+    --title-font-weight : 600;
+    --description-font-weight : 200;
+    --btn-font-weight: 500;
+}
