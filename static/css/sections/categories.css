@@ -1,0 +1,118 @@
+.top-rated-movie__title,
+.category-1__title {
+    font-size: 32px;
+    font-weight: var(--title-font-weight)
+}
+
+.category-2__title {
+    font-size: 36px;
+    font-weight: var(--title-font-weight)
+}
+
+.category-others__title {
+    font-size: 40px;
+    font-weight: var(--title-font-weight)
+}
+
+.categories {
+    width: 100%;
+}
+
+.categories img {
+    width: 100%;
+    height: auto;
+    margin-bottom: 32px;
+}
+
+.movie-item {
+    position: relative;
+}
+
+.overlay {
+    position: absolute;
+    top: 14%;
+    left: 0;
+    right: 0;
+    height: 41%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.overlay span {
+    position: absolute;
+    top: 22%;
+    left: 8%;
+    color: #fff;
+    font-size: 24px;
+    font-weight: var(--title-font-weight);
+    text-shadow: 0 2px 8px #000a;
+    text-align: left;
+}
+
+.overlay button {
+    position: absolute;
+    bottom: 12%;
+    right: 6%;
+    background: #333;
+    color: #fff;
+    font-size: 14px;
+    font-weight: var(--btn-font-weight);
+    border-radius: 25px;
+    padding: 8px 32px;
+    cursor: pointer;
+    box-shadow: 0 2px 8px #0005;
+    transition: background 0.3s;
+    outline: none;
+    display: block;
+}
+
+.overlay button:hover {
+    background-color: #d50000;
+}
+
+.show-more-btn {
+    margin-top: 0;
+    margin-bottom: 16px;
+    width: 214px;
+    height: 36px;
+    font-size: 20px;
+    padding: 2px 4px;
+    gap: 10px;
+    transition: background 0.3s;
+}
+
+@media (min-width: 768px) { 
+
+.top-rated-movie__title,
+.category-1__title,
+.category-2__title,
+.category-others__title{
+    font-size: 40px;
+    margin-bottom: 16px;
+}
+
+.category-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    padding-bottom: 16px;
+    max-width: 620px; /* On limite aussi en desktop */
+    margin: 0 auto;
+}
+
+.category-grid .movie-item {
+    margin: 0;
+    max-width: 100%;
+}
+
+.movie-item img {
+    display: block;           /* évite les petits espaces en bas */
+    width: 100%;              /* pleine largeur */
+    height: 286px;            /* hauteur fixe pour activer object-fit */
+    object-fit: cover;        /* rogne pour remplir sans déformation */
+    object-position: center;  /* centre le “crop” sur l’image */
+  }
+
+.categories img {
+    margin-bottom: 0px;
+}
+}

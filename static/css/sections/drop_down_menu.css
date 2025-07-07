@@ -1,0 +1,185 @@
+.others-header-row {
+    width: 100%;
+}
+
+.dropdown-menu {
+    display: block;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    border-radius: 12px;
+    font-family: 'Oswald', sans-serif;
+    overflow: visible;
+    position: relative;
+    z-index: 2;
+}
+
+
+.dropdown-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 100%;
+    padding: 8px 16px;
+    background-color: #f0f0f0;
+    border: none;
+    font-weight: bold;
+    font-size: 28px;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-bottom: 0;
+    flex: 1;
+}
+
+.dropdown-toggle:hover {
+    background-color: #e2e2e2;
+}
+
+.dropdown-menu.open .arrow {
+    transform: rotate(180deg);
+}
+
+/* Par défaut, menu caché */
+.dropdown-items {
+    background: #fff;
+    display: none;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    margin-top: 0;
+    box-sizing: border-box;
+    position: absolute;
+    left: 0;
+    top: 100%;
+    width: 100%;
+    border: 1px solid #ddd;
+    max-height: calc(6 * 56px);
+}
+  
+.dropdown-menu.open .dropdown-items {
+    display: block;
+}
+
+.dropdown-items li {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 16px;
+    height: 56px;
+    font-weight: var(--title-font-weight);
+    font-size: 24px;
+    border-bottom: 2px solid black;
+    cursor: pointer;
+    text-align: center;
+    color: black;
+    background-color: white;
+    position: relative;
+}
+
+.dropdown-items li > span:first-child {
+    flex: 1;
+    text-align: center;
+}
+
+.checkmark {
+    position: absolute;
+    right: 16px;
+    font-size: 32px;
+    color: limegreen;
+    display: none;
+}
+
+.dropdown-items li[aria-selected="true"] .checkmark {
+    display: inline;
+}
+
+.dropdown-items li:not([aria-selected="true"]):hover {
+    background-color: #eee;
+    color: black;
+}
+
+.dropdown-items::-webkit-scrollbar {
+    width: 10px;
+}
+
+.dropdown-items::-webkit-scrollbar-track {
+    background: #f0f0f0;
+}
+
+.dropdown-items::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+}
+
+.dropdown-items::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+.no-movie-message {
+    text-align: center;
+    padding: 2px 4px;
+    font-size: 20px;
+    font-family: 'Oswald', sans-serif;
+    color: #900;
+    background-color: #ffe5e5;
+    border: 1px solid #faa;
+    border-radius: 8px;
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: 16px;
+}
+
+.dropdown-items li:last-child {
+    border-bottom: none;
+}
+
+.selected-category-wrapper {
+    width: 100%;
+}
+   
+#selected-category-container .movie-item img {
+    width: 100%;
+}
+  
+#others-show-more-btn {
+    display: block;       /* devient block pour que margin auto fonctionne */
+    margin: 16px auto;    /* marge verticale + auto à gauche/droite = centrage */
+  }
+  
+  @media (min-width: 768px) {
+    .others-header-row {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;  /* bien garder tout à gauche */
+      gap: 0.5rem;                   /* espace uniforme entre Autres: et la dropdown */
+    }
+  
+    .others-header-row .category-others__title {
+      margin: 0;                     /* plus besoin de margin-right si on utilise gap */
+    }
+  
+    .others-header-row .dropdown-menu {
+      width: 320px;                  /* largeur fixe souhaitée */
+      /* plus de margin-left: auto ici */
+    }
+  
+    .others-header-row .dropdown-toggle {
+      width: 100%;                   /* remplir toute la dropdown */
+    }
+    /* Quand #selected-category-container a la classe single-column,
+   on sort du grid et on centre le message */
+#selected-category-container.single-column {
+    display: block;               /* plus de grid */
+    text-align: center;           /* centre tout le texte à l’intérieur */
+  }
+  
+  /* On limite la largeur du message et on le centre */
+  #selected-category-container.single-column .no-movie-message {
+    display: inline-block;        /* pour pouvoir fixer une width max */
+    max-width: 620px;             /* largeur de ton container .container */
+    width: 100%;
+    margin: 16px auto;               /* centre horizontalement */
+  }
+  
+}

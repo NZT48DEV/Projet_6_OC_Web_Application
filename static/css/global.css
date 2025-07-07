@@ -1,33 +1,66 @@
+/* ===========================
+   Minimal reset pour Chrome,
+   Firefox et Safari
+   =========================== */
+
+/* 1. Box-sizing + suppression des marges/paddings */
 *, *::before, *::after {
     margin: 0;
     padding: 0;
-    font-family: var(--oswald);
     box-sizing: border-box;
 }
 
-html,
-body {
-    height: 100%;
+/* 2. Corps de page */
+html, body {
+  width: 100%;
+  height: 100%;
+  line-height: 1.5;              /* meilleur espacement de texte */
+  -webkit-text-size-adjust: 100%;/* évite le zoom automatique sur iOS */
 }
 
-.body-container {
+/* 3. Titres, paragraphes et listes */
+h1, h2, h3, h4, h5, h6,
+p, ul, ol, figure, blockquote, dl, dd {
+  margin: 0;                      /* on gère les espacements au cas par cas */
+}
+ul, ol {
+  list-style: none;               /* supprime puces et numéros */
+}
+
+/* 4. Liens */
+a {
+  color: inherit;                 /* hérite la couleur du parent */
+  text-decoration: none;          /* sans soulignement */
+}
+
+/* 5. Images et médias */
+img, picture, video, canvas, svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/* 6. Formulaires et boutons */
+button, input, select, textarea {
+  font: inherit;                  /* hérite la police du body */
+  background: none;
+  border: none;
+  outline: none;
+}
+
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     text-align: center;
-    max-width: 724px;
-    min-width: 400px;
+    max-width: 329px;
+    min-width: 329px;
     width: 100%;
     margin: auto; 
-    padding: 32px;
-    /* background: #d8d3d3;    /* Optionnel : pour un effet carte sur fond gris */
-    /* border-radius: 10px; Optionnel : coins arrondis */
-    /* box-shadow: 0 0 16px #eaeaea; Optionnel : ombre douce */
-}
-
-.header,
-.best-movie__movie-card,
-img {
-    max-width: 500px;
-    width: 100%;
-    margin: auto;
+    font-family: var(--oswald);
+    background: #d8d3d3;    /* Optionnel : pour un effet carte sur fond gris */
+    border-radius: 10px; /* Optionnel : coins arrondis */
+    box-shadow: 0 0 16px #eaeaea; /*Optionnel : ombre douce */
 }
 
 .btn {
@@ -52,28 +85,32 @@ img {
 .movie-item.hidden {
     display: none;
   }
-  
-  .movie-item.visible {
+
+.movie-item.visible {
     display: block;
   }
 
-@media (min-width: 456px) {
-.body-container {
-    max-width: 619px;
-    width: 100%;
+  @media (min-width: 768px) {
+
+.container{
+    max-width: 620px;
+    min-width: 620px;
     text-align: left;
 }
 
-.header,
-.best-movie__movie-card,
-img {
-    max-width: 619px;
-}
 
 .show-more-btn {
     display: block;
     margin: 32px auto 16px auto;  /* haut, auto (centre), bas, auto */
     width: 214px;
   }
+}
+
+@media (min-width: 1024px) { 
+    .container{
+        max-width: 837px;
+        min-width: 837px;
+        text-align: left;
+    }
 
 }

@@ -1,9 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Oswald:wght@200..700&display=swap');
 @import url('global.css');
 @import url('sections/header.css');
-@import url('sections/section_best_movie.css');
-@import url('sections/section_categories.css');
-@import url('sections/drop-down-menu.css');
+@import url('sections/best_movie.css');
+@import url('sections/categories.css');
+@import url('sections/drop_down_menu.css');
 
 
 :root {
