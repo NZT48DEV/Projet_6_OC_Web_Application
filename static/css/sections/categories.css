@@ -57,7 +57,7 @@
     font-size: 14px;
     font-weight: var(--btn-font-weight);
     border-radius: 25px;
-    padding: 8px 32px;
+    padding: 4px 32px;
     cursor: pointer;
     box-shadow: 0 2px 8px #0005;
     transition: background 0.3s;
@@ -107,7 +107,7 @@
 .movie-item img {
     display: block;           /* évite les petits espaces en bas */
     width: 100%;              /* pleine largeur */
-    height: 286px;            /* hauteur fixe pour activer object-fit */
+    height: 300px;            /* hauteur fixe pour activer object-fit */
     object-fit: cover;        /* rogne pour remplir sans déformation */
     object-position: center;  /* centre le “crop” sur l’image */
   }
@@ -115,4 +115,36 @@
 .categories img {
     margin-bottom: 0px;
 }
+
+.overlay span {
+    top: 18%;
+}
+}
+
+@media (min-width: 1024px) { 
+.top-rated-movie__title,
+.category-1__title,
+.category-2__title,
+.category-others__title{
+    font-size: 48px;
+    margin-bottom: 32px;
+}
+
+.category-grid {
+    grid-template-columns: repeat(3, 1fr);
+    max-width: 837px;
+    gap: 32px;
+}
+
+.movie-item img {
+    height: 252px;
+  }
+
+.show-more-btn {
+    display: none;
+}
+.overlay button {
+    padding: 2px 24px
+}
+
 }

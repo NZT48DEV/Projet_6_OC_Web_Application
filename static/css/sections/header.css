@@ -9,6 +9,11 @@ header {
     margin-bottom: 16px;  
 }
 
+.header__logo-img {
+    width: 182px;
+    height: 130px;
+}
+
 .header__logo-title {
     display: none;
 }
@@ -17,7 +22,7 @@ header {
 
 .header__logo-title {
     display: block;
-    margin: auto;
+    margin-left: 32px;
     font-weight: 300;
     font-size: 40px;
     color: white;
@@ -39,11 +44,25 @@ header{
     margin-bottom: 32px;
   }
 
+.header__logo-img {
+    width: 165px;
+    height: 113px;
+}
+
 }
 
 @media (min-width: 1024px) { 
+
+header {
+    height: 122px;
+}
 .container__header {
     width: 100%;
     max-width: 837px;
+}
+
+.header__logo-img {
+    width: 127px;
+    height: 94px;
 }
 }

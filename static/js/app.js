@@ -34,6 +34,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const INITIAL_COUNT = 2;
   const INCREMENT = 4;
 
+  // --------- AJOUT : fonction helper pour détecter le desktop
+  function isDesktop() {
+    return window.innerWidth >= 1024;
+  }
+
   // Ouvre/ferme le menu déroulant
   toggle.addEventListener('click', () => {
     const isOpen = dd.classList.toggle('open');
@@ -79,11 +84,17 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  // --------- AJOUT : mise à jour du bouton selon la largeur écran
   function updateShowMoreButton() {
+    if (isDesktop()) {
+      showMoreBtn.style.display = 'none';
+      return;
+    }
     showMoreBtn.textContent = (displayedCount >= currentMovies.length) ? 'Voir moins' : 'Voir plus';
     showMoreBtn.style.display = currentMovies.length > INITIAL_COUNT ? 'block' : 'none';
   }
 
+  // --------- MODIFIE : adapte le nombre de films selon la largeur écran
   function selectCategory(item) {
     items.forEach(i => i.removeAttribute('aria-selected'));
     item.setAttribute('aria-selected', 'true');
@@ -100,7 +111,11 @@ document.addEventListener('DOMContentLoaded', () => {
       currentMovies = [];
     }
 
-    displayedCount = Math.min(INITIAL_COUNT, currentMovies.length);
+    if (isDesktop()) {
+      displayedCount = currentMovies.length;
+    } else {
+      displayedCount = Math.min(INITIAL_COUNT, currentMovies.length);
+    }
     renderMovies(currentMovies, displayedCount);
     updateShowMoreButton();
   }
@@ -122,4 +137,18 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     showMoreBtn.focus();
   });
+
+  // --------- AJOUT : mets à jour l'affichage lors d'un resize
+  window.addEventListener('resize', () => {
+    if (currentMovies.length > 0) {
+      if (isDesktop()) {
+        displayedCount = currentMovies.length;
+      } else {
+        displayedCount = Math.min(INITIAL_COUNT, currentMovies.length);
+      }
+      renderMovies(currentMovies, displayedCount);
+      updateShowMoreButton();
+    }
+  });
+
 });

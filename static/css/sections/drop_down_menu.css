@@ -147,39 +147,62 @@
     margin: 16px auto;    /* marge verticale + auto à gauche/droite = centrage */
   }
   
-  @media (min-width: 768px) {
-    .others-header-row {
-      display: flex;
-      align-items: center;
-      justify-content: flex-start;  /* bien garder tout à gauche */
-      gap: 0.5rem;                   /* espace uniforme entre Autres: et la dropdown */
-    }
-  
-    .others-header-row .category-others__title {
-      margin: 0;                     /* plus besoin de margin-right si on utilise gap */
-    }
-  
-    .others-header-row .dropdown-menu {
-      width: 320px;                  /* largeur fixe souhaitée */
-      /* plus de margin-left: auto ici */
-    }
-  
-    .others-header-row .dropdown-toggle {
-      width: 100%;                   /* remplir toute la dropdown */
-    }
-    /* Quand #selected-category-container a la classe single-column,
-   on sort du grid et on centre le message */
+@media (min-width: 768px) {
+.others-header-row {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;  /* bien garder tout à gauche */
+    gap: 0.5rem;                   /* espace uniforme entre Autres: et la dropdown */
+}
+
+.others-header-row .category-others__title {
+    margin: 0;                     /* plus besoin de margin-right si on utilise gap */
+}
+
+.others-header-row .dropdown-menu {
+    width: 360px;                  
+}
+
+.others-header-row .dropdown-toggle {
+    width: 100%;                  
+}
+
 #selected-category-container.single-column {
-    display: block;               /* plus de grid */
-    text-align: center;           /* centre tout le texte à l’intérieur */
-  }
+    display: block;              
+    text-align: center;           
+}
   
-  /* On limite la largeur du message et on le centre */
-  #selected-category-container.single-column .no-movie-message {
-    display: inline-block;        /* pour pouvoir fixer une width max */
-    max-width: 620px;             /* largeur de ton container .container */
+#selected-category-container.single-column .no-movie-message {
+    display: inline-block;        
+    max-width: 100%;            
     width: 100%;
-    margin: 16px auto;               /* centre horizontalement */
-  }
-  
+    margin: 16px auto;               
+}
+.dropdown-items li {
+    font-size: 32px;
+}
+.dropdown-toggle {
+    font-size: 32px;
+}
+.no-movie-message {
+    font-size: 28px;
+}
+}
+
+@media (min-width: 1024px) {
+.show-more-btn{
+    display: none!important;
+}
+.dropdown-items li {
+    font-size: 36px;
+}
+.dropdown-toggle {
+ font-size: 36px;
+}
+.others-header-row .dropdown-menu {
+    width: 404px;                  
+}
+.no-movie-message {
+    font-size: 32px;
+}
 }
