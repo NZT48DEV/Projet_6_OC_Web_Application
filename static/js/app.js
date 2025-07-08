@@ -150,5 +150,76 @@ document.addEventListener('DOMContentLoaded', () => {
       updateShowMoreButton();
     }
   });
+// ========== GESTION MODALE ==========
+
+function openModal({ title, image, description }) {
+  const modalOverlay = document.getElementById('modal-overlay');
+  document.getElementById('modal-title').textContent = title || '';
+  document.getElementById('modal-poster').src = image || '';
+  document.getElementById('modal-poster').alt = title || '';
+  document.getElementById('modal-description').textContent = description || 'Description non disponible.';
+  modalOverlay.style.display = 'flex';
+
+  // Bloque le scroll derrière la modale
+  document.body.style.overflow = 'hidden';
+}
+
+// Fermer la modale (croix ou clic extérieur)
+function closeModal() {
+  document.getElementById('modal-overlay').style.display = 'none';
+  document.body.style.overflow = '';
+}
+
+// Fermeture par la croix
+document.querySelector('.modal-close').addEventListener('click', closeModal);
+
+// Fermeture au clic sur l’overlay (hors modale)
+document.getElementById('modal-overlay').addEventListener('click', function (e) {
+  if (e.target === this) closeModal();
+});
+
+// Fermeture au clavier (touche Esc)
+window.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeModal();
+});
+
+// ========== OUVERTURE MODALE AU CLIC SUR "Détails" ==========
+
+// Pour la section "Meilleur film"
+document.addEventListener('DOMContentLoaded', function () {
+  // --- MEILLEUR FILM ---
+  const bestBtn = document.querySelector('.best-movie__info .movie-info__btn');
+  if (bestBtn) {
+    bestBtn.addEventListener('click', function() {
+      openModal({
+        title: 'The Big Lebowski',
+        image: '../assets/the-big-lebowski.svg',
+        description: 'Jeff "The Dude" Lebowski, mistaken for a millionaire of the same name, seeks restitution for his ruined rug and enlists his bowling buddies to help get it.'
+      });
+    });
+  }
+
+  // --- AUTRES FILMS ---
+  // Délégation sur tous les boutons .overlay button
+  document.body.addEventListener('click', function (e) {
+    if (e.target.matches('.overlay button, .movie-button')) {
+      // Remonte jusqu'à .movie-item pour récupérer les infos
+      const movieItem = e.target.closest('.movie-item');
+      if (movieItem) {
+        // Recherche les infos de base
+        const img = movieItem.querySelector('img');
+        const title = movieItem.querySelector('.overlay span') ? movieItem.querySelector('.overlay span').textContent : (img ? img.alt : '');
+        // Si tu veux ajouter une vraie description, tu peux l'ajouter en data-attribute ou via un objet JS...
+        openModal({
+          title: title,
+          image: img ? img.src : '',
+          description: "Description non disponible." // (A compléter dynamiquement plus tard)
+        });
+      }
+    }
+  });
+});
 
 });
+
+

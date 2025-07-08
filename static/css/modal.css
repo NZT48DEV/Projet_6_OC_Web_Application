@@ -1,0 +1,125 @@
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--oswald);
+  }
+  
+  .modal {
+    background: #fff;
+    border: 6px solid #000;     /* Bordure noire 6px */
+    box-shadow: 0 8px 32px #0004;
+    max-width: 506px;
+    width: 100%;
+    padding: 40px;
+    position: relative;
+    overflow: hidden;
+    animation: modalIn 0.25s;
+    display: flex;
+    flex-direction: row;
+    max-height: 90vh;
+    overflow: hidden;
+  }
+  
+  @keyframes modalIn {
+    from { transform: translateY(30px) scale(0.95); opacity: 0; }
+    to   { transform: none; opacity: 1; }
+  }
+  
+  .modal-content {
+    display: flex;
+    flex-direction: row;
+    max-width: 409px;
+    max-height: 76vh;
+    overflow-y: auto;
+    /* Scrollbar pour Firefox */
+    scrollbar-width: thin;
+    scrollbar-color: #888 #eee;
+  }
+
+  /* Scrollbar pour Chrome, Safari, Edge */
+.modal-content::-webkit-scrollbar {
+    width: 10px;
+    background: #eee;
+  }
+.modal-content::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 6px;
+  }
+.modal-content::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+
+
+  /* --------------------------------------------------------- */
+  
+  .modal-poster {
+    width: 100%;
+    max-height: 602px;
+    object-fit: cover;
+    background: #eee;
+    margin: 0;
+    display: block;
+    flex-shrink: 0;
+    margin-bottom: 32px;
+  }
+
+  .modal-cast {
+    line-height: 1.2;
+  }
+
+  .modal-actors {
+    font-size: 20px;
+    font-weight: 300;
+  }
+
+  
+  .modal-title {
+    font-size: 48px;
+    font-weight: bold;
+    color: #000000;
+  }
+  
+  .modal-meta {
+    font-size: 24px;
+    color: #666;
+    font-weight: 600;
+    line-height: 1.2;
+    margin-bottom: 32px;
+  }
+  
+  .modal-directors, .modal-cast {
+    color: #000000;
+    font-size: 24px;
+
+  }
+  
+  #modal-description {
+    font-size: 24px;
+    font-weight: 300;
+    word-break: break-word;
+    padding-bottom: 32px;
+    line-height: 1.2;
+  }
+  
+  .modal-close {
+    position: absolute;
+    top: 40px;
+    right: 16px;
+    font-size: 48px;
+    font-weight: 500;
+    color: #000000;
+    cursor: pointer;
+    transition: color 0.2s;
+  }
+  .modal-close:hover { color: #FA0B0B; }
+  
+  /* Responsive Desktop */
+@media (max-width: 1024px) {
+
+} 
+  
