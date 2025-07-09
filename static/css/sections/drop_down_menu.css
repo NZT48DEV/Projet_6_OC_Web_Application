@@ -143,20 +143,20 @@
 }
   
 #others-show-more-btn {
-    display: block;       /* devient block pour que margin auto fonctionne */
-    margin: 16px auto;    /* marge verticale + auto à gauche/droite = centrage */
-  }
+    display: block;       
+    margin: 16px auto;    
+}
   
 @media (min-width: 769px) {
 .others-header-row {
     display: flex;
     align-items: center;
-    justify-content: flex-start;  /* bien garder tout à gauche */
-    gap: 0.5rem;                   /* espace uniforme entre Autres: et la dropdown */
+    justify-content: flex-start;  
+    gap: 8px;                  
 }
 
 .others-header-row .category-others__title {
-    margin: 0;                     /* plus besoin de margin-right si on utilise gap */
+    margin: 0;                    
 }
 
 .others-header-row .dropdown-menu {
@@ -193,15 +193,19 @@
 .show-more-btn{
     display: none!important;
 }
+
 .dropdown-items li {
     font-size: 36px;
 }
+
 .dropdown-toggle {
  font-size: 36px;
 }
+
 .others-header-row .dropdown-menu {
     width: 404px;                  
 }
+
 .no-movie-message {
     font-size: 32px;
 }

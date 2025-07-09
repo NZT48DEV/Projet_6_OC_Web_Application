@@ -34,15 +34,15 @@ header {
     transform: translateX(-50%);
     width: 100%;
     width: 620px;
-    display: flex;                  /* logo + titre côte à côte */
+    display: flex;                  
     align-items: center;
-    gap: 1rem;                      /* espace entre logo et texte */
+    gap: 16px;                      
     padding: 16px;
-  }
+}
 
 header{
     margin-bottom: 32px;
-  }
+}
 
 .header__logo-img {
     width: 165px;
