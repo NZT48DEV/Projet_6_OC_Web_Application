@@ -80,7 +80,7 @@
     transition: background 0.3s;
 }
 
-@media (min-width: 768px) { 
+@media (min-width: 769px) { 
 
 .top-rated-movie__title,
 .category-1__title,
@@ -121,7 +121,7 @@
 }
 }
 
-@media (min-width: 1024px) { 
+@media (min-width: 1025px) { 
 .top-rated-movie__title,
 .category-1__title,
 .category-2__title,

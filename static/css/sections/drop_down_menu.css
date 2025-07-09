@@ -147,7 +147,7 @@
     margin: 16px auto;    /* marge verticale + auto à gauche/droite = centrage */
   }
   
-@media (min-width: 768px) {
+@media (min-width: 769px) {
 .others-header-row {
     display: flex;
     align-items: center;
@@ -189,7 +189,7 @@
 }
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 1025px) {
 .show-more-btn{
     display: none!important;
 }

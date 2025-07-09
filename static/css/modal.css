@@ -1,125 +1,224 @@
 .modal-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.5);
-    z-index: 1000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: var(--oswald);
-  }
-  
-  .modal {
-    background: #fff;
-    border: 6px solid #000;     /* Bordure noire 6px */
-    box-shadow: 0 8px 32px #0004;
-    max-width: 506px;
-    width: 100%;
-    padding: 40px;
-    position: relative;
-    overflow: hidden;
-    animation: modalIn 0.25s;
-    display: flex;
-    flex-direction: row;
-    max-height: 90vh;
-    overflow: hidden;
-  }
-  
-  @keyframes modalIn {
-    from { transform: translateY(30px) scale(0.95); opacity: 0; }
-    to   { transform: none; opacity: 1; }
-  }
-  
-  .modal-content {
-    display: flex;
-    flex-direction: row;
-    max-width: 409px;
-    max-height: 76vh;
-    overflow-y: auto;
-    /* Scrollbar pour Firefox */
-    scrollbar-width: thin;
-    scrollbar-color: #888 #eee;
-  }
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--oswald);
+}
 
-  /* Scrollbar pour Chrome, Safari, Edge */
+.modal {
+  position: relative;
+  max-width: 506px;
+  width: 100%;
+  background: #fff;
+  border: 6px solid #000;
+  box-shadow: 0 8px 32px #0004;
+  max-height: 90vh;
+  overflow: visible;
+  display: flex;
+  flex-direction: column;
+}
+
+@keyframes modalIn {
+  from { transform: translateY(30px) scale(0.95); opacity: 0; }
+  to   { transform: none; opacity: 1; }
+}
+
+.modal-content {
+  display: block;
+  max-width: 409px;
+  max-height: 76vh;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #888 #eee;
+  padding: 4px;
+}
+
 .modal-content::-webkit-scrollbar {
-    width: 10px;
-    background: #eee;
-  }
+  width: 10px;
+  background: #eee;
+}
 .modal-content::-webkit-scrollbar-thumb {
-    background: #888;
-    border-radius: 6px;
-  }
+  background: #888;
+  border-radius: 6px;
+}
 .modal-content::-webkit-scrollbar-thumb:hover {
-    background: #555;
-  }
+  background: #555;
+}
 
+/* Header row (meta/réalisateurs + poster desktop) */
+.modal-header-row {
+  display: block;
+}
 
-  /* --------------------------------------------------------- */
-  
-  .modal-poster {
-    width: 100%;
-    max-height: 602px;
-    object-fit: cover;
-    background: #eee;
-    margin: 0;
-    display: block;
-    flex-shrink: 0;
-    margin-bottom: 32px;
-  }
+.poster-desktop {
+  display: none;
+}
+.poster-mobile {
+  display: block;
+  margin: 24px auto 24px;
+  width: 100%;
+}
+.poster-mobile img,
+.poster-desktop img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 4px;
+}
 
-  .modal-cast {
-    line-height: 1.2;
-  }
+.modal-cast  {
+  font-size: clamp(12px, 3.9vw, 20px);
+  line-height: 1.4;
+  font-weight: 300;
+}
 
-  .modal-actors {
-    font-size: 20px;
-    font-weight: 300;
-  }
+.modal-title {
+  font-size: clamp(30px, 9vw, 48px);
+  font-weight: bold;
+  color: #000000;
+  line-height: 0.8;
+  margin-bottom: 12px;
+}
 
-  
-  .modal-title {
-    font-size: 48px;
-    font-weight: bold;
-    color: #000000;
-  }
-  
-  .modal-meta {
-    font-size: 24px;
-    color: #666;
-    font-weight: 600;
-    line-height: 1.2;
-    margin-bottom: 32px;
-  }
-  
-  .modal-directors, .modal-cast {
-    color: #000000;
-    font-size: 24px;
+.modal-meta {
+  font-size: clamp(15px, 4.5vw, 24px);
+  color: #666;
+  font-weight: 600;
+  margin-bottom: 32px;
+}
 
-  }
-  
-  #modal-description {
-    font-size: 24px;
-    font-weight: 300;
-    word-break: break-word;
-    padding-bottom: 32px;
-    line-height: 1.2;
-  }
-  
+.modal-meta span {
+  line-height: 1;
+ }
+
+.modal-directors {
+  color: #000000;
+  font-weight: 300;
+  font-size: clamp(15px, 4.5vw, 24px);
+}
+
+.modal-description {
+  font-size: clamp(15px, 4.5vw, 24px);
+  font-weight: 300;
+  word-break: break-word;
+  line-height: 1.4;
+  margin-top: 0;
+}
+
+.modal-scrollable {
+  padding: 36px;
+  overflow-y: auto;
+  max-height: 90vh;
+  box-sizing: border-box;
+}
+
+.modal-close {
+  position: absolute;
+  top: 4px;
+  right: 16px;
+  font-size: clamp(48px, 14vw, 70px);
+  font-weight: 500;
+  color: #ff0000;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.modal-close:hover { color: #FA0B0B; }
+
+.modal .btn {
+  display: none
+}
+
+@media (max-width: 400px) {
   .modal-close {
-    position: absolute;
-    top: 40px;
-    right: 16px;
-    font-size: 48px;
-    font-weight: 500;
-    color: #000000;
-    cursor: pointer;
-    transition: color 0.2s;
-  }
-  .modal-close:hover { color: #FA0B0B; }
-  
-  /* Responsive Desktop */
-@media (max-width: 1024px) {
+    top: 8px;
+   }
+ }
 
-} 
+/* ------------------- Responsive Desktop ------------------- */
+@media (min-width: 1025px) {
+  .modal {
+    max-width: 778px;
+    max-height: 90vh;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .modal-content {
+    display: block;
+    width: 100%;
+    max-width: none;
+    max-height: 80vh;
+    scrollbar-width: none;
+  }
+
+  .modal-header-row {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    width: 100%;
+  }
+  .modal-header-text {
+    flex: 1 1 0;
+  }
+
+  .poster-mobile {
+    display: none;
+  }
+  .poster-desktop {
+    display: block;
+    width: 227px;
+    max-width: 227px;
+    max-height: 334px;
+    flex-shrink: 0;
+    position: sticky;
+    top: 0;
+    margin-bottom: 0;
+  }
+  .poster-desktop img {
+    max-width: 100%;
+    max-height: 334px;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 4px;
+  }
+
+  .modal-details {
+    width: 100%;
+  }
+  .modal-meta {
+    margin-bottom: 32px;
+  }
   
+  .modal-directors {
+    margin-bottom: 16px;
+  }
+  .modal-description,
+  .modal-cast {
+    margin-top: 32px;
+    max-width: 100%;
+    width: 100%;
+    clear: both;
+  }
+  .modal-close {
+    display: none;
+  }
+
+  .modal .btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 32px auto 0px;
+    width: 214px;
+    height: 36px;
+    font-size: 20px;
+  }
+
+}

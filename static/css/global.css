@@ -90,7 +90,7 @@ button, input, select, textarea {
     display: block;
   }
 
-  @media (min-width: 768px) {
+  @media (min-width: 769px) {
 
 .container{
     max-width: 620px;
@@ -106,7 +106,7 @@ button, input, select, textarea {
   }
 }
 
-@media (min-width: 1024px) { 
+@media (min-width: 1025px) { 
 .container{
     max-width: 837px;
     min-width: 837px;

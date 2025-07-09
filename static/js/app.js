@@ -150,43 +150,50 @@ document.addEventListener('DOMContentLoaded', () => {
       updateShowMoreButton();
     }
   });
-// ========== GESTION MODALE ==========
+  // ========== GESTION MODALE ==========
 
-function openModal({ title, image, description }) {
-  const modalOverlay = document.getElementById('modal-overlay');
-  document.getElementById('modal-title').textContent = title || '';
-  document.getElementById('modal-poster').src = image || '';
-  document.getElementById('modal-poster').alt = title || '';
-  document.getElementById('modal-description').textContent = description || 'Description non disponible.';
-  modalOverlay.style.display = 'flex';
+  function openModal({ title, image, description }) {
+    const modalOverlay = document.getElementById('modal-overlay');
+    document.getElementById('modal-title').textContent = title || '';
+    const posterEl = document.getElementById('modal-poster');
+    if (posterEl) {
+      posterEl.src = image || '';
+      posterEl.alt = title || '';
+    }
+    document.getElementById('modal-description').textContent = description || 'Description non disponible.';
+    modalOverlay.style.display = 'flex';
 
-  // Bloque le scroll derrière la modale
-  document.body.style.overflow = 'hidden';
-}
+    // Bloque le scroll derrière la modale
+    document.body.style.overflow = 'hidden';
+  }
 
-// Fermer la modale (croix ou clic extérieur)
-function closeModal() {
-  document.getElementById('modal-overlay').style.display = 'none';
-  document.body.style.overflow = '';
-}
+  // Fermer la modale (croix ou clic extérieur)
+  function closeModal() {
+    document.getElementById('modal-overlay').style.display = 'none';
+    document.body.style.overflow = '';
+  }
 
-// Fermeture par la croix
-document.querySelector('.modal-close').addEventListener('click', closeModal);
+  // Fermeture par la croix
+  document.querySelector('.modal-close').addEventListener('click', closeModal);
 
-// Fermeture au clic sur l’overlay (hors modale)
-document.getElementById('modal-overlay').addEventListener('click', function (e) {
-  if (e.target === this) closeModal();
-});
+  // Fermeture au clic sur l’overlay (hors modale)
+  document.getElementById('modal-overlay').addEventListener('click', function (e) {
+    if (e.target === this) closeModal();
+  });
 
-// Fermeture au clavier (touche Esc)
-window.addEventListener('keydown', function(e) {
-  if (e.key === 'Escape') closeModal();
-});
+  // Fermeture au clavier (touche Esc)
+  window.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeModal();
+  });
 
-// ========== OUVERTURE MODALE AU CLIC SUR "Détails" ==========
+  // Ajout : gestion du bouton "Fermer" (desktop)
+  const desktopCloseBtn = document.querySelector('.modal .btn');
+  if (desktopCloseBtn) {
+    desktopCloseBtn.addEventListener('click', closeModal);
+  }
 
-// Pour la section "Meilleur film"
-document.addEventListener('DOMContentLoaded', function () {
+  // ========== OUVERTURE MODALE AU CLIC SUR "Détails" ==========
+
   // --- MEILLEUR FILM ---
   const bestBtn = document.querySelector('.best-movie__info .movie-info__btn');
   if (bestBtn) {
@@ -218,8 +225,5 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     }
   });
-});
 
-});
-
-
+}); // FIN DU DOMContentLoaded
