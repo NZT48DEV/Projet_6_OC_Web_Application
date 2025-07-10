@@ -1,6 +1,6 @@
 // ui.js — Gestion des boutons, dropdowns, rendering liste films
 import { openModal } from './modal.js';
-import { fetchTopMoviesByGenre } from './api.js';
+import { fetchTopMoviesByGenre, fetchMovieDetails } from './api.js';
 
 const NO_POSTER = '/static/assets/no_poster.svg';
 
@@ -25,7 +25,7 @@ export function renderCategoryMovies(gridSelector, movies, showInit = 2) {
   const grid = document.querySelector(gridSelector);
   if (!grid) return;
   grid.innerHTML = movies.map((movie, idx) => `
-    <div class="movie-item${idx >= showInit ? ' hidden' : ''}">
+    <div class="movie-item${idx >= showInit ? ' hidden' : ''}" data-id="${movie.id}">
       <img 
         src="${movie.image_url ? movie.image_url : NO_POSTER}"
         alt="Affiche du film '${movie.title.replace(/'/g, "\\'")}'"
@@ -33,7 +33,7 @@ export function renderCategoryMovies(gridSelector, movies, showInit = 2) {
       >
       <div class="overlay">
         <span>${movie.title}</span>
-        <button>Détails</button>
+        <button class="movie-button">Détails</button>
       </div>
     </div>
   `).join('');
@@ -61,8 +61,8 @@ export function setupDropdown() {
   function renderMovies(movies, count) {
     const moviesToShow = movies.slice(0, count);
     if (moviesToShow.length > 0) {
-      display.innerHTML = moviesToShow.map(({ title, image_url }) => `
-        <div class="movie-item">
+      display.innerHTML = moviesToShow.map(({ title, image_url, id }) => `
+        <div class="movie-item" data-id="${id}">
           <img 
             src="${image_url ? image_url : NO_POSTER}"
             alt="${title}"
@@ -165,17 +165,16 @@ export function setupDropdown() {
 
 // --------- Délégation click sur .movie-button pour ouvrir la modale ---------
 export function setupMovieDetailButtons() {
-  document.body.addEventListener('click', function (e) {
+  document.body.addEventListener('click', async function (e) {
     if (e.target.matches('.overlay button, .movie-button')) {
       const movieItem = e.target.closest('.movie-item');
       if (movieItem) {
-        const img = movieItem.querySelector('img');
-        const title = movieItem.querySelector('.overlay span') ? movieItem.querySelector('.overlay span').textContent : (img ? img.alt : '');
-        openModal({
-          title: title,
-          image: img && img.src ? img.src : NO_POSTER,
-          description: "Description non disponible."
-        });
+        const movieId = movieItem.dataset.id;
+        if (movieId) {
+          // On va chercher le détail du film avant d'ouvrir la modale
+          const detail = await fetchMovieDetails(movieId);
+          openModal(detail);
+        }
       }
     }
   });
@@ -192,7 +191,7 @@ export function renderTopRatedMoviesSection(movies) {
   if (!grid) return;
 
   grid.innerHTML = movies.map((movie, idx) => `
-    <div class="movie-item${!topRatedShowingAll && idx >= SHOW_INIT ? ' hidden' : ''}">
+    <div class="movie-item${!topRatedShowingAll && idx >= SHOW_INIT ? ' hidden' : ''}" data-id="${movie.id}">
       <img 
         src="${movie.image_url ? movie.image_url : NO_POSTER}"
         alt="Affiche du film '${movie.title.replace(/'/g, "\\'")}'"

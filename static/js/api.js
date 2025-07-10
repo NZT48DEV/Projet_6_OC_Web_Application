@@ -49,3 +49,9 @@ export function fetchTopMoviesByGenre(genre) {
         .then(res => res.json())
         .then(data => data.results || []);
 }
+
+// Détail d’un film par son ID (pour la modale)
+export function fetchMovieDetails(id) {
+    return fetch(`http://localhost:8000/api/v1/titles/${id}`)
+        .then(res => res.json());
+}

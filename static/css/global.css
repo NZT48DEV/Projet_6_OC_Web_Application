@@ -93,12 +93,20 @@ button, input, select, textarea {
     display: block;
 }
 
+.others-header-row {
+  padding-top: 16px;
+  padding-bottom: 32px;
+}
+
   @media (min-width: 769px) {
 
 .container{
     max-width: 620px;
     min-width: 620px;
     text-align: left;
+}
+.others-header-row {
+  padding-top: 32px;
 }
 }
 
@@ -113,8 +121,4 @@ button, input, select, textarea {
   display: block;
 }
 
-.others-header-row {
-  padding-top: 32px;
-  padding-bottom: 32px;
-}
 }

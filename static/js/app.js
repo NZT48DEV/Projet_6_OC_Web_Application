@@ -1,26 +1,6 @@
 import { openModal, setupModalEvents } from './modal.js';
 import { setupShowMoreButtons, setupDropdown, setupMovieDetailButtons, renderTopRatedMoviesSection, renderCategoryMovies } from './ui.js';
-import { fetchTopMoviesByGenre, fetchAllGenres } from './api.js';
-
-// Récupère le meilleur film
-function fetchBestMovie() {
-  return fetch("http://localhost:8000/api/v1/titles/?sort_by=-imdb_score&page_size=1")
-    .then(res => res.json())
-    .then(data => data.results && data.results[0] ? data.results[0] : null);
-}
-
-// Récupère les 6 meilleurs films toutes catégories
-function fetchTopRatedMovies() {
-  return fetch("http://localhost:8000/api/v1/titles/?sort_by=-imdb_score&page_size=6")
-    .then(res => res.json())
-    .then(data => data.results || []);
-}
-
-// Récupère les détails d’un film par ID
-function fetchMovieDetails(id) {
-  return fetch(`http://localhost:8000/api/v1/titles/${id}`)
-    .then(res => res.json());
-}
+import { fetchTopMoviesByGenre, fetchAllGenres, fetchMovieDetails, fetchTopRatedMovies, fetchBestMovie } from './api.js';
 
 document.addEventListener('DOMContentLoaded', function () {
   setupShowMoreButtons();
@@ -44,11 +24,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const detailsBtn = document.querySelector('.movie-info__btn');
         if (detailsBtn) {
           detailsBtn.onclick = function () {
-            openModal({
-              title: detail.title,
-              image: detail.image_url ? detail.image_url : '/static/assets/no_poster.svg',
-              description: detail.long_description || detail.description || ''
-            });
+            openModal(detail);
           };
         }
       });
