@@ -2,6 +2,7 @@
 import { openModal } from './modal.js';
 import { fetchTopMoviesByGenre, fetchMovieDetails } from './api.js';
 
+// Gestion dynamique de l’URL fallback compatible toutes plateformes
 const NO_POSTER = `${window.location.origin}/static/assets/no_poster.svg`;
 
 // --------- Boutons "Voir plus" des sections fixes ---------
@@ -20,20 +21,30 @@ export function setupShowMoreButtons() {
   });
 }
 
+// --------- Fonction utilitaire propre pour gestion d'image fallback ---------
+function renderPoster(url, alt, extra = '') {
+  // La src est déjà safe par le JS : "" ou fausse valeur => NO_POSTER
+  // Pas d’erreur JS possible, même si l’URL n’existe pas.
+  return `
+    <img
+      src="${url ? url : NO_POSTER}"
+      alt="${alt}"
+      onerror="this.onerror=null;this.src='${NO_POSTER}';"
+      ${extra}
+    >
+  `;
+}
+
 // --------- Rendu catégorie générique (Action, Aventure, ...) ---------
 export function renderCategoryMovies(gridSelector, movies, showInit = 2) {
   const grid = document.querySelector(gridSelector);
   if (!grid) return;
   grid.innerHTML = movies.map((movie, idx) => `
     <div class="movie-item${idx >= showInit ? ' hidden' : ''}" data-id="${movie.id}">
-      <img 
-        src="${movie.image_url ? movie.image_url : NO_POSTER}"
-        alt="Affiche du film '${movie.title.replace(/'/g, "\\'")}'"
-        onerror="this.onerror=null;this.src='${NO_POSTER}';"
-      >
+      ${renderPoster(movie.image_url, `Affiche du film '${movie.title.replace(/'/g, "\\'")}'`)}
       <div class="overlay">
         <span>${movie.title}</span>
-        <button class="movie-button">Détails</button>
+        <button class="movie-button"${movie.id ? '' : ' disabled'}>Détails</button>
       </div>
     </div>
   `).join('');
@@ -63,14 +74,10 @@ export function setupDropdown() {
     if (moviesToShow.length > 0) {
       display.innerHTML = moviesToShow.map(({ title, image_url, id }) => `
         <div class="movie-item" data-id="${id}">
-          <img 
-            src="${image_url ? image_url : NO_POSTER}"
-            alt="${title}"
-            onerror="this.onerror=null;this.src='${NO_POSTER}';"
-          >
+          ${renderPoster(image_url, title)}
           <div class="overlay">
             <span>${title}</span>
-            <button class="movie-button">Détails</button>
+            <button class="movie-button"${id ? '' : ' disabled'}>Détails</button>
           </div>
         </div>
       `).join('');
@@ -172,8 +179,13 @@ export function setupMovieDetailButtons() {
         const movieId = movieItem.dataset.id;
         if (movieId) {
           // On va chercher le détail du film avant d'ouvrir la modale
-          const detail = await fetchMovieDetails(movieId);
-          openModal(detail);
+          try {
+            const detail = await fetchMovieDetails(movieId);
+            openModal(detail);
+          } catch (err) {
+            // Optionnel : tu peux log ou afficher une notif, mais ne rien faire c’est OK
+            // console.error('Erreur lors de l’ouverture de la modale film:', err);
+          }
         }
       }
     }
@@ -192,14 +204,10 @@ export function renderTopRatedMoviesSection(movies) {
 
   grid.innerHTML = movies.map((movie, idx) => `
     <div class="movie-item${!topRatedShowingAll && idx >= SHOW_INIT ? ' hidden' : ''}" data-id="${movie.id}">
-      <img 
-        src="${movie.image_url ? movie.image_url : NO_POSTER}"
-        alt="Affiche du film '${movie.title.replace(/'/g, "\\'")}'"
-        onerror="this.onerror=null;this.src='${NO_POSTER}';"
-      >
+      ${renderPoster(movie.image_url, `Affiche du film '${movie.title.replace(/'/g, "\\'")}'`)}
       <div class="overlay">
         <span>${movie.title}</span>
-        <button>Détails</button>
+        <button class="movie-button"${movie.id ? '' : ' disabled'}>Détails</button>
       </div>
     </div>
   `).join('');
