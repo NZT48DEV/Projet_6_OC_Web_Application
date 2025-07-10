@@ -21,7 +21,9 @@
 .categories img {
     width: 100%;
     height: auto;
-    margin-bottom: 32px;
+    margin-bottom: 32px; 
+    max-height: 329px;
+    object-fit: cover;
 }
 
 .movie-item {

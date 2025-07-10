@@ -5,6 +5,7 @@
 
 .best-movie__movie-card {
     width: 100%;
+    min-width: 329px;
     border: 6px solid rgb(var(--primary-color));
     padding: 8px;
     margin-bottom: 16px;
@@ -40,7 +41,7 @@
     flex-direction: row;        
     align-items: stretch;        
     max-height: 271px;
-    width: 100%;
+    min-width: 620px;
     overflow: hidden;
 }
   
@@ -115,5 +116,9 @@
 
 .movie-card__poster {
     max-height: 334px;
+}
+
+.best-movie__movie-card {
+    min-width: 835px;
 }
 }

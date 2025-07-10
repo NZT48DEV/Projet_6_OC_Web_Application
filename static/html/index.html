@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="../css/style.css">
     <link rel="shortcut icon" href="../assets/logo_1.svg" type="image/svg+xml">
 </head>
-
 <body>
     <div class="container">
         <header>
@@ -22,92 +21,25 @@
             <h2 class="best-movie__title">Meilleur Film</h2>
             <div class="best-movie__movie-card">
                 <img 
-                class="movie-card__poster"
-                src="../assets/the-big-lebowski.svg" 
-                alt="Affiche du film 'The Big Lebowski'"
+                    id="best-movie-poster"
+                    class="movie-card__poster"
+                    src="" 
+                    alt="Affiche du meilleur film"
                 >
                 <div class="best-movie__info">
-                    <h3 class="movie-info__title">The Big Lebowski</h3>
-                    <p class="movie-info__description">
-                    Jeff "The Dude" Lebowski, mistaken for a millionaire of the same name,
-                    seeks restitution for his ruined rug and enlists his bowling buddies to help get it.
-                    </p>
+                    <h3 id="best-movie-title" class="movie-info__title"></h3>
+                    <p id="best-movie-description" class="movie-info__description"></p>
                     <button class="movie-info__btn btn">Détails</button>
                 </div>
             </div>
         </section>
 
-        <!------------- FILM LES MIEUX NOTES ------------->
+            
         <div class="categories">
+            <!------------- FILM LES MIEUX NOTES ------------->
             <section class="top-rated-movie category-section">
                 <h2 class="top-rated-movie__title">Films les mieux notés</h2>
-                <div class="category-grid">
-                    <div class="movie-item">
-                        <img 
-                        src="../assets/titanic.svg" 
-                        alt="Affiche du film 'Titanic'"
-                        >
-                        <div class="overlay">
-                            <span>Titanic</span>
-                            <button>Détails</button>
-                        </div>
-                    </div>
-
-                    <div class="movie-item">
-                        <img 
-                        src="../assets/retour-futur.svg" 
-                        alt="Affiche du film 'Retour vers le futur'"
-                        >
-                        <div class="overlay">
-                            <span>Retour vers le futur</span>
-                            <button>Détails</button>
-                        </div>
-                    </div>
-
-                    <div class="movie-item hidden">
-                        <img 
-                        src="../assets/scarface.svg" 
-                        alt="Affiche du film 'Scarface'"
-                        >
-                        <div class="overlay">
-                            <span>Scarface</span>
-                            <button>Détails</button>
-                        </div>
-                    </div>
-
-                    <div class="movie-item hidden">
-                        <img 
-                        src="../assets/pulp-fiction.svg" 
-                        alt="Affiche du film 'Pulp Fiction'"
-                        >
-                        <div class="overlay">
-                            <span>Pulp Fiction</span>
-                            <button>Détails</button>
-                        </div>
-                    </div>
-
-                    <div class="movie-item hidden">
-                        <img 
-                        src="../assets/le-parrain.svg" 
-                        alt="Affiche du film 'Le Parrain'"
-                        >
-                        <div class="overlay">
-                            <span>Le Parrain</span>
-                            <button>Détails</button>
-                        </div>
-                    </div>
-
-                    <div class="movie-item hidden">
-                        <img 
-                        src="../assets/alien.svg" 
-                        alt="Affiche du film 'Alien'"
-                        >
-                        <div class="overlay">
-                            <span>Alien</span>
-                            <button>Détails</button>
-                        </div>
-                    </div>
-                </div>
+                <div id="top-rated-movies-grid" class="category-grid"></div>
                 <button class="show-more-btn btn">Voir plus</button>
             </section>
 
@@ -115,147 +47,17 @@
             <section class="category-1 category-section">
                 <h2 class="category-1__title">Catégorie 1</h2>
                 <div class="category-grid">
-
-                    <div class="movie-item">
-                        <img 
-                        src="../assets/le-parrain.svg" 
-                        alt="Affiche du film 'Le Parrain'"
-                        >
-                        <div class="overlay">
-                            <span>Le Parrain</span>
-                            <button>Détails</button>
-                        </div>
-                    </div>
-
-                    <div class="movie-item">
-                        <img 
-                        src="../assets/scarface.svg" 
-                        alt="Affiche du film 'Scarface'"
-                        >
-                        <div class="overlay">
-                            <span>Scarface</span>
-                            <button>Détails</button>
-                        </div>
-                    </div>
-
-                    <div class="movie-item hidden">
-                        <img 
-                        src="../assets/pulp-fiction.svg" 
-                        alt="Affiche du film 'Pulp Fiction'"
-                        >
-                        <div class="overlay">
-                            <span>Pulp Fiction</span>
-                            <button>Détails</button>
-                        </div>
-                    </div>
-
-                    <div class="movie-item hidden">
-                        <img 
-                        src="../assets/titanic.svg" 
-                        alt="Affiche du film 'Titanic'"
-                        >
-                        <div class="overlay">
-                            <span>Titanic</span>
-                            <button>Détails</button>
-                        </div>
-                    </div>
-
-                    <div class="movie-item hidden">
-                        <img 
-                        src="../assets/retour-futur.svg" 
-                        alt="Affiche du film 'Retour vers le futur'"
-                        >
-                        <div class="overlay">
-                            <span>Retour vers le futur</span>
-                            <button>Détails</button>
-                        </div>
-                    </div>
-
-                    <div class="movie-item hidden">
-                        <img 
-                        src="../assets/the-big-lebowski.svg" 
-                        alt="Affiche du film 'The Big Lebowski'"
-                        >
-                        <div class="overlay">
-                            <span>The Big Lebowski</span>
-                            <button>Détails</button>
-                        </div>
-                    </div>
+                    <!-- contenu remplacé dynamiquement -->
                 </div>
                 <button class="show-more-btn btn">Voir plus</button>
             </section>
 
             <!------------------- CATEGORIE 2 ------------------->
             <section class="category-2 category-section">
-                <h2 class="category-2__title">Catégorie 2</h2>
+                <h2 class="category-2__title">Catégorie 1</h2>
                 <div class="category-grid">
-                    <div class="movie-item">
-                        <img 
-                        src="../assets/alien.svg" 
-                        alt="Affiche du film 'Alien'"
-                        >
-                        <div class="overlay">
-                            <span>Alien</span>
-                            <button>Détails</button>
-                        </div>
-                    </div>
-            
-                    <div class="movie-item">
-                        <img 
-                        src="../assets/le-parrain.svg" 
-                        alt="Affiche du film 'Le Parrain'"
-                        >
-                        <div class="overlay">
-                            <span>Le Parrain</span>
-                            <button>Détails</button>
-                        </div>
-                    </div>
-            
-                    <div class="movie-item hidden">
-                        <img 
-                        src="../assets/scarface.svg" 
-                        alt="Affiche du film 'Scarface'"
-                        >
-                        <div class="overlay">
-                            <span>Scarface</span>
-                            <button>Détails</button>
-                        </div>
-                    </div>
-            
-                    <div class="movie-item hidden">
-                        <img 
-                        src="../assets/pulp-fiction.svg" 
-                        alt="Affiche du film 'Pulp Fiction'"
-                        >
-                        <div class="overlay">
-                            <span>Pulp Fiction</span>
-                            <button>Détails</button>
-                        </div>
-                    </div>
-            
-                    <div class="movie-item hidden">
-                        <img 
-                        src="../assets/retour-futur.svg" 
-                        alt="Affiche du film 'Retour vers le futur'"
-                        >
-                        <div class="overlay">
-                            <span>Retour vers le futur</span>
-                            <button>Détails</button>
-                        </div>
-                    </div>
-            
-                    <div class="movie-item hidden">
-                        <img 
-                        src="../assets/titanic.svg" 
-                        alt="Affiche du film 'Titanic'"
-                        >
-                        <div class="overlay">
-                            <span>Titanic</span>
-                            <button>Détails</button>
-                        </div>
-                    </div>
+                    <!-- contenu remplacé dynamiquement -->
                 </div>
-
                 <button class="show-more-btn btn">Voir plus</button>
             </section>
 
@@ -265,73 +67,21 @@
                     <h2 class="category-others__title">Autres:</h2>
                     <div class="dropdown-menu" id="genre-dropdown">
                         <button class="dropdown-toggle" aria-haspopup="listbox" aria-expanded="false" id="dropdownToggle">
-                        <span class="selected-value">Sélectionnez un genre</span>
-                        <span class="arrow">▾</span>
+                            <span class="selected-value">Sélectionnez un genre</span>
+                            <span class="arrow">▾</span>
                         </button>
                         <ul class="dropdown-items" role="listbox" aria-labelledby="dropdownToggle" tabindex="-1">
-                            <li 
-                            role="option" 
-                            data-value="action"
-                            data-movies='[
-                                {"title":"Alien", "image":"../assets/alien.svg"},
-                                {"title":"Le Parrain", "image":"../assets/le-parrain.svg"},
-                                {"title":"Pulp Fiction", "image":"../assets/pulp-fiction.svg"},
-                                {"title":"The Big Lebowski", "image":"../assets/the-big-lebowski.svg"}
-                            ]'>
-                            <span>Films d’action</span>
-                            <span class="checkmark">✔</span>
-                            </li>
-                            <li role="option" data-value="action" data-movies='[]'>
-                            <span>Mystery</span>
-                            <span class="checkmark">✔</span>
-                            </li>
-                            <li 
-                            role="option" 
-                            data-value="comedie"
-                            data-movies='[
-                                {"title":"Retour vers le futur", "image":"../assets/retour-futur.svg"}
-                            ]'>
-                            <span>Comédies</span>
-                            <span class="checkmark">✔</span>
-                            </li>
-                            <li 
-                            role="option" 
-                            data-value="fantasy"
-                            data-movies='[
-                                {"title":"Pulp Fiction", "image":"../assets/pulp-fiction.svg"}
-                            ]'>
-                            <span>Fantasy</span>
-                            <span class="checkmark">✔</span>
-                            </li>
-                            <li role="option" data-value="test1" data-movies='[]'>
-                            <span>Test 1</span>
-                            <span class="checkmark">✔</span>
-                            </li>
-                            <li role="option" data-value="test2" data-movies='[]'>
-                            <span>Test 2</span>
-                            <span class="checkmark">✔</span>
-                            </li>
-                            <li role="option" data-value="test3" data-movies='[]'>
-                            <span>Test 3</span>
-                            <span class="checkmark">✔</span>
-                            </li>
-                            <li role="option" data-value="test4" data-movies='[]'>
-                            <span>Test 4</span>
-                            <span class="checkmark">✔</span>
-                            </li>
+                            <!-- Les <li> seront injectés ici par JS -->
                         </ul>
                     </div>
                 </div>
-
                 <div class="selected-category-wrapper">
                     <div id="selected-category-container" class="category-grid"></div>
                     <button id="others-show-more-btn" class="show-more-btn btn" style="display:none;">
-                    Voir plus
+                        Voir plus
                     </button>
                 </div>
-
             </section>
-
         </div>
     </div>
 
@@ -379,7 +129,7 @@
             </div>
         </div>
     </div>
-    <script src="../js/app.js"></script>
+    <script type="module" src="../js/app.js"></script>
 </body>
 
 </html>

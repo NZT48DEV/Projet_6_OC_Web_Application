@@ -1,229 +1,107 @@
-// Gestion des boutons "Voir plus" dans les catégories fixes (avec éléments .movie-item.hidden)
-document.querySelectorAll('.show-more-btn').forEach(btn => {
-  // On remonte jusqu'à la <section> parent
-  const section = btn.closest('section');
-  if (!section) return;
+import { openModal, setupModalEvents } from './modal.js';
+import { setupShowMoreButtons, setupDropdown, setupMovieDetailButtons, renderTopRatedMoviesSection, renderCategoryMovies } from './ui.js';
+import { fetchTopMoviesByGenre, fetchAllGenres } from './api.js';
 
-  btn.addEventListener('click', () => {
-    // On affiche / masque les .movie-item.hidden
-    const hiddenMovies = section.querySelectorAll('.movie-item.hidden');
-    hiddenMovies.forEach(item => item.classList.toggle('visible'));
+// Récupère le meilleur film
+function fetchBestMovie() {
+  return fetch("http://localhost:8000/api/v1/titles/?sort_by=-imdb_score&page_size=1")
+    .then(res => res.json())
+    .then(data => data.results && data.results[0] ? data.results[0] : null);
+}
 
-    // On alterne le texte du bouton
-    btn.textContent = btn.textContent === 'Voir plus' ? 'Voir moins' : 'Voir plus';
+// Récupère les 6 meilleurs films toutes catégories
+function fetchTopRatedMovies() {
+  return fetch("http://localhost:8000/api/v1/titles/?sort_by=-imdb_score&page_size=6")
+    .then(res => res.json())
+    .then(data => data.results || []);
+}
 
-    // —— SCROLL + FOCUS : on ramène le bouton à l'écran et lui redonne le focus
-    btn.scrollIntoView({
-      behavior: 'smooth',
-      block: 'nearest'
-    });
-    btn.focus();
-  });
-});
+// Récupère les détails d’un film par ID
+function fetchMovieDetails(id) {
+  return fetch(`http://localhost:8000/api/v1/titles/${id}`)
+    .then(res => res.json());
+}
 
-// Gestion spécifique du bouton "Voir plus" dans la section "Autres"
-document.addEventListener('DOMContentLoaded', () => {
-  const dd = document.getElementById('genre-dropdown');
-  const toggle = dd.querySelector('.dropdown-toggle');
-  const items = dd.querySelectorAll('.dropdown-items li');
-  const display = document.getElementById('selected-category-container');
-  const showMoreBtn = document.getElementById('others-show-more-btn');
+document.addEventListener('DOMContentLoaded', function () {
+  setupShowMoreButtons();
+  setupMovieDetailButtons();
+  setupModalEvents();
 
-  let currentMovies = [];
-  let displayedCount = 0;
-  const INITIAL_COUNT = 2;
-  const INCREMENT = 4;
-
-  // --------- AJOUT : fonction helper pour détecter le desktop
-  function isDesktop() {
-    return window.innerWidth >= 1024;
-  }
-
-  // Ouvre/ferme le menu déroulant
-  toggle.addEventListener('click', () => {
-    const isOpen = dd.classList.toggle('open');
-    toggle.setAttribute('aria-expanded', isOpen);
-  });
-
-  // Sélection de catégorie au clic et au clavier
-  items.forEach(item => {
-    item.addEventListener('click', () => selectCategory(item));
-    item.addEventListener('keydown', e => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        selectCategory(item);
-      }
-    });
-  });
-
-  // Ferme la dropdown si on clique à l'extérieur
-  document.addEventListener('click', e => {
-    if (!dd.contains(e.target)) {
-      dd.classList.remove('open');
-      toggle.setAttribute('aria-expanded', false);
-    }
-  });
-
-  function renderMovies(movies, count) {
-    const moviesToShow = movies.slice(0, count);
-
-    if (moviesToShow.length > 0) {
-      display.innerHTML = moviesToShow.map(({ title, image }) => `
-        <div class="movie-item">
-          <img src="${image}" alt="${title}">
-          <div class="overlay">
-            <span>${title}</span>
-            <button class="movie-button">Détails</button>
-          </div>
-        </div>
-      `).join('');
-      display.classList.remove('single-column');
-    } else {
-      display.innerHTML = `<p class="no-movie-message">Aucun film disponible pour cette catégorie.</p>`;
-      display.classList.add('single-column');
-    }
-  }
-
-  // --------- AJOUT : mise à jour du bouton selon la largeur écran
-  function updateShowMoreButton() {
-    if (isDesktop()) {
-      showMoreBtn.style.display = 'none';
-      return;
-    }
-    showMoreBtn.textContent = (displayedCount >= currentMovies.length) ? 'Voir moins' : 'Voir plus';
-    showMoreBtn.style.display = currentMovies.length > INITIAL_COUNT ? 'block' : 'none';
-  }
-
-  // --------- MODIFIE : adapte le nombre de films selon la largeur écran
-  function selectCategory(item) {
-    items.forEach(i => i.removeAttribute('aria-selected'));
-    item.setAttribute('aria-selected', 'true');
-
-    toggle.querySelector('.selected-value').textContent = item.querySelector('span').textContent;
-    dd.classList.remove('open');
-    toggle.setAttribute('aria-expanded', false);
-
-    try {
-      const moviesAttr = item.getAttribute('data-movies');
-      currentMovies = moviesAttr ? JSON.parse(moviesAttr) : [];
-      if (!Array.isArray(currentMovies)) currentMovies = [];
-    } catch {
-      currentMovies = [];
-    }
-
-    if (isDesktop()) {
-      displayedCount = currentMovies.length;
-    } else {
-      displayedCount = Math.min(INITIAL_COUNT, currentMovies.length);
-    }
-    renderMovies(currentMovies, displayedCount);
-    updateShowMoreButton();
-  }
-
-  // Lorsque l'on clique sur "Voir plus" / "Voir moins" dans "Autres"
-  showMoreBtn.addEventListener('click', () => {
-    if (displayedCount >= currentMovies.length) {
-      displayedCount = Math.min(INITIAL_COUNT, currentMovies.length);
-    } else {
-      displayedCount = Math.min(displayedCount + INCREMENT, currentMovies.length);
-    }
-    renderMovies(currentMovies, displayedCount);
-    updateShowMoreButton();
-
-    // —— SCROLL + FOCUS pour le bouton "Autres" aussi
-    showMoreBtn.scrollIntoView({
-      behavior: 'smooth',
-      block: 'nearest'
-    });
-    showMoreBtn.focus();
-  });
-
-  // --------- AJOUT : mets à jour l'affichage lors d'un resize
-  window.addEventListener('resize', () => {
-    if (currentMovies.length > 0) {
-      if (isDesktop()) {
-        displayedCount = currentMovies.length;
-      } else {
-        displayedCount = Math.min(INITIAL_COUNT, currentMovies.length);
-      }
-      renderMovies(currentMovies, displayedCount);
-      updateShowMoreButton();
-    }
-  });
-  // ========== GESTION MODALE ==========
-
-  function openModal({ title, image, description }) {
-    const modalOverlay = document.getElementById('modal-overlay');
-    document.getElementById('modal-title').textContent = title || '';
-    const posterEl = document.getElementById('modal-poster');
-    if (posterEl) {
-      posterEl.src = image || '';
-      posterEl.alt = title || '';
-    }
-    document.getElementById('modal-description').textContent = description || 'Description non disponible.';
-    modalOverlay.style.display = 'flex';
-
-    // Bloque le scroll derrière la modale
-    document.body.style.overflow = 'hidden';
-  }
-
-  // Fermer la modale (croix ou clic extérieur)
-  function closeModal() {
-    document.getElementById('modal-overlay').style.display = 'none';
-    document.body.style.overflow = '';
-  }
-
-  // Fermeture par la croix
-  document.querySelector('.modal-close').addEventListener('click', closeModal);
-
-  // Fermeture au clic sur l’overlay (hors modale)
-  document.getElementById('modal-overlay').addEventListener('click', function (e) {
-    if (e.target === this) closeModal();
-  });
-
-  // Fermeture au clavier (touche Esc)
-  window.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') closeModal();
-  });
-
-  // Ajout : gestion du bouton "Fermer" (desktop)
-  const desktopCloseBtn = document.querySelector('.modal .btn');
-  if (desktopCloseBtn) {
-    desktopCloseBtn.addEventListener('click', closeModal);
-  }
-
-  // ========== OUVERTURE MODALE AU CLIC SUR "Détails" ==========
-
-  // --- MEILLEUR FILM ---
-  const bestBtn = document.querySelector('.best-movie__info .movie-info__btn');
-  if (bestBtn) {
-    bestBtn.addEventListener('click', function() {
-      openModal({
-        title: 'The Big Lebowski',
-        image: '../assets/the-big-lebowski.svg',
-        description: 'Jeff "The Dude" Lebowski, mistaken for a millionaire of the same name, seeks restitution for his ruined rug and enlists his bowling buddies to help get it.'
+  // Bloc "Meilleur film"
+  fetchBestMovie()
+    .then(function (bestMovie) {
+      if (!bestMovie) return;
+      fetchMovieDetails(bestMovie.id).then(function (detail) {
+        const poster = document.getElementById('best-movie-poster');
+        document.getElementById('best-movie-title').textContent = detail.title || '';
+        poster.src = detail.image_url ? detail.image_url : '/static/assets/no_poster.svg';
+        poster.alt = detail.title || '';
+        poster.onerror = function() {
+          this.onerror = null;
+          this.src = '/static/assets/no_poster.svg';
+        };
+        document.getElementById('best-movie-description').textContent = detail.description || detail.long_description || '';
+        const detailsBtn = document.querySelector('.movie-info__btn');
+        if (detailsBtn) {
+          detailsBtn.onclick = function () {
+            openModal({
+              title: detail.title,
+              image: detail.image_url ? detail.image_url : '/static/assets/no_poster.svg',
+              description: detail.long_description || detail.description || ''
+            });
+          };
+        }
       });
+    })
+    .catch(function (err) {
+      console.error('Erreur lors de la récupération du meilleur film :', err);
     });
-  }
 
-  // --- AUTRES FILMS ---
-  // Délégation sur tous les boutons .overlay button
-  document.body.addEventListener('click', function (e) {
-    if (e.target.matches('.overlay button, .movie-button')) {
-      // Remonte jusqu'à .movie-item pour récupérer les infos
-      const movieItem = e.target.closest('.movie-item');
-      if (movieItem) {
-        // Recherche les infos de base
-        const img = movieItem.querySelector('img');
-        const title = movieItem.querySelector('.overlay span') ? movieItem.querySelector('.overlay span').textContent : (img ? img.alt : '');
-        // Si tu veux ajouter une vraie description, tu peux l'ajouter en data-attribute ou via un objet JS...
-        openModal({
-          title: title,
-          image: img ? img.src : '',
-          description: "Description non disponible." // (A compléter dynamiquement plus tard)
-        });
-      }
-    }
-  });
+  // Bloc "Films les mieux notés"
+  fetchTopRatedMovies()
+    .then(function (movies) {
+      renderTopRatedMoviesSection(movies);
+    })
+    .catch(function (err) {
+      console.error('Erreur lors de la récupération des films les mieux notés :', err);
+    });
 
-}); // FIN DU DOMContentLoaded
+  // Bloc catégorie "Action" (Catégorie 1)
+  fetchTopMoviesByGenre('Action')
+    .then(function (movies) {
+      const title = document.querySelector('.category-1__title');
+      if (title) title.textContent = 'Action';
+      renderCategoryMovies('.category-1 .category-grid', movies);
+    })
+    .catch(function (err) {
+      console.error('Erreur lors de la récupération des films Action :', err);
+    });
+
+  // Bloc catégorie "Aventure" (Catégorie 2)
+  fetchTopMoviesByGenre('Adventure')
+    .then(function (movies) {
+      const title = document.querySelector('.category-2__title');
+      if (title) title.textContent = 'Aventure';
+      renderCategoryMovies('.category-2 .category-grid', movies);
+    })
+    .catch(function (err) {
+      console.error('Erreur lors de la récupération des films Aventure :', err);
+    });
+
+  // --------- Dropdown dynamique des genres "Autres" ----------
+  fetchAllGenres()
+    .then(function (genres) {
+      const ul = document.querySelector('.dropdown-items');
+      if (!ul) return;
+      ul.innerHTML = genres.map(genre => `
+        <li role="option" data-value="${genre.name}">
+          <span>${genre.name}</span>
+          <span class="checkmark">✔</span>
+        </li>
+      `).join('');
+      setupDropdown();
+    })
+    .catch(function (err) {
+      console.error('Erreur lors de la récupération des genres :', err);
+    });
+});
