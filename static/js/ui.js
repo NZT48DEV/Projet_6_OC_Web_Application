@@ -2,7 +2,7 @@
 import { openModal } from './modal.js';
 import { fetchTopMoviesByGenre, fetchMovieDetails } from './api.js';
 
-const NO_POSTER = '/static/assets/no_poster.svg';
+const NO_POSTER = `${window.location.origin}/static/assets/no_poster.svg`;
 
 // --------- Boutons "Voir plus" des sections fixes ---------
 export function setupShowMoreButtons() {

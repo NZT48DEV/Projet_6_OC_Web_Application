@@ -6,28 +6,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/style.css">
     <link rel="shortcut icon" href="../assets/logo_1.svg" type="image/svg+xml">
+    <title>JustStreamIt - Vidéos à la demande</title>
 </head>
+
 <body>
     <div class="container">
         <header>
             <div class="container__header">
-                <img class="header__logo-img "src="../assets/logo_1.svg" alt="Logo JustStreamIt">
+                <img class="header__logo-img" src="../assets/logo_1.svg" alt="Logo JustStreamIt">
                 <h1 class="header__logo-title">Vidéos à la demande</h1>
             </div>
         </header>
 
-        <!------------- MEILLEUR FILM ------------->
         <section class="best-movie">
             <h2 class="best-movie__title">Meilleur Film</h2>
             <div class="best-movie__movie-card">
                 <img 
                     id="best-movie-poster"
                     class="movie-card__poster"
-                    src="" 
+                    src="/static/assets/no_poster.svg" 
                     alt="Affiche du meilleur film"
                 >
                 <div class="best-movie__info">
-                    <h3 id="best-movie-title" class="movie-info__title"></h3>
+                    <h3 id="best-movie-title" class="movie-info__title">Titre du film</h3>
                     <p id="best-movie-description" class="movie-info__description"></p>
                     <button class="movie-info__btn btn">Détails</button>
                 </div>
@@ -36,14 +37,13 @@
 
             
         <div class="categories">
-            <!------------- FILM LES MIEUX NOTES ------------->
+
             <section class="top-rated-movie category-section">
                 <h2 class="top-rated-movie__title">Films les mieux notés</h2>
                 <div id="top-rated-movies-grid" class="category-grid"></div>
                 <button class="show-more-btn btn">Voir plus</button>
             </section>
 
-            <!------------------- CATEGORIE 1 ------------------->
             <section class="category-1 category-section">
                 <h2 class="category-1__title">Catégorie 1</h2>
                 <div class="category-grid">
@@ -52,7 +52,6 @@
                 <button class="show-more-btn btn">Voir plus</button>
             </section>
 
-            <!------------------- CATEGORIE 2 ------------------->
             <section class="category-2 category-section">
                 <h2 class="category-2__title">Catégorie 1</h2>
                 <div class="category-grid">
@@ -61,7 +60,6 @@
                 <button class="show-more-btn btn">Voir plus</button>
             </section>
 
-            <!------------------- CATEGORIE AUTRES ------------------->
             <section id="category-others" class="category-section">
                 <div class="others-header-row">
                     <h2 class="category-others__title">Autres:</h2>
@@ -82,10 +80,10 @@
                     </button>
                 </div>
             </section>
+
         </div>
     </div>
 
-    <!------------------- MODAL ------------------->
     <div id="modal-overlay" class="modal-overlay">
         <div class="modal">
             <button class="modal-close" aria-label="Fermer">×</button>
@@ -93,7 +91,7 @@
                 <div class="modal-header-row">
                     <div class="modal-header-text">
                         <div class="modal-meta">
-                            <h3 id="modal-title" class="modal-title"></h3>
+                            <h3 id="modal-title" class="modal-title">Titre du film</h3>
                             <span class="meta-year" id="modal-year"></span>
                             <span>-</span>
                             <span class="meta-categories" id="modal-genres"></span><br>
