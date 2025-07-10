@@ -118,8 +118,8 @@
 
 .modal-close {
   position: absolute;
-  top: 4px;
-  right: 16px;
+  top: 0%;
+  right: 3%;
   font-size: clamp(48px, 14vw, 70px);
   font-weight: 500;
   color: #ff0000;
@@ -133,12 +133,6 @@
 .modal .btn {
   display: none
 }
-
-@media (max-width: 400px) {
-  .modal-close {
-    top: 8px;
-   }
- }
 
 /* ------------------- Responsive Desktop ------------------- */
 @media (min-width: 1025px) {
