@@ -1,5 +1,5 @@
 // modal.js — Gestion de la modale
-const NO_POSTER = '/static/assets/no_poster.svg';
+const NO_POSTER = `${window.location.origin}/static/assets/no_poster.svg`;
 
 export function openModal(movie) {
   // Fallback N/A
