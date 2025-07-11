@@ -2,6 +2,8 @@ import { openModal, setupModalEvents } from './modal.js';
 import { setupShowMoreButtons, setupDropdown, setupMovieDetailButtons, renderTopRatedMoviesSection, renderCategoryMovies } from './ui.js';
 import { fetchTopMoviesByGenre, fetchAllGenres, fetchMovieDetails, fetchTopRatedMovies, fetchBestMovie } from './api.js';
 
+export const NO_POSTER = '/static/assets/no_poster.svg'
+
 document.addEventListener('DOMContentLoaded', function () {
   setupShowMoreButtons();
   setupMovieDetailButtons();
@@ -14,11 +16,11 @@ document.addEventListener('DOMContentLoaded', function () {
       fetchMovieDetails(bestMovie.id).then(function (detail) {
         const poster = document.getElementById('best-movie-poster');
         document.getElementById('best-movie-title').textContent = detail.title || '';
-        poster.src = detail.image_url ? detail.image_url : '/static/assets/no_poster.svg';
+        poster.src = detail.image_url ? detail.image_url : NO_POSTER;
         poster.alt = detail.title || '';
         poster.onerror = function() {
           this.onerror = null;
-          this.src = '/static/assets/no_poster.svg';
+          this.src = NO_POSTER;
         };
         document.getElementById('best-movie-description').textContent = detail.description || detail.long_description || '';
         const detailsBtn = document.querySelector('.movie-info__btn');

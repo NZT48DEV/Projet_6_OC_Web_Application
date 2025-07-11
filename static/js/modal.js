@@ -1,5 +1,5 @@
 // modal.js — Gestion de la modale
-const NO_POSTER = `${window.location.origin}/static/assets/no_poster.svg`;
+import { NO_POSTER } from './app.js';
 
 export function openModal(movie) {
   function na(value) {
@@ -48,6 +48,9 @@ export function openModal(movie) {
 
   modalOverlay.style.display = 'flex';
   document.body.style.overflow = 'hidden';
+
+  const scrollable = modalOverlay.querySelector('.modal-scrollable');
+  if (scrollable) scrollable.scrollTop = 0;
 }
 
 export function closeModal() {

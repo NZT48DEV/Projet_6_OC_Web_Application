@@ -1,9 +1,7 @@
 // ui.js — Gestion des boutons, dropdowns, rendering liste films
 import { openModal } from './modal.js';
 import { fetchTopMoviesByGenre, fetchMovieDetails } from './api.js';
-
-// Gestion dynamique de l’URL fallback compatible toutes plateformes
-const NO_POSTER = `${window.location.origin}/static/assets/no_poster.svg`;
+import { NO_POSTER } from './app.js';
 
 // --------- Boutons "Voir plus" des sections fixes ---------
 export function setupShowMoreButtons() {
