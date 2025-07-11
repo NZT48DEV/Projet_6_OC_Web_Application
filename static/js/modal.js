@@ -2,21 +2,19 @@
 const NO_POSTER = `${window.location.origin}/static/assets/no_poster.svg`;
 
 export function openModal(movie) {
-  // Fallback N/A
   function na(value) {
     if (!value || (Array.isArray(value) && value.length === 0)) return 'N/A';
     return value;
   }
-
-  // Pour joindre les tableaux avec virgule
   function joinArray(arr) {
     if (!arr || arr.length === 0) return 'N/A';
     return arr.join(', ');
   }
 
   const modalOverlay = document.getElementById('modal-overlay');
+  if (!modalOverlay) return; // sécurité : ne va pas plus loin si la modale n’existe pas
 
-  // Image desktop et mobile (double affichage)
+  // Gestion image desktop et mobile (double affichage)
   const posterEl = document.getElementById('modal-poster');
   const posterMobileEl = document.getElementById('modal-poster-mobile');
   const posterSrc = movie.image_url ? movie.image_url : NO_POSTER;
@@ -31,30 +29,37 @@ export function openModal(movie) {
     }
   });
 
-  document.getElementById('modal-title').textContent = na(movie.title);
-  document.getElementById('modal-year').textContent = na(movie.year);
-  document.getElementById('modal-genres').textContent = joinArray(movie.genres);
-  document.getElementById('modal-classification').textContent = na(movie.rated);
-  document.getElementById('modal-duration').textContent = movie.duration ? `${movie.duration} min` : 'N/A';
-  document.getElementById('modal-countries').textContent = movie.countries ? `(${joinArray(movie.countries)})` : '(N/A)';
-  document.getElementById('modal-imdb-score').textContent = movie.imdb_score ? `${movie.imdb_score}/10` : 'N/A';
-  document.getElementById('modal-revenue').textContent = movie.worldwide_gross_income ? `${movie.worldwide_gross_income.toLocaleString()} $` : 'N/A';
-  document.getElementById('modal-directors').textContent = joinArray(movie.directors);
-  document.getElementById('modal-description').textContent = na(movie.long_description || movie.description);
-  document.getElementById('modal-actors').textContent = joinArray(movie.actors);
+  const setText = (id, value) => {
+    const el = document.getElementById(id);
+    if (el) el.textContent = value;
+  };
+
+  setText('modal-title', na(movie.title));
+  setText('modal-year', na(movie.year));
+  setText('modal-genres', joinArray(movie.genres));
+  setText('modal-classification', na(movie.rated));
+  setText('modal-duration', movie.duration ? `${movie.duration} min` : 'N/A');
+  setText('modal-countries', movie.countries ? `(${joinArray(movie.countries)})` : '(N/A)');
+  setText('modal-imdb-score', movie.imdb_score ? `${movie.imdb_score}/10` : 'N/A');
+  setText('modal-revenue', movie.worldwide_gross_income ? `${movie.worldwide_gross_income.toLocaleString()} $` : 'N/A');
+  setText('modal-directors', joinArray(movie.directors));
+  setText('modal-description', na(movie.long_description || movie.description));
+  setText('modal-actors', joinArray(movie.actors));
 
   modalOverlay.style.display = 'flex';
   document.body.style.overflow = 'hidden';
 }
 
 export function closeModal() {
-  document.getElementById('modal-overlay').style.display = 'none';
+  const overlay = document.getElementById('modal-overlay');
+  if (overlay) overlay.style.display = 'none';
   document.body.style.overflow = '';
 }
 
 // Initialisation listeners modale
 export function setupModalEvents() {
-  document.querySelector('.modal-close').addEventListener('click', closeModal);
+  const closeBtn = document.querySelector('.modal-close');
+  if (closeBtn) closeBtn.addEventListener('click', closeModal);
 
   // Fermeture bouton desktop
   const desktopCloseBtn = document.querySelector('.modal .btn');
@@ -63,9 +68,12 @@ export function setupModalEvents() {
   }
 
   // Clic sur overlay
-  document.getElementById('modal-overlay').addEventListener('click', function (e) {
-    if (e.target === this) closeModal();
-  });
+  const overlay = document.getElementById('modal-overlay');
+  if (overlay) {
+    overlay.addEventListener('click', function (e) {
+      if (e.target === this) closeModal();
+    });
+  }
 
   // Touche Esc
   window.addEventListener('keydown', function(e) {
