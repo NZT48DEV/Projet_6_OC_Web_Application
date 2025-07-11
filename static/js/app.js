@@ -1,8 +1,35 @@
 import { openModal, setupModalEvents } from './modal.js';
-import { setupShowMoreButtons, setupDropdown, setupMovieDetailButtons, renderTopRatedMoviesSection, renderCategoryMovies } from './ui.js';
-import { fetchTopMoviesByGenre, fetchAllGenres, fetchMovieDetails, fetchTopRatedMovies, fetchBestMovie } from './api.js';
+import {
+  renderBestMovieSection,
+  setupShowMoreButtons,
+  setupDropdown,
+  setupMovieDetailButtons,
+  renderTopRatedMoviesSection,
+  renderCategoryMovies,
+  getInitialCount,
+} from './ui.js';
+import {
+  fetchTopMoviesByGenre,
+  fetchAllGenres,
+  fetchMovieDetails,
+  fetchTopRatedMovies,
+  fetchBestMovie
+} from './api.js';
 
-export const NO_POSTER = '/static/assets/no_poster.svg'
+export const NO_POSTER = '/static/assets/no_poster.svg';
+
+let actionMovies = [];
+let adventureMovies = [];
+let cachedTopRatedMovies = [];
+
+// Fonction pour re-render selon device lors du resize
+function renderCategoryGridsResponsive() {
+  renderCategoryMovies('.category-1 .category-grid', actionMovies, getInitialCount());
+  renderCategoryMovies('.category-2 .category-grid', adventureMovies, getInitialCount());
+  if (cachedTopRatedMovies.length > 0) {
+    renderTopRatedMoviesSection(cachedTopRatedMovies);
+  }
+}
 
 document.addEventListener('DOMContentLoaded', function () {
   setupShowMoreButtons();
@@ -11,33 +38,20 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // Bloc "Meilleur film"
   fetchBestMovie()
-    .then(function (bestMovie) {
-      if (!bestMovie) return;
-      fetchMovieDetails(bestMovie.id).then(function (detail) {
-        const poster = document.getElementById('best-movie-poster');
-        document.getElementById('best-movie-title').textContent = detail.title || '';
-        poster.src = detail.image_url ? detail.image_url : NO_POSTER;
-        poster.alt = detail.title || '';
-        poster.onerror = function() {
-          this.onerror = null;
-          this.src = NO_POSTER;
-        };
-        document.getElementById('best-movie-description').textContent = detail.description || detail.long_description || '';
-        const detailsBtn = document.querySelector('.movie-info__btn');
-        if (detailsBtn) {
-          detailsBtn.onclick = function () {
-            openModal(detail);
-          };
-        }
-      });
-    })
-    .catch(function (err) {
-      console.error('Erreur lors de la récupération du meilleur film :', err);
+  .then(function (bestMovie) {
+    if (!bestMovie) return;
+    fetchMovieDetails(bestMovie.id).then(function (detail) {
+      renderBestMovieSection(detail);
     });
+  })
+  .catch(function (err) {
+    console.error('Erreur lors de la récupération du meilleur film :', err);
+  });
 
   // Bloc "Films les mieux notés"
   fetchTopRatedMovies()
     .then(function (movies) {
+      cachedTopRatedMovies = movies;
       renderTopRatedMoviesSection(movies);
     })
     .catch(function (err) {
@@ -47,9 +61,10 @@ document.addEventListener('DOMContentLoaded', function () {
   // Bloc catégorie "Action" (Catégorie 1)
   fetchTopMoviesByGenre('Action')
     .then(function (movies) {
+      actionMovies = movies; // Garde pour resize
       const title = document.querySelector('.category-1__title');
       if (title) title.textContent = 'Action';
-      renderCategoryMovies('.category-1 .category-grid', movies);
+      renderCategoryMovies('.category-1 .category-grid', movies, getInitialCount());
     })
     .catch(function (err) {
       console.error('Erreur lors de la récupération des films Action :', err);
@@ -58,9 +73,10 @@ document.addEventListener('DOMContentLoaded', function () {
   // Bloc catégorie "Aventure" (Catégorie 2)
   fetchTopMoviesByGenre('Adventure')
     .then(function (movies) {
+      adventureMovies = movies; // Garde pour resize
       const title = document.querySelector('.category-2__title');
       if (title) title.textContent = 'Aventure';
-      renderCategoryMovies('.category-2 .category-grid', movies);
+      renderCategoryMovies('.category-2 .category-grid', movies, getInitialCount());
     })
     .catch(function (err) {
       console.error('Erreur lors de la récupération des films Aventure :', err);
@@ -82,4 +98,7 @@ document.addEventListener('DOMContentLoaded', function () {
     .catch(function (err) {
       console.error('Erreur lors de la récupération des genres :', err);
     });
+
+  // Re-render responsive sur resize (toutes grilles)
+  window.addEventListener('resize', renderCategoryGridsResponsive);
 });

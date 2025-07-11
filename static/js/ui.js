@@ -21,8 +21,6 @@ export function setupShowMoreButtons() {
 
 // --------- Fonction utilitaire propre pour gestion d'image fallback ---------
 function renderPoster(url, alt, extra = '') {
-  // La src est déjà safe par le JS : "" ou fausse valeur => NO_POSTER
-  // Pas d’erreur JS possible, même si l’URL n’existe pas.
   return `
     <img
       src="${url ? url : NO_POSTER}"
@@ -31,6 +29,26 @@ function renderPoster(url, alt, extra = '') {
       ${extra}
     >
   `;
+}
+
+// --------- Helpers pour Responsive ---------
+function getDeviceType() {
+  const w = window.innerWidth;
+  if (w > 1024) return 'desktop';
+  if (w >= 769) return 'tablet';
+  return 'mobile';
+}
+function getInitialCount() {
+  const type = getDeviceType();
+  if (type === 'desktop') return 6;
+  if (type === 'tablet') return 4;
+  return 2;
+}
+function getIncrement() {
+  const type = getDeviceType();
+  if (type === 'desktop') return 0;
+  if (type === 'tablet') return 2;
+  return 4;
 }
 
 // --------- Rendu catégorie générique (Action, Aventure, ...) ---------
@@ -60,12 +78,8 @@ export function setupDropdown() {
 
   let currentMovies = [];
   let displayedCount = 0;
-  const INITIAL_COUNT = 2;
-  const INCREMENT = 4;
-
-  function isDesktop() {
-    return window.innerWidth >= 1024;
-  }
+  let INITIAL_COUNT = getInitialCount();
+  let INCREMENT = getIncrement();
 
   function renderMovies(movies, count) {
     const moviesToShow = movies.slice(0, count);
@@ -87,7 +101,7 @@ export function setupDropdown() {
   }
 
   function updateShowMoreButton() {
-    if (isDesktop()) {
+    if (getDeviceType() === 'desktop') {
       showMoreBtn.style.display = 'none';
       return;
     }
@@ -106,7 +120,9 @@ export function setupDropdown() {
     li.setAttribute('aria-selected', 'true');
     fetchTopMoviesByGenre(genre).then(movies => {
       currentMovies = movies;
-      if (isDesktop()) {
+      INITIAL_COUNT = getInitialCount();
+      INCREMENT = getIncrement();
+      if (getDeviceType() === 'desktop') {
         displayedCount = currentMovies.length;
       } else {
         displayedCount = Math.min(INITIAL_COUNT, currentMovies.length);
@@ -115,7 +131,7 @@ export function setupDropdown() {
       updateShowMoreButton();
 
       // --- Ajout UX : scroll automatique en desktop après choix catégorie ---
-      if (isDesktop() && currentMovies.length > 0) {
+      if (getDeviceType() === 'desktop' && currentMovies.length > 0) {
         const lastItem = display.querySelector('.movie-item:last-child');
         if (lastItem) {
           lastItem.scrollIntoView({ behavior: 'smooth', block: 'end' });
@@ -156,8 +172,10 @@ export function setupDropdown() {
   });
 
   window.addEventListener('resize', () => {
+    INITIAL_COUNT = getInitialCount();
+    INCREMENT = getIncrement();
     if (currentMovies.length > 0) {
-      if (isDesktop()) {
+      if (getDeviceType() === 'desktop') {
         displayedCount = currentMovies.length;
       } else {
         displayedCount = Math.min(INITIAL_COUNT, currentMovies.length);
@@ -168,35 +186,71 @@ export function setupDropdown() {
   });
 }
 
-// --------- Délégation click sur .movie-button pour ouvrir la modale ---------
+// -------- Délégation click sur bouton Détails OU sur image du film --------
 export function setupMovieDetailButtons() {
   document.body.addEventListener('click', async function (e) {
-    if (e.target.matches('.overlay button, .movie-button')) {
-      const movieItem = e.target.closest('.movie-item');
-      if (movieItem) {
-        const movieId = movieItem.dataset.id;
-        if (movieId) {
-          // On va chercher le détail du film avant d'ouvrir la modale
-          try {
-            const detail = await fetchMovieDetails(movieId);
-            openModal(detail);
-          } catch (err) {
-            // Optionnel : tu peux log ou afficher une notif, mais ne rien faire c’est OK
-            // console.error('Erreur lors de l’ouverture de la modale film:', err);
-          }
+    const movieItem = e.target.closest('.movie-item');
+    if (!movieItem) return;
+
+    // Si clic sur bouton, image, overlay (hors bouton), ou titre (span ou son texte)
+    if (
+      e.target.matches('.overlay button, .movie-button, .movie-item img') ||
+      (e.target.closest('.overlay') && !e.target.matches('button')) ||
+      e.target.closest('.overlay span')
+    ) {
+      const movieId = movieItem.dataset.id;
+      if (movieId) {
+        try {
+          const detail = await fetchMovieDetails(movieId);
+          openModal(detail);
+        } catch (err) {
+          // Optionnel : gestion d’erreur silencieuse
         }
       }
     }
   });
 }
 
-// -------- Correction Top Rated (voir plus/moins fonctionne partout) --------
+// -------- Best Movie  --------
+export function renderBestMovieSection(detail) {
+  const poster = document.getElementById('best-movie-poster');
+  const title = document.getElementById('best-movie-title');
+  const description = document.getElementById('best-movie-description');
+  const detailsBtn = document.querySelector('.movie-info__btn');
+  if (!poster || !title || !description) return;
+
+  title.textContent = detail.title || '';
+  poster.src = detail.image_url ? detail.image_url : NO_POSTER;
+  poster.alt = detail.title || '';
+  poster.onerror = function () {
+    this.onerror = null;
+    this.src = NO_POSTER;
+  };
+  description.textContent = detail.description || detail.long_description || '';
+
+  // Délègue ouverture modale sur bouton
+  if (detailsBtn) {
+    detailsBtn.onclick = function () {
+      import('./modal.js').then(({ openModal }) => openModal(detail));
+    };
+  }
+  // Délègue ouverture modale sur image
+  poster.style.cursor = 'pointer';
+  poster.onclick = function () {
+    import('./modal.js').then(({ openModal }) => openModal(detail));
+  };
+}
+
+// -------- Top Rated  --------
 let topRatedShowingAll = false;
+let cachedTopRatedMovies = []; // <-- Pour garder les films pour le resize
 
 export function renderTopRatedMoviesSection(movies) {
   const grid = document.querySelector('.top-rated-movie .category-grid');
   const showMoreBtn = document.querySelector('.top-rated-movie .show-more-btn');
-  const SHOW_INIT = 2;
+  const SHOW_INIT = getInitialCount(); // <--- responsive
+
+  cachedTopRatedMovies = movies; // <-- stock pour resize
 
   if (!grid) return;
 
@@ -224,3 +278,5 @@ export function renderTopRatedMoviesSection(movies) {
     }
   }
 }
+
+export { getInitialCount };
