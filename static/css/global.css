@@ -14,38 +14,48 @@
 html, body {
   width: 100%;
   height: 100%;
-  line-height: 1.5;              /* meilleur espacement de texte */
   -webkit-text-size-adjust: 100%;/* évite le zoom automatique sur iOS */
 }
 
 /* 3. Titres, paragraphes et listes */
-h1, h2, h3, h4, h5, h6,
-p, ul, ol, figure, blockquote, dl, dd {
-  margin: 0;                      /* on gère les espacements au cas par cas */
+h1, h2, h3, p, ul{
+  margin: 0;                     
 }
-ul, ol {
-  list-style: none;               /* supprime puces et numéros */
-}
-
-/* 4. Liens */
-a {
-  color: inherit;                 /* hérite la couleur du parent */
-  text-decoration: none;          /* sans soulignement */
+ul{
+  list-style: none;               
 }
 
-/* 5. Images et médias */
-img, picture, video, canvas, svg {
+/* 4. Images et médias */
+img, svg {
   display: block;
   max-width: 100%;
   height: auto;
 }
 
 /* 6. Formulaires et boutons */
-button, input, select, textarea {
+button {
   font: inherit;                  
   background: none;
   border: none;
   outline: none;
+}
+
+/* Met un encadrement net sur les images et boutons lorsqu'ils sont focus avec le clavier */
+.movie-item img:focus-visible,
+.movie-item .movie-button:focus-visible,
+.movie-item .overlay:focus-visible,
+.movie-item span:focus-visible,
+.movie-info__btn:focus-visible {
+    outline: 3px solid #ff9800;
+    z-index: 2;
+}
+
+.dropdown-toggle:focus-visible { outline: 3px solid #ff9800; }
+.dropdown-items li:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px #ff9800 inset;
+    z-index: 2;
+    position: relative;
 }
 
 .container{

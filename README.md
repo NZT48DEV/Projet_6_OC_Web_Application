@@ -6,12 +6,40 @@ Une application web responsive de découverte de films, utilisant une API locale
 
 ## 🚀 Fonctionnalités
 
-- **Affichage du meilleur film** : Présentation du film le mieux noté de l’API.
-- **Sections thématiques** : Top films toutes catégories, catégories fixes (Action, Aventure...), sélection dynamique d'autres genres via dropdown.
-- **Modal détaillée** : Fiche complète du film (affiche, titre, genres, année, score IMDb, réalisateurs, acteurs, durée, pays, recettes, description).
-- **Navigation accessible** : Boutons « Voir plus/moins » par catégorie, dropdown de sélection accessible clavier/souris, scroll automatique UX.
-- **Fallback images** : Affiche alternative si le film n’a pas d’affiche disponible.
-- **Responsive** : Expérience adaptée à tous les écrans (PC, tablette, mobile).
+- **Affichage du meilleur film**
+  - Présentation dynamique du film le mieux noté de l’API en haut de page.
+  - Ouverture de la fiche détaillée (modale) possible via l’affiche ou le bouton « Détails ».
+
+- **Modal détaillée (fiche film complète)**
+  - Contient : affiche, titre, genres complets, année de sortie, classification, score IMDb, réalisateurs, acteurs, durée, pays d’origine, recettes box-office, résumé.
+  - S’ouvre via : image, titre, bouton Détails, overlay (pour toutes les catégories).
+  - Fermeture : bouton, clic sur l’overlay ou touche `ESC`.
+  - Accessible clavier et souris.
+
+- **Sections thématiques**
+  - **Top films toutes catégories**.
+  - **Catégories fixes** : Action, Aventure.
+  - **Dropdown dynamique** : sélection d’autres genres parmi tous les genres de l’API (liste complète à jour).
+
+- **Navigation accessible**
+  - Boutons “Voir plus/moins” dans chaque section pour révéler/masquer les films cachés.
+  - Dropdown “Autres genres” accessible clavier/souris, navigation au clavier (flèches, tab, entrée).
+
+- **Fallback images**
+  - Affiche alternative si le film n’a pas d’affiche disponible (pas d’image cassée).
+
+- **Responsive Design (RWD)**
+  - **Interface réactive** : l’affichage s’adapte à tous les écrans (PC, tablette, mobile).
+  - **Nombre de films visibles par section selon la taille d’écran** :
+    - **PC** : 6 films affichés.
+    - **Tablette** : 4 films affichés (2 cachés).
+    - **Mobile** : 2 films affichés (4 cachés).
+  - Les films cachés peuvent être affichés via le bouton “Voir plus”, puis masqués de nouveau (“Voir moins”).
+
+- **Expérience utilisateur optimisée**
+  - Défilement automatique sur les bons éléments lors des interactions pour faciliter la navigation (hors mobile).
+  - Focus et accessibilité clavier pris en compte sur tous les boutons.
+  - Affichage instantané des films sans rechargement de page.
 
 ---
 

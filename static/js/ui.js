@@ -1,4 +1,5 @@
-// ui.js — Gestion des boutons, dropdowns, rendering liste films
+// Gestion des boutons, dropdowns, rendering liste films
+
 import { openModal } from './modal.js';
 import { fetchTopMoviesByGenre, fetchMovieDetails } from './api.js';
 import { NO_POSTER } from './app.js';
@@ -10,10 +11,32 @@ export function setupShowMoreButtons() {
     if (!section) return;
 
     btn.addEventListener('click', () => {
-      const hiddenMovies = section.querySelectorAll('.movie-item.hidden');
+      const device = getDeviceType();
+      const hiddenMovies = Array.from(section.querySelectorAll('.movie-item.hidden'));
+      const allMovies = Array.from(section.querySelectorAll('.movie-item'));
+      const isVoirPlus = btn.textContent === 'Voir plus';
+
+      let scrollTarget = null;
+      if (!isVoirPlus) { // Cas "Voir moins"
+        const lastHiddenIdx = hiddenMovies.length > 0 ? allMovies.indexOf(hiddenMovies[hiddenMovies.length - 1]) : -1;
+        scrollTarget = allMovies[lastHiddenIdx + 1];
+      }
+
       hiddenMovies.forEach(item => item.classList.toggle('visible'));
-      btn.textContent = btn.textContent === 'Voir plus' ? 'Voir moins' : 'Voir plus';
-      btn.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      btn.textContent = isVoirPlus ? 'Voir moins' : 'Voir plus';
+
+      // Gestion du scroll uniquement sur tablette/desktop
+      if (device !== 'mobile') {
+        if (isVoirPlus) {
+          btn.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        } else {
+          if (scrollTarget) {
+            scrollTarget.scrollIntoView({ behavior: 'auto', block: 'start' });
+          } else {
+            btn.scrollIntoView({ behavior: 'auto', block: 'center' });
+          }
+        }
+      }
       btn.focus();
     });
   });
@@ -34,7 +57,7 @@ function renderPoster(url, alt, extra = '') {
 // --------- Helpers pour Responsive ---------
 function getDeviceType() {
   const w = window.innerWidth;
-  if (w > 1024) return 'desktop';
+  if (w >= 1025) return 'desktop';
   if (w >= 769) return 'tablet';
   return 'mobile';
 }
@@ -81,6 +104,12 @@ export function setupDropdown() {
   let INITIAL_COUNT = getInitialCount();
   let INCREMENT = getIncrement();
 
+  // UX : détecte clavier ou souris
+  let lastInteractionWasKeyboard = false;
+  document.addEventListener('keydown', () => { lastInteractionWasKeyboard = true; });
+  document.addEventListener('mousedown', () => { lastInteractionWasKeyboard = false; });
+
+  // --------- Rendu films + focus premier film ---------
   function renderMovies(movies, count) {
     const moviesToShow = movies.slice(0, count);
     if (moviesToShow.length > 0) {
@@ -94,6 +123,17 @@ export function setupDropdown() {
         </div>
       `).join('');
       display.classList.remove('single-column');
+      setTimeout(() => {
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            const firstMovie = display.querySelector('.movie-item');
+            if (firstMovie) {
+              const img = firstMovie.querySelector('img');
+              if (img) img.focus();
+            }
+          });
+        });
+      }, 0);
     } else {
       display.innerHTML = `<p class="no-movie-message">Aucun film disponible pour cette catégorie.</p>`;
       display.classList.add('single-column');
@@ -109,49 +149,87 @@ export function setupDropdown() {
     showMoreBtn.style.display = currentMovies.length > INITIAL_COUNT ? 'block' : 'none';
   }
 
+  // Ouvre/Ferme le menu (clic ou clavier)
+  toggle.addEventListener('click', (e) => {
+    const isOpen = dd.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', isOpen);
+
+    if (isOpen) {
+      const firstLi = ul.querySelector('li[tabindex="0"]');
+      if (firstLi && lastInteractionWasKeyboard) {
+        firstLi.focus();
+      }
+      setTimeout(() => {
+        const rect = ul.getBoundingClientRect();
+        const menuBottom = rect.bottom + window.scrollY;
+        const windowBottom = window.scrollY + window.innerHeight;
+        if (menuBottom > windowBottom) {
+          window.scrollTo({ top: menuBottom - window.innerHeight + 20, behavior: 'smooth' });
+        }
+      }, 0);
+    }
+  });
+
+  // Clavier : ouvrir menu avec Entrée/Espace
+  toggle.addEventListener('keydown', (e) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      toggle.click();
+    }
+  });
+
+  // Sélection d'un genre
   ul.addEventListener('click', e => {
     const li = e.target.closest('li[role="option"]');
     if (!li) return;
     const genre = li.getAttribute('data-value');
-    toggle.querySelector('.selected-value').textContent = li.querySelector('span').textContent;
-    dd.classList.remove('open');
-    toggle.setAttribute('aria-expanded', false);
-    ul.querySelectorAll('li').forEach(node => node.removeAttribute('aria-selected'));
-    li.setAttribute('aria-selected', 'true');
-    fetchTopMoviesByGenre(genre).then(movies => {
-      currentMovies = movies;
-      INITIAL_COUNT = getInitialCount();
-      INCREMENT = getIncrement();
-      if (getDeviceType() === 'desktop') {
-        displayedCount = currentMovies.length;
-      } else {
-        displayedCount = Math.min(INITIAL_COUNT, currentMovies.length);
-      }
-      renderMovies(currentMovies, displayedCount);
-      updateShowMoreButton();
-
-      // --- Ajout UX : scroll automatique en desktop après choix catégorie ---
-      if (getDeviceType() === 'desktop' && currentMovies.length > 0) {
-        const lastItem = display.querySelector('.movie-item:last-child');
-        if (lastItem) {
-          lastItem.scrollIntoView({ behavior: 'smooth', block: 'end' });
+    toggle.focus();
+    setTimeout(() => {
+      toggle.querySelector('.selected-value').textContent = li.querySelector('span').textContent;
+      dd.classList.remove('open');
+      toggle.setAttribute('aria-expanded', false);
+      ul.querySelectorAll('li').forEach(node => node.removeAttribute('aria-selected'));
+      li.setAttribute('aria-selected', 'true');
+      fetchTopMoviesByGenre(genre).then(movies => {
+        currentMovies = movies;
+        INITIAL_COUNT = getInitialCount();
+        INCREMENT = getIncrement();
+        if (getDeviceType() === 'desktop') {
+          displayedCount = currentMovies.length;
+        } else {
+          displayedCount = Math.min(INITIAL_COUNT, currentMovies.length);
         }
-      }
-    });
+        renderMovies(currentMovies, displayedCount);
+        updateShowMoreButton();
+        if (getDeviceType() === 'desktop' && currentMovies.length > 0) {
+          const lastItem = display.querySelector('.movie-item:last-child');
+          if (lastItem) {
+            lastItem.scrollIntoView({ behavior: 'smooth', block: 'end' });
+          }
+        }
+      });
+    }, 10);
   });
 
+  // Sélection clavier d'un genre
   ul.addEventListener('keydown', e => {
     if ((e.key === 'Enter' || e.key === ' ') && e.target.matches('li[role="option"]')) {
       e.preventDefault();
       e.target.click();
     }
+    if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+      e.preventDefault();
+      const items = Array.from(ul.querySelectorAll('li[role="option"]'));
+      const currentIndex = items.indexOf(document.activeElement);
+      let nextIndex = (e.key === 'ArrowDown') ? currentIndex + 1 : currentIndex - 1;
+      if (nextIndex < 0) nextIndex = items.length - 1;
+      if (nextIndex >= items.length) nextIndex = 0;
+      items[nextIndex].focus();
+      items[nextIndex].scrollIntoView({ behavior: "smooth", block: "nearest" });
+    }
   });
 
-  toggle.addEventListener('click', () => {
-    const isOpen = dd.classList.toggle('open');
-    toggle.setAttribute('aria-expanded', isOpen);
-  });
-
+  // Fermer menu si clic hors menu
   document.addEventListener('click', e => {
     if (!dd.contains(e.target)) {
       dd.classList.remove('open');
@@ -160,6 +238,15 @@ export function setupDropdown() {
   });
 
   showMoreBtn.addEventListener('click', () => {
+    const device = getDeviceType();
+    const allMovies = Array.from(display.querySelectorAll('.movie-item'));
+    const hiddenMovies = allMovies.filter(el => el.classList.contains('hidden'));
+    const isVoirPlus = showMoreBtn.textContent === 'Voir plus';
+    let scrollTarget = null;
+    if (!isVoirPlus) {
+      const lastHiddenIdx = hiddenMovies.length > 0 ? allMovies.indexOf(hiddenMovies[hiddenMovies.length - 1]) : -1;
+      scrollTarget = allMovies[lastHiddenIdx + 1];
+    }
     if (displayedCount >= currentMovies.length) {
       displayedCount = Math.min(INITIAL_COUNT, currentMovies.length);
     } else {
@@ -167,7 +254,19 @@ export function setupDropdown() {
     }
     renderMovies(currentMovies, displayedCount);
     updateShowMoreButton();
-    showMoreBtn.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+    // Scrolling uniquement sur tablette/desktop
+    if (device !== 'mobile') {
+      if (isVoirPlus) {
+        showMoreBtn.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      } else {
+        if (scrollTarget) {
+          scrollTarget.scrollIntoView({ behavior: 'auto', block: 'start' });
+        } else {
+          showMoreBtn.scrollIntoView({ behavior: 'auto', block: 'center' });
+        }
+      }
+    }
     showMoreBtn.focus();
   });
 
@@ -191,8 +290,6 @@ export function setupMovieDetailButtons() {
   document.body.addEventListener('click', async function (e) {
     const movieItem = e.target.closest('.movie-item');
     if (!movieItem) return;
-
-    // Si clic sur bouton, image, overlay (hors bouton), ou titre (span ou son texte)
     if (
       e.target.matches('.overlay button, .movie-button, .movie-item img') ||
       (e.target.closest('.overlay') && !e.target.matches('button')) ||
@@ -228,17 +325,26 @@ export function renderBestMovieSection(detail) {
   };
   description.textContent = detail.description || detail.long_description || '';
 
-  // Délègue ouverture modale sur bouton
+  poster.style.cursor = 'pointer';
+
+  // Ouvre la modale au clic souris
+  poster.onclick = function () {
+    import('./modal.js').then(({ openModal }) => openModal(detail));
+  };
+
+  // Ouvre la modale au clavier
+  poster.onkeydown = function (e) {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      import('./modal.js').then(({ openModal }) => openModal(detail));
+    }
+  };
+
   if (detailsBtn) {
     detailsBtn.onclick = function () {
       import('./modal.js').then(({ openModal }) => openModal(detail));
     };
   }
-  // Délègue ouverture modale sur image
-  poster.style.cursor = 'pointer';
-  poster.onclick = function () {
-    import('./modal.js').then(({ openModal }) => openModal(detail));
-  };
 }
 
 // -------- Top Rated  --------
@@ -250,7 +356,7 @@ export function renderTopRatedMoviesSection(movies) {
   const showMoreBtn = document.querySelector('.top-rated-movie .show-more-btn');
   const SHOW_INIT = getInitialCount(); // <--- responsive
 
-  cachedTopRatedMovies = movies; // <-- stock pour resize
+  cachedTopRatedMovies = movies;
 
   if (!grid) return;
 
@@ -267,11 +373,35 @@ export function renderTopRatedMoviesSection(movies) {
   if (showMoreBtn) {
     showMoreBtn.style.display = movies.length > SHOW_INIT ? "block" : "none";
     showMoreBtn.textContent = topRatedShowingAll ? 'Voir moins' : 'Voir plus';
+
     if (!showMoreBtn.dataset.init) {
       showMoreBtn.addEventListener('click', function () {
+        const device = getDeviceType();
+        const allMovies = Array.from(grid.querySelectorAll('.movie-item'));
+        const hiddenMovies = allMovies.filter(el => el.classList.contains('hidden'));
+        const isVoirPlus = !topRatedShowingAll;
+        let scrollTarget = null;
+
+        if (!isVoirPlus) {
+          const lastHiddenIdx = hiddenMovies.length > 0 ? allMovies.indexOf(hiddenMovies[hiddenMovies.length - 1]) : -1;
+          scrollTarget = allMovies[lastHiddenIdx + 1];
+        }
+
         topRatedShowingAll = !topRatedShowingAll;
         renderTopRatedMoviesSection(movies);
-        showMoreBtn.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+        // Scroll uniquement tablette/desktop
+        if (device !== 'mobile') {
+          if (isVoirPlus) {
+            showMoreBtn.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          } else {
+            if (scrollTarget) {
+              scrollTarget.scrollIntoView({ behavior: 'auto', block: 'start' });
+            } else {
+              showMoreBtn.scrollIntoView({ behavior: 'auto', block: 'center' });
+            }
+          }
+        }
         showMoreBtn.focus();
       });
       showMoreBtn.dataset.init = "1";

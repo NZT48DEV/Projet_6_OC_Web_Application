@@ -1,3 +1,5 @@
+// Point d’entrée de l’application front-end.
+
 import { openModal, setupModalEvents } from './modal.js';
 import {
   renderBestMovieSection,
@@ -88,11 +90,12 @@ document.addEventListener('DOMContentLoaded', function () {
       const ul = document.querySelector('.dropdown-items');
       if (!ul) return;
       ul.innerHTML = genres.map(genre => `
-        <li role="option" data-value="${genre.name}">
-          <span>${genre.name}</span>
-          <span class="checkmark">✔</span>
-        </li>
-      `).join('');
+      <li role="option" data-value="${genre.name}" tabindex="0">
+        <span>${genre.name}</span>
+        <span class="checkmark">✔</span>
+      </li>
+    `).join('');
+    
       setupDropdown();
     })
     .catch(function (err) {

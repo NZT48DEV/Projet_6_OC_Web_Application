@@ -1,7 +1,11 @@
-// modal.js — Gestion de la modale
+// Gestion de la modale
+
 import { NO_POSTER } from './app.js';
 
+let lastFocusedElement = null;
+
 export function openModal(movie) {
+  lastFocusedElement = document.activeElement;
   function na(value) {
     if (!value || (Array.isArray(value) && value.length === 0)) return 'N/A';
     return value;
@@ -51,12 +55,21 @@ export function openModal(movie) {
 
   const scrollable = modalOverlay.querySelector('.modal-scrollable');
   if (scrollable) scrollable.scrollTop = 0;
+
+  setTimeout(() => {
+    if (scrollable) scrollable.focus();
+  }, 50);
 }
 
 export function closeModal() {
   const overlay = document.getElementById('modal-overlay');
   if (overlay) overlay.style.display = 'none';
   document.body.style.overflow = '';
+  // --- Remet le focus où il était ---
+  if (lastFocusedElement) {
+    lastFocusedElement.focus();
+    lastFocusedElement = null;
+  }
 }
 
 // Initialisation listeners modale

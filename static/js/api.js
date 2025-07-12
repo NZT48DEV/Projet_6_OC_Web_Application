@@ -1,4 +1,4 @@
-// api.js — Requêtes API avec Promises
+// Requêtes API avec Promises
 
 // Récupérer le meilleur film
 export function fetchBestMovie() {
