@@ -44,11 +44,13 @@ export function setupShowMoreButtons() {
 
 // --------- Fonction utilitaire propre pour gestion d'image fallback ---------
 function renderPoster(url, alt, extra = '') {
+  const isNoImage = !url;
   return `
     <img
+      class="${isNoImage ? 'no-image' : ''}"
       src="${url ? url : NO_POSTER}"
       alt="${alt}"
-      onerror="this.onerror=null;this.src='${NO_POSTER}';"
+      onerror="this.onerror=null;this.classList.add('no-image');this.src='${NO_POSTER}';"
       ${extra}
     >
   `;
