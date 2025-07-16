@@ -10,6 +10,8 @@ export function setupShowMoreButtons() {
     const section = btn.closest('section');
     if (!section) return;
 
+    let lastScrollPos = null; // mémorisation du scroll pour ce bouton
+
     btn.addEventListener('click', () => {
       const device = getDeviceType();
       const hiddenMovies = Array.from(section.querySelectorAll('.movie-item.hidden'));
@@ -22,11 +24,18 @@ export function setupShowMoreButtons() {
         scrollTarget = allMovies[lastHiddenIdx + 1];
       }
 
+      if (device === 'mobile') {
+        if (isVoirPlus) {
+          // Avant d'ouvrir, mémoriser la position de scroll
+          lastScrollPos = window.scrollY;
+        }
+      }
+
       hiddenMovies.forEach(item => item.classList.toggle('visible'));
       btn.textContent = isVoirPlus ? 'Voir moins' : 'Voir plus';
 
-      // Gestion du scroll uniquement sur tablette/desktop
       if (device !== 'mobile') {
+        // Scroll sur tablette/desktop (comportement actuel)
         if (isVoirPlus) {
           btn.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
         } else {
@@ -36,11 +45,19 @@ export function setupShowMoreButtons() {
             btn.scrollIntoView({ behavior: 'auto', block: 'center' });
           }
         }
+      } else {
+        // Mobile
+        if (!isVoirPlus && lastScrollPos !== null) {
+          // Revenir à la position mémorisée quand on ferme (Voir moins)
+          window.scrollTo({ top: lastScrollPos, behavior: 'auto' });
+          lastScrollPos = null;
+        }
       }
       btn.focus();
     });
   });
 }
+
 
 // --------- Fonction utilitaire propre pour gestion d'image fallback ---------
 function renderPoster(url, alt, extra = '') {
