@@ -120,5 +120,5 @@ git clone https://github.com/NZT48DEV/Projet_6_OC_Web_Application.git
 # 8. Installe l'extension "Live Server"
 # 9. Navigue jusqu'au fichier static/html/index.html
 # 10. Clique-droit > "Open with Live Server" (ou bouton "Go Live" en bas)
-# 11. Accède à l’URL proposée (http://127.0.0.1:8000/static/html/index.html)
+# 11. Accède à l’URL proposée (http://127.0.0.1:5500/static/html/index.html)
 ```
