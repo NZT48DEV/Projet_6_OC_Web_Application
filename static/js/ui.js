@@ -122,6 +122,7 @@ export function setupDropdown() {
   let displayedCount = 0;
   let INITIAL_COUNT = getInitialCount();
   let INCREMENT = getIncrement();
+  let lastScrollPos = null; // mémorisation scroll mobile/tablette
 
   // UX : détecte clavier ou souris
   let lastInteractionWasKeyboard = false;
@@ -274,8 +275,24 @@ export function setupDropdown() {
     renderMovies(currentMovies, displayedCount);
     updateShowMoreButton();
 
-    // Scrolling uniquement sur tablette/desktop
-    if (device !== 'mobile') {
+    // Scroll adapté tablette/desktop/mobile
+    if (device === 'mobile') {
+      if (isVoirPlus) {
+        lastScrollPos = window.scrollY; // mémorise la position avant expansion
+      } else if (lastScrollPos !== null) {
+        window.scrollTo({ top: lastScrollPos, behavior: 'auto' });
+        lastScrollPos = null;
+      }
+    } else if (device === 'tablet') {
+      if (isVoirPlus) {
+        showMoreBtn.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      } else {
+        const btnRect = showMoreBtn.getBoundingClientRect();
+        const offset = window.pageYOffset || document.documentElement.scrollTop;
+        const scrollToPos = offset + btnRect.top + btnRect.height;
+        window.scrollTo({ top: scrollToPos, behavior: 'smooth' });
+      }
+    } else { // desktop
       if (isVoirPlus) {
         showMoreBtn.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
       } else {
@@ -369,6 +386,7 @@ export function renderBestMovieSection(detail) {
 // -------- Top Rated  --------
 let topRatedShowingAll = false;
 let cachedTopRatedMovies = []; // <-- Pour garder les films pour le resize
+let lastScrollPosTopRated = null; // mémorisation scroll mobile/tablette pour top rated
 
 export function renderTopRatedMoviesSection(movies) {
   const grid = document.querySelector('.top-rated-movie .category-grid');
@@ -409,8 +427,25 @@ export function renderTopRatedMoviesSection(movies) {
         topRatedShowingAll = !topRatedShowingAll;
         renderTopRatedMoviesSection(movies);
 
-        // Scroll uniquement tablette/desktop
-        if (device !== 'mobile') {
+        // Scroll uniquement tablette/desktop/mobile
+        if (device === 'mobile') {
+          if (isVoirPlus) {
+            lastScrollPosTopRated = window.scrollY; // mémorise la position avant expansion
+          } else if (lastScrollPosTopRated !== null) {
+            // Revenir à la position mémorisée en mobile
+            window.scrollTo({ top: lastScrollPosTopRated, behavior: 'auto' });
+            lastScrollPosTopRated = null;
+          }
+        } else if (device === 'tablet') {
+          if (isVoirPlus) {
+            showMoreBtn.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          } else {
+            const btnRect = showMoreBtn.getBoundingClientRect();
+            const offset = window.pageYOffset || document.documentElement.scrollTop;
+            const scrollToPos = offset + btnRect.top + btnRect.height;
+            window.scrollTo({ top: scrollToPos, behavior: 'smooth' });
+          }
+        } else { // desktop
           if (isVoirPlus) {
             showMoreBtn.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
           } else {
@@ -421,6 +456,7 @@ export function renderTopRatedMoviesSection(movies) {
             }
           }
         }
+
         showMoreBtn.focus();
       });
       showMoreBtn.dataset.init = "1";
