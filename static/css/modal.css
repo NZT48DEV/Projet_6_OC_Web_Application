@@ -20,6 +20,7 @@
   overflow: visible;
   display: flex;
   flex-direction: column;
+  animation: modalIn 0.3s ease forwards;
 }
 
 @keyframes modalIn {
